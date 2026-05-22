@@ -20,11 +20,9 @@ import {
 } from "lucide-react";
 import {
   copy,
-  inquiryOptions,
   siteContent,
   type Locale,
   type MediaItem,
-  type VisualVariant,
 } from "./content/siteContent";
 
 const socialIcons = {
@@ -36,18 +34,10 @@ const socialIcons = {
 
 const serviceIcons = [Brush, Clapperboard, Smartphone, Star];
 
-type VisualArtProps = {
-  variant?: VisualVariant;
-  label: string;
-  compact?: boolean;
-  motion?: boolean;
-};
-
 type FormState = {
   name: string;
   email: string;
   company: string;
-  inquiryType: string;
   message: string;
 };
 
@@ -55,108 +45,27 @@ const initialForm: FormState = {
   name: "",
   email: "",
   company: "",
-  inquiryType: "",
   message: "",
 };
 
-function VisualArt({ variant = "dream", label, compact = false, motion = false }: VisualArtProps) {
+function MediaImage({
+  item,
+  locale,
+  sizes,
+}: {
+  item: MediaItem;
+  locale: Locale;
+  sizes?: string;
+}) {
   return (
-    <div
-      className={`visual-art visual-${variant} ${compact ? "visual-compact" : ""} ${
-        motion ? "visual-motion" : ""
-      }`}
-      role="img"
-      aria-label={label}
-    >
-      <span className="visual-scan" />
-      {variant === "portrait" ? (
-        <>
-          <span className="portrait-halo" />
-          <span className="portrait-neck" />
-          <span className="portrait-face" />
-          <span className="portrait-hair hair-one" />
-          <span className="portrait-hair hair-two" />
-          <span className="portrait-eye" />
-          <span className="portrait-line line-one" />
-          <span className="portrait-line line-two" />
-          <span className="portrait-line line-three" />
-          <span className="data-rune rune-one" />
-          <span className="data-rune rune-two" />
-        </>
-      ) : null}
-      {variant === "ice" ? (
-        <>
-          <span className="ice-face" />
-          <span className="ice-hair" />
-          <span className="ice-crystal ice-one" />
-          <span className="ice-crystal ice-two" />
-          <span className="ice-crystal ice-three" />
-          <span className="light-thread thread-one" />
-          <span className="light-thread thread-two" />
-        </>
-      ) : null}
-      {variant === "city" ? (
-        <>
-          {Array.from({ length: 9 }).map((_, index) => (
-            <span className={`tower tower-${index + 1}`} key={index} />
-          ))}
-          <span className="city-horizon" />
-          <span className="city-rain rain-one" />
-          <span className="city-rain rain-two" />
-        </>
-      ) : null}
-      {variant === "crystal" ? (
-        <>
-          <span className="crystal crystal-one" />
-          <span className="crystal crystal-two" />
-          <span className="crystal crystal-three" />
-          <span className="crystal-figure" />
-          <span className="crystal-line crystal-line-one" />
-          <span className="crystal-line crystal-line-two" />
-        </>
-      ) : null}
-      {variant === "astronaut" ? (
-        <>
-          <span className="moon-line" />
-          <span className="helmet" />
-          <span className="visor" />
-          <span className="space-body" />
-          <span className="space-pack" />
-          <span className="space-star star-one" />
-          <span className="space-star star-two" />
-        </>
-      ) : null}
-      {variant === "film" ? (
-        <>
-          <span className="film-stage" />
-          <span className="film-person person-one" />
-          <span className="film-person person-two" />
-          <span className="film-person person-three" />
-          <span className="film-frame frame-one" />
-          <span className="film-frame frame-two" />
-          <span className="film-light" />
-        </>
-      ) : null}
-      {variant === "signal" ? (
-        <>
-          <span className="signal-device" />
-          <span className="signal-card card-one" />
-          <span className="signal-card card-two" />
-          <span className="signal-line signal-line-one" />
-          <span className="signal-line signal-line-two" />
-          <span className="signal-dot dot-one" />
-        </>
-      ) : null}
-      {variant === "dream" ? (
-        <>
-          <span className="dream-window" />
-          <span className="dream-figure" />
-          <span className="dream-ribbon ribbon-one" />
-          <span className="dream-ribbon ribbon-two" />
-          <span className="dream-sun" />
-        </>
-      ) : null}
-    </div>
+    <img
+      src={item.imageUrl}
+      alt={item.title[locale]}
+      loading="lazy"
+      decoding="async"
+      sizes={sizes}
+      className="media-image"
+    />
   );
 }
 
@@ -196,7 +105,7 @@ function Header({
     { href: "#works", label: t.navWorks },
     { href: "#services", label: t.navRequests },
     { href: "#about", label: t.navProfile },
-    { href: "#links", label: "LINKS" },
+    { href: "#links", label: t.navLinks },
     { href: "#contact", label: t.navContact },
   ];
 
@@ -217,7 +126,6 @@ function Header({
         <LanguageToggle locale={locale} onChange={onLocaleChange} />
         <a className="contact-pill" href="#contact">
           <span>{t.heroSecondary}</span>
-          <ArrowRight size={14} aria-hidden="true" />
         </a>
         <button className="menu-button" type="button" aria-label="Open menu">
           <Menu size={20} aria-hidden="true" />
@@ -248,12 +156,7 @@ function TopMarquee({
       <div className={`marquee-inner ${paused ? "is-paused" : ""}`}>
         {loop.map((item, index) => (
           <article className="thumb-card" key={`${item.id}-${index}`}>
-            <VisualArt
-              variant={item.visual}
-              label={item.title[locale]}
-              compact
-              motion={item.motion}
-            />
+            <MediaImage item={item} locale={locale} sizes="160px" />
             {item.motion ? (
               <span className="play-chip" aria-hidden="true">
                 <Play size={12} fill="currentColor" />
@@ -262,7 +165,12 @@ function TopMarquee({
           </article>
         ))}
       </div>
-      <button className="pause-button" type="button" onClick={onToggle} aria-label={paused ? t.play : t.pause}>
+      <button
+        className="pause-button"
+        type="button"
+        onClick={onToggle}
+        aria-label={paused ? t.play : t.pause}
+      >
         {paused ? <Play size={14} fill="currentColor" /> : <Pause size={14} />}
         <span>{paused ? t.play : t.pause}</span>
       </button>
@@ -273,13 +181,14 @@ function TopMarquee({
 function Hero({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const profile = siteContent.profile[locale];
+  const portrait = siteContent.heroPortrait;
 
   return (
     <section className="hero-section" id="top">
       <div className="hero-copy">
         <p className="eyebrow">{t.heroKicker}</p>
         <h1>
-          <span>AI Creator &</span>
+          <span>AI Creator &amp;</span>
           <span>Visual Storyteller</span>
         </h1>
         <p>{t.heroLead}</p>
@@ -288,14 +197,20 @@ function Hero({ locale }: { locale: Locale }) {
           <ArrowRight size={16} aria-hidden="true" />
         </a>
       </div>
-      <div className="hero-art">
-        <VisualArt variant="portrait" label="Leer / RIA portrait visual" />
+      <div className="hero-art" aria-hidden="false">
+        <img
+          src={portrait.imageUrl}
+          alt={portrait.alt[locale]}
+          loading="eager"
+          decoding="async"
+          className="hero-portrait"
+        />
+        <span className="hero-portrait-glow" aria-hidden="true" />
       </div>
       <aside className="profile-card" id="about">
         <p className="profile-name">{profile.name}</p>
         <p className="profile-role">{profile.role}</p>
         <p className="profile-bio">{profile.bio}</p>
-        <p className="profile-concept">{profile.concept}</p>
         <div className="profile-meta">
           <span>
             <MapPin size={13} aria-hidden="true" />
@@ -329,7 +244,7 @@ function SocialLinks({ locale }: { locale: Locale }) {
             <span className={`social-icon social-${social.kind}`}>
               <Icon size={20} aria-hidden="true" />
             </span>
-            <span>
+            <span className="social-label">
               <strong>{social.label}</strong>
               <small>{social.note[locale]}</small>
             </span>
@@ -344,19 +259,15 @@ function SocialLinks({ locale }: { locale: Locale }) {
 function WorkCard({
   item,
   locale,
-  index,
+  position,
 }: {
   item: MediaItem;
   locale: Locale;
-  index: number;
+  position: number;
 }) {
   return (
-    <article className={`work-card work-card-${index + 1}`}>
-      <VisualArt
-        variant={item.visual}
-        label={item.title[locale]}
-        motion={item.motion}
-      />
+    <article className={`work-card work-card-${position}`}>
+      <MediaImage item={item} locale={locale} sizes="320px" />
       {item.motion ? (
         <span className="large-play" aria-label={copy[locale].playVideo}>
           <Play size={18} fill="currentColor" aria-hidden="true" />
@@ -367,11 +278,13 @@ function WorkCard({
           <h3>{item.title[locale]}</h3>
           {item.description ? <p>{item.description[locale]}</p> : null}
         </div>
-        <div className="tag-row">
-          {item.tags?.slice(0, 2).map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
-        </div>
+        {item.tags?.length ? (
+          <div className="tag-row">
+            {item.tags.slice(0, 2).map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+        ) : null}
       </div>
     </article>
   );
@@ -388,7 +301,6 @@ function FeaturedWorks({ locale }: { locale: Locale }) {
       <div className="section-heading-row">
         <div>
           <p className="section-label">{t.worksTitle}</p>
-          <p className="section-subtitle">{t.worksLead}</p>
         </div>
         <a className="ghost-button" href="#contact">
           <span>{t.viewAll}</span>
@@ -397,7 +309,7 @@ function FeaturedWorks({ locale }: { locale: Locale }) {
       </div>
       <div className="works-grid">
         {works.map((item, index) => (
-          <WorkCard item={item} locale={locale} index={index} key={item.id} />
+          <WorkCard item={item} locale={locale} position={index + 1} key={item.id} />
         ))}
       </div>
     </section>
@@ -423,7 +335,7 @@ function Services({ locale }: { locale: Locale }) {
           return (
             <article className="service-card" key={service}>
               <span className="service-icon">
-                <Icon size={26} aria-hidden="true" />
+                <Icon size={24} aria-hidden="true" />
               </span>
               <div>
                 <h3>{service}</h3>
@@ -443,16 +355,11 @@ function Services({ locale }: { locale: Locale }) {
 
 function Contact({ locale }: { locale: Locale }) {
   const t = copy[locale];
-  const options = inquiryOptions[locale];
   const endpoint = useMemo(() => import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined, []);
-  const [form, setForm] = useState<FormState>({ ...initialForm, inquiryType: options[0] });
+  const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState<
     "idle" | "sending" | "success" | "error" | "missing" | "required"
   >("idle");
-
-  useEffect(() => {
-    setForm((current) => ({ ...current, inquiryType: options[0] }));
-  }, [options]);
 
   const updateField = (field: keyof FormState, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -487,7 +394,6 @@ function Contact({ locale }: { locale: Locale }) {
           name: form.name,
           email: form.email,
           company: form.company,
-          inquiryType: form.inquiryType,
           message: form.message,
           recipient: siteContent.contact.email,
         }),
@@ -497,7 +403,7 @@ function Contact({ locale }: { locale: Locale }) {
         throw new Error("Form submission failed");
       }
 
-      setForm({ ...initialForm, inquiryType: options[0] });
+      setForm(initialForm);
       setStatus("success");
     } catch {
       setStatus("error");
@@ -517,7 +423,7 @@ function Contact({ locale }: { locale: Locale }) {
 
   return (
     <section className="contact-panel" id="contact">
-      <div>
+      <div className="contact-info">
         <p className="section-label">{t.contactKicker}</p>
         <h2>{t.contactTitle}</h2>
         <p>{t.contactLead}</p>
@@ -527,62 +433,54 @@ function Contact({ locale }: { locale: Locale }) {
         </a>
       </div>
       <form onSubmit={onSubmit} noValidate>
-        <label>
-          <span>{t.name}</span>
+        <label className="field-name">
           <input
             value={form.name}
             onChange={(event) => updateField("name", event.target.value)}
             autoComplete="name"
+            placeholder={t.name}
             required
           />
         </label>
-        <label>
-          <span>{t.email}</span>
+        <label className="field-email">
           <input
             type="email"
             value={form.email}
             onChange={(event) => updateField("email", event.target.value)}
             autoComplete="email"
+            placeholder={t.email}
             required
           />
         </label>
-        <label>
-          <span>{t.company}</span>
+        <label className="field-company">
           <input
             value={form.company}
             onChange={(event) => updateField("company", event.target.value)}
             autoComplete="organization"
+            placeholder={t.company}
           />
         </label>
-        <label>
-          <span>{t.inquiryType}</span>
-          <select
-            value={form.inquiryType}
-            onChange={(event) => updateField("inquiryType", event.target.value)}
-          >
-            {options.map((option) => (
-              <option value={option} key={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="message-field">
-          <span>{t.message}</span>
+        <label className="field-message">
           <textarea
             value={form.message}
             onChange={(event) => updateField("message", event.target.value)}
-            rows={4}
+            rows={3}
+            placeholder={t.message}
             required
           />
         </label>
-        <p className={`form-status ${status === "success" ? "is-success" : ""}`} role="status">
-          {statusMessage}
-        </p>
-        <button type="submit" disabled={status === "sending"}>
+        <button className="field-submit" type="submit" disabled={status === "sending"}>
           <span>{status === "sending" ? t.sending : t.submit}</span>
           <Send size={15} aria-hidden="true" />
         </button>
+        {statusMessage ? (
+          <p
+            className={`form-status ${status === "success" ? "is-success" : ""}`}
+            role="status"
+          >
+            {statusMessage}
+          </p>
+        ) : null}
       </form>
     </section>
   );
@@ -598,10 +496,14 @@ export default function App() {
 
   return (
     <div className="page-shell">
-      <div className="ambient-grid" aria-hidden="true" />
+      <div className="ambient-glow" aria-hidden="true" />
       <div className="portfolio-frame">
         <Header locale={locale} onLocaleChange={setLocale} />
-        <TopMarquee locale={locale} paused={paused} onToggle={() => setPaused((value) => !value)} />
+        <TopMarquee
+          locale={locale}
+          paused={paused}
+          onToggle={() => setPaused((value) => !value)}
+        />
         <main>
           <Hero locale={locale} />
           <SocialLinks locale={locale} />
@@ -610,7 +512,7 @@ export default function App() {
           <Contact locale={locale} />
         </main>
         <footer>
-          <a href="#top" aria-label="Back to top">
+          <a href="#top" aria-label="Back to top" className="footer-brand">
             <span>Leer / RIA</span>
             <small>AI CREATOR</small>
           </a>
@@ -618,7 +520,7 @@ export default function App() {
             <a href="#works">{copy[locale].navWorks}</a>
             <a href="#services">{copy[locale].navRequests}</a>
             <a href="#about">{copy[locale].navProfile}</a>
-            <a href="#links">LINKS</a>
+            <a href="#links">{copy[locale].navLinks}</a>
             <a href="#contact">{copy[locale].navContact}</a>
           </nav>
           <p>© 2026 Leer / RIA. {copy[locale].footer}</p>

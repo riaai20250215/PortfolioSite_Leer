@@ -1,14 +1,5 @@
 export type Locale = "ja" | "en";
-export type MediaKind = "image" | "localVideo" | "youtube";
-export type VisualVariant =
-  | "portrait"
-  | "ice"
-  | "city"
-  | "crystal"
-  | "astronaut"
-  | "film"
-  | "signal"
-  | "dream";
+export type MediaKind = "image" | "video" | "youtube";
 
 export type LocalizedText = Record<Locale, string>;
 
@@ -17,13 +8,17 @@ export type MediaItem = {
   kind: MediaKind;
   title: LocalizedText;
   description?: LocalizedText;
-  src: string;
-  thumbnail?: string;
+  imageUrl: string;
+  videoUrl?: string;
   tags?: string[];
   visible: boolean;
   order: number;
-  visual?: VisualVariant;
   motion?: boolean;
+};
+
+export type HeroVisual = {
+  imageUrl: string;
+  alt: LocalizedText;
 };
 
 export type SiteContent = {
@@ -38,6 +33,7 @@ export type SiteContent = {
       availability: string;
     }
   >;
+  heroPortrait: HeroVisual;
   socialLinks: {
     label: string;
     note: LocalizedText;
@@ -58,136 +54,143 @@ export const siteContent: SiteContent = {
   profile: {
     ja: {
       name: "Leer / RIA",
-      role: "AI Creator",
-      bio: "AIを創作のパートナーに、静かな物語性を持つビジュアルとショートムービーを制作しています。",
+      role: "AI CREATOR",
+      bio: "AIを創作のパートナーに、画像とストーリーを制作しています。テクノロジーと感情を融合させ、新しい世界をかたちにします。",
       concept:
-        "透明感のある青、未来的な都市、感情を宿したキャラクター。見る人の想像が少し先へ進むような世界を形にします。",
+        "透明感のある青、未来的な都市、感情を宿したキャラクター。見る人の想像を一歩先へ進める世界をつくります。",
       location: "Tokyo, Japan",
       availability: "制作・コラボ相談受付中",
     },
     en: {
       name: "Leer / RIA",
-      role: "AI Creator",
-      bio: "I create AI visuals and short stories with artificial intelligence as my creative partner.",
+      role: "AI CREATOR",
+      bio: "I create images and stories with AI as my creative partner. Blending technology and emotion to shape new worlds.",
       concept:
         "Cool blue light, cinematic cities, and characters with quiet emotion. Each piece is built to move imagination forward.",
       location: "Tokyo, Japan",
       availability: "Available for projects",
     },
   },
+  heroPortrait: {
+    imageUrl: "/images/hero-portrait.svg",
+    alt: {
+      ja: "Leer / RIA のヒーロービジュアル",
+      en: "Leer / RIA hero visual",
+    },
+  },
   socialLinks: [
     {
       label: "X",
-      note: { ja: "最新情報", en: "Follow me" },
+      note: { ja: "Follow me", en: "Follow me" },
       url: "https://x.com/ria_aicreator",
       kind: "x",
     },
     {
       label: "YouTube",
-      note: { ja: "映像作品", en: "Watch reels" },
+      note: { ja: "Watch reels", en: "Watch reels" },
       url: "https://www.youtube.com/@ria_aicreator",
       kind: "youtube",
     },
     {
       label: "Instagram",
-      note: { ja: "日々のビジュアル", en: "Daily visuals" },
+      note: { ja: "Daily visuals", en: "Daily visuals" },
       url: "https://www.instagram.com/leer.ai.20260418?igsh=MzQ0NHVoZjNlOHcz&utm_source=qr",
       kind: "instagram",
     },
     {
       label: "TikTok",
-      note: { ja: "ショートと制作過程", en: "Shorts and process" },
+      note: {
+        ja: "Shorts & behind the scenes",
+        en: "Shorts & behind the scenes",
+      },
       url: "https://www.tiktok.com/@leer.ai.20260418?_r=1&_t=ZS-96N6vRqholM",
       kind: "tiktok",
     },
   ],
   heroGallery: [
     {
-      id: "ice-memory",
+      id: "marquee-ice-memory",
       kind: "image",
       title: { ja: "氷の記憶", en: "Ice Memory" },
-      description: {
-        ja: "雪光をまとったキャラクタービジュアル。",
-        en: "A character visual wrapped in winter light.",
-      },
-      src: "#generated-ice-memory",
-      tags: ["character", "ai visual"],
+      imageUrl: "/images/marquee/01-ice.svg",
+      tags: ["character"],
       visible: true,
       order: 1,
-      visual: "ice",
     },
     {
-      id: "night-archive",
+      id: "marquee-night-archive",
       kind: "image",
       title: { ja: "夜明け前の都市", en: "City Before Dawn" },
-      description: {
-        ja: "青い霧と高層都市の世界観。",
-        en: "A blue city world built from light and haze.",
-      },
-      src: "#generated-night-archive",
-      tags: ["world", "cinematic"],
+      imageUrl: "/images/marquee/02-city.svg",
+      tags: ["world"],
       visible: true,
       order: 2,
-      visual: "city",
       motion: true,
     },
     {
-      id: "crystal-girl",
+      id: "marquee-crystal-girl",
       kind: "image",
       title: { ja: "水晶の横顔", en: "Crystal Profile" },
-      description: {
-        ja: "透明な感情を残すポートレート。",
-        en: "A portrait that leaves a transparent afterglow.",
-      },
-      src: "#generated-crystal-girl",
-      tags: ["portrait", "illustration"],
+      imageUrl: "/images/marquee/03-portrait.svg",
+      tags: ["portrait"],
       visible: true,
       order: 3,
-      visual: "portrait",
     },
     {
-      id: "lunar-short",
+      id: "marquee-tower-twilight",
       kind: "image",
-      title: { ja: "月面ショート", en: "Lunar Short" },
-      description: {
-        ja: "静かな宇宙を歩くショート映像の構想。",
-        en: "A short film concept walking through quiet space.",
-      },
-      src: "#generated-lunar-short",
-      tags: ["short film", "story"],
+      title: { ja: "残響の塔", en: "Tower Twilight" },
+      imageUrl: "/images/marquee/04-tower.svg",
+      tags: ["world"],
       visible: true,
       order: 4,
-      visual: "astronaut",
-      motion: true,
     },
     {
-      id: "afterimage",
+      id: "marquee-afterimage",
       kind: "image",
-      title: { ja: "残像のリール", en: "Afterimage Reel" },
-      description: {
-        ja: "SNSで止まりたくなる数秒の構成。",
-        en: "A few seconds composed for a social pause.",
-      },
-      src: "#generated-afterimage",
-      tags: ["reel", "motion"],
+      title: { ja: "残像のリール", en: "Afterimage" },
+      imageUrl: "/images/marquee/05-film.svg",
+      tags: ["motion"],
       visible: true,
       order: 5,
-      visual: "film",
       motion: true,
     },
     {
-      id: "blue-signal",
+      id: "marquee-blue-signal",
       kind: "image",
       title: { ja: "青い信号", en: "Blue Signal" },
-      description: {
-        ja: "ブランドの印象を作るSNSビジュアル。",
-        en: "Social visuals that build a coherent signal.",
-      },
-      src: "#generated-blue-signal",
-      tags: ["sns", "brand"],
+      imageUrl: "/images/marquee/06-signal.svg",
+      tags: ["sns"],
       visible: true,
       order: 6,
-      visual: "signal",
+    },
+    {
+      id: "marquee-aurora-eye",
+      kind: "image",
+      title: { ja: "オーロラの瞳", en: "Aurora Eye" },
+      imageUrl: "/images/marquee/07-aurora.svg",
+      tags: ["portrait"],
+      visible: true,
+      order: 7,
+    },
+    {
+      id: "marquee-lunar-walk",
+      kind: "image",
+      title: { ja: "月を歩く", en: "Lunar Walk" },
+      imageUrl: "/images/marquee/08-lunar.svg",
+      tags: ["story"],
+      visible: true,
+      order: 8,
+      motion: true,
+    },
+    {
+      id: "marquee-dream-protocol",
+      kind: "image",
+      title: { ja: "夢の手紙", en: "Dream Protocol" },
+      imageUrl: "/images/marquee/09-dream.svg",
+      tags: ["concept"],
+      visible: true,
+      order: 9,
     },
   ],
   featuredWorks: [
@@ -196,28 +199,26 @@ export const siteContent: SiteContent = {
       kind: "image",
       title: { ja: "Blue Prayer", en: "Blue Prayer" },
       description: {
-        ja: "氷のような静けさとキャラクターの内面を重ねたAIビジュアル。",
+        ja: "氷のような静けさと内面を重ねたキャラクタービジュアル。",
         en: "An AI visual blending icy stillness with a character's inner world.",
       },
-      src: "#generated-work-blue-prayer",
+      imageUrl: "/images/works/01-blue-prayer.svg",
       tags: ["illustration", "character"],
       visible: true,
       order: 1,
-      visual: "ice",
     },
     {
       id: "work-tokyo-nocturne",
       kind: "image",
       title: { ja: "Tokyo Nocturne", en: "Tokyo Nocturne" },
       description: {
-        ja: "夜の都市を舞台にしたショート映像向けのキービジュアル。",
+        ja: "夜の都市を舞台にしたショート映像のキービジュアル。",
         en: "A key visual for a short film set in a nocturnal city.",
       },
-      src: "#generated-work-tokyo-nocturne",
+      imageUrl: "/images/works/02-tokyo-nocturne.svg",
       tags: ["short film", "world"],
       visible: true,
       order: 2,
-      visual: "city",
       motion: true,
     },
     {
@@ -228,11 +229,11 @@ export const siteContent: SiteContent = {
         ja: "透明な歌声をイメージしたMVビジュアルディレクション。",
         en: "Music-video visual direction inspired by a transparent voice.",
       },
-      src: "#generated-work-crystal-voice",
-      tags: ["mv", "visual direction"],
+      imageUrl: "/images/works/03-crystal-voice.svg",
+      tags: ["mv", "direction"],
       visible: true,
       order: 3,
-      visual: "crystal",
+      motion: true,
     },
     {
       id: "work-lunar-postcard",
@@ -242,26 +243,50 @@ export const siteContent: SiteContent = {
         ja: "孤独と余白をテーマにした物語のワンシーン。",
         en: "A story frame built around solitude and space.",
       },
-      src: "#generated-work-lunar-postcard",
+      imageUrl: "/images/works/04-lunar-postcard.svg",
       tags: ["story", "concept"],
       visible: true,
       order: 4,
-      visual: "astronaut",
+    },
+    {
+      id: "work-aurora-fragments",
+      kind: "image",
+      title: { ja: "Aurora Fragments", en: "Aurora Fragments" },
+      description: {
+        ja: "ポートレートの細部に光をまとわせた一枚。",
+        en: "A portrait wrapped in fragments of aurora light.",
+      },
+      imageUrl: "/images/works/05-aurora-fragments.svg",
+      tags: ["portrait", "illustration"],
+      visible: true,
+      order: 5,
     },
     {
       id: "work-silent-loop",
       kind: "image",
       title: { ja: "Silent Loop", en: "Silent Loop" },
       description: {
-        ja: "数秒で世界観を見せるためのリール構成。",
-        en: "A reel composition designed to reveal a world in seconds.",
+        ja: "数秒で世界観を見せるリール構成。",
+        en: "A reel composition that reveals a world in seconds.",
       },
-      src: "#generated-work-silent-loop",
+      imageUrl: "/images/works/06-silent-loop.svg",
       tags: ["reel", "motion"],
       visible: true,
-      order: 5,
-      visual: "film",
+      order: 6,
       motion: true,
+    },
+    {
+      id: "work-midnight-bloom",
+      kind: "image",
+      title: { ja: "Midnight Bloom", en: "Midnight Bloom" },
+      description: {
+        ja: "夜の中で咲くような淡い物語シーン。",
+        en: "A quiet scene blooming inside the night.",
+      },
+      imageUrl: "/images/works/07-midnight-bloom.svg",
+      tags: ["concept", "world"],
+      visible: true,
+      order: 7,
     },
     {
       id: "work-dream-protocol",
@@ -271,39 +296,28 @@ export const siteContent: SiteContent = {
         ja: "ブランドコラボ向けの幻想的なSNSシリーズ。",
         en: "A dreamy social series for brand collaboration.",
       },
-      src: "#generated-work-dream-protocol",
+      imageUrl: "/images/works/08-dream-protocol.svg",
       tags: ["sns", "campaign"],
       visible: true,
-      order: 6,
-      visual: "dream",
+      order: 8,
     },
   ],
   services: {
-    ja: [
-      "AI Illustration",
-      "AI Short Film",
-      "SNS Visuals",
-      "Character / World",
-    ],
-    en: [
-      "AI Illustration",
-      "AI Short Film",
-      "SNS Visuals",
-      "Character / World",
-    ],
+    ja: ["AI Illustration", "AI Short Film", "SNS Visuals", "Brand Collaboration"],
+    en: ["AI Illustration", "AI Short Film", "SNS Visuals", "Brand Collaboration"],
   },
   serviceDetails: {
     ja: [
-      "SNS投稿、アイコン、キービジュアル向けの高品質なAIイラスト。",
-      "数秒から世界観を伝えるショート動画の構成とビジュアル制作。",
-      "投稿、告知、リール表紙まで統一感のあるSNSクリエイティブ。",
-      "キャラクター、背景、世界設定をまとめて設計するビジュアル制作。",
+      "AIで生成する高品質なビジュアル。",
+      "AIで生み出すシネマティックな短編。",
+      "SNSで目を引くコンテンツ。",
+      "ブランドと共に創るクリエイティブキャンペーン。",
     ],
     en: [
-      "High-quality AI visuals for posts, icons, and key art.",
-      "Short-form cinematic stories generated with AI.",
-      "Eye-catching content for social media and daily updates.",
-      "Characters, environments, and story worlds designed together.",
+      "High-quality visuals created with AI.",
+      "Cinematic stories generated by AI.",
+      "Eye-catching content for social media.",
+      "Creative campaigns together with brands.",
     ],
   },
   contact: {
@@ -318,6 +332,7 @@ export const copy = {
     navWorks: "WORKS",
     navRequests: "SERVICES",
     navContact: "CONTACT",
+    navLinks: "LINKS",
     heroKicker: "AI Creator Portfolio",
     heroTitle: "AI Creator & Visual Storyteller",
     heroLead: "知性と想像力で、明日のビジュアルと物語をつくる。",
@@ -330,16 +345,16 @@ export const copy = {
     socialsTitle: "LINKS",
     socialsLead: "作品、制作過程、ショート映像はこちらから。",
     worksTitle: "FEATURED WORKS",
-    worksLead: "生成したビジュアルと映像構想を、作品として並べました。",
+    worksLead: "生成したビジュアルと映像構想を作品として並べました。",
     requestsTitle: "SERVICES",
     requestsLead: "What I Can Create For You",
     contactTitle: "Business Inquiries",
-    contactLead: "制作依頼、コラボレーション、相談はこちらから。",
+    contactLead:
+      "制作依頼、コラボレーション、相談はこちらから。あなたのアイデアを形にしましょう。",
     contactKicker: "LET'S CREATE TOGETHER",
     name: "Name",
     email: "Email",
     company: "Company / Organization",
-    inquiryType: "Inquiry type",
     message: "Message",
     submit: "SEND MESSAGE",
     sending: "SENDING",
@@ -351,15 +366,16 @@ export const copy = {
     openExternal: "外部リンクを開く",
     playVideo: "映像を見る",
     openChannel: "チャンネルを開く",
-    viewAll: "VIEW ALL",
+    viewAll: "VIEW ALL WORKS",
     learnMore: "LEARN MORE",
-    footer: "AI visuals, short films, characters, and quiet future worlds.",
+    footer: "All rights reserved.",
   },
   en: {
     navProfile: "ABOUT",
     navWorks: "WORKS",
     navRequests: "SERVICES",
     navContact: "CONTACT",
+    navLinks: "LINKS",
     heroKicker: "AI Creator Portfolio",
     heroTitle: "AI Creator & Visual Storyteller",
     heroLead: "Crafting tomorrow's visuals with intelligence and imagination.",
@@ -376,12 +392,12 @@ export const copy = {
     requestsTitle: "SERVICES",
     requestsLead: "What I Can Create For You",
     contactTitle: "Business Inquiries",
-    contactLead: "For commissions, collaborations, and visual direction.",
+    contactLead:
+      "I'm open to creative collaborations and commissioned work. Let's bring your ideas to life.",
     contactKicker: "LET'S CREATE TOGETHER",
     name: "Name",
     email: "Email",
     company: "Company / Organization",
-    inquiryType: "Inquiry type",
     message: "Message",
     submit: "SEND MESSAGE",
     sending: "SENDING",
@@ -393,20 +409,8 @@ export const copy = {
     openExternal: "Open external link",
     playVideo: "Play video",
     openChannel: "Open channel",
-    viewAll: "VIEW ALL",
+    viewAll: "VIEW ALL WORKS",
     learnMore: "LEARN MORE",
-    footer: "AI visuals, short films, characters, and quiet future worlds.",
+    footer: "All rights reserved.",
   },
 } satisfies Record<Locale, Record<string, string>>;
-
-export const inquiryOptions = {
-  ja: ["AIイラスト", "AIショート映像", "SNSビジュアル", "キャラクター / 世界観", "コラボ相談", "その他"],
-  en: [
-    "AI illustration",
-    "AI short film",
-    "Social visual",
-    "Character / world",
-    "Collaboration",
-    "Other",
-  ],
-} satisfies Record<Locale, string[]>;

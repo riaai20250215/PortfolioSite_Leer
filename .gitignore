@@ -3,4 +3,5 @@ dist
 .env
 .tools
 .vite-dev*.log
+.playwright-mcp/
 .DS_Store
