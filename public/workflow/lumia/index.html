@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>『ルミア』制作工程 — りあ / Leer</title>
+  <meta name="description" content="TapNow『ルミアと始まりの海』企画へ提出した30秒MVの、応募要件、企画、楽曲、画像、Seedance、Remotion、編集、提出を記録した制作ケーススタディ。">
+  <meta property="og:title" content="『ルミア』制作工程 — りあ / Leer">
+  <meta property="og:description" content="30秒MV『ルミア』が完成するまでの判断、失敗、生成、編集、提出。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="../../assets/workflow/lumia/cover.png">
+  <meta name="theme-color" content="#07151d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../workflow.css">
+</head>
+<body class="process-body lumia-case-body">
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="process-header" id="siteHeader">
+    <a class="process-brand" href="../../">りあ <span>/</span> Leer</a>
+    <nav class="process-nav" id="siteNav" aria-label="ルミア制作工程ナビゲーション">
+      <a href="../../">TOP</a>
+      <a href="../../#works">WORKS</a>
+      <a class="active" href="../">PROCESS</a>
+      <a href="../../#profile">PROFILE</a>
+    </nav>
+    <button class="process-nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="lumia-hero">
+      <img class="lumia-hero__image" src="../../assets/workflow/lumia/cover.png" alt="ルミアと仲間たち">
+      <div class="lumia-hero__veil" aria-hidden="true"></div>
+      <div class="lumia-hero__copy">
+        <p>CREATIVE PROCESS / CASE 001</p>
+        <h1>ルミア</h1>
+        <strong>30秒・提供IPコンテストMV<br>要件から提出までの制作工程</strong>
+        <div class="lumia-hero__meta"><span>2026.08.02–04</span><span>29.80 SEC</span><span>BPM 180</span><span>17 SHOTS</span></div>
+      </div>
+      <a class="process-scroll" href="#brief">READ <i></i></a>
+    </section>
+
+    <nav class="case-subnav" aria-label="ページ内目次">
+      <a href="#brief">要件</a><a href="#film">完成映像</a><a href="#concept">企画</a><a href="#workflow">工程</a><a href="#sessions">生成</a><a href="#type">文字</a><a href="#lessons">改善</a><a href="#submission">提出</a><a href="#sources">出典</a>
+    </nav>
+
+    <div class="case-layout">
+      <aside class="case-toc">
+        <p>CONTENTS</p>
+        <a href="#brief"><span>01</span>コンテスト要件</a>
+        <a href="#film"><span>02</span>完成映像</a>
+        <a href="#concept"><span>03</span>企画の核</a>
+        <a href="#workflow"><span>04</span>制作工程</a>
+        <a href="#sessions"><span>05</span>4セッション</a>
+        <a href="#type"><span>06</span>Remotion</a>
+        <a href="#lessons"><span>07</span>失敗と改善</a>
+        <a href="#submission"><span>08</span>提出文面</a>
+        <a href="#unknowns"><span>09</span>要確認</a>
+        <a href="#sources"><span>10</span>出典</a>
+      </aside>
+
+      <article class="case-document">
+        <section class="case-section" id="brief">
+          <div class="case-label">01 / CONTEST REQUIREMENTS <span>VERIFIED 2026.08.04</span></div>
+          <h2>コンテスト要件</h2>
+          <p class="case-lead">コンテスト作品の工程記録は、アイデアではなく応募条件から始める。何を作ったかと同じ重さで、何を守り、どこへ、どの順で提出したかを残す。</p>
+          <div class="requirement-summary">
+            <div><span>DEADLINE</span><strong>2026.08.04<br>23:59</strong></div>
+            <div><span>DURATION</span><strong>30 SEC</strong></div>
+            <div><span>SUBMISSION</span><strong>3 STEPS</strong></div>
+          </div>
+          <div class="case-table-wrap">
+            <table class="case-table">
+              <thead><tr><th>項目</th><th>要件</th><th>本作での扱い</th></tr></thead>
+              <tbody>
+                <tr><td>お題</td><td>『ルミアと始まりの海』のキャラクターまたは世界観を使った30秒動画</td><td>必須／確認済み</td></tr>
+                <tr><td>提供素材</td><td>ルミア、クルル、ポワン、プクリの設定画、環境資料、タイトルロゴ等</td><td>公式画像を生成参照に使用</td></tr>
+                <tr><td>表現の自由</td><td>新キャラ、新情景、戦闘、掛け合い、ジャンル再構成が可能。全員出演は不要</td><td>ルミア中心＋従者3体へ集約</td></tr>
+                <tr><td>商用利用</td><td>不可</td><td>遵守</td></tr>
+                <tr><td>禁止事項</td><td>公共良俗に反する表現、過度に暴力的な表現</td><td>該当表現なし</td></tr>
+                <tr><td>参加特典</td><td>条件達成者へ2,000 Tapies</td><td>企画情報</td></tr>
+                <tr><td>優秀作品</td><td>2名、各10,000 Tapies相当</td><td>企画情報</td></tr>
+                <tr><td>必須表記</td><td><code>@TapNow_AI @TapNow_JP #ルミアと始まりの海</code></td><td>X投稿時に使用</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="submission-route">
+            <span>01 <b>TapTV</b><small>完成動画＋制作キャンバス</small></span><i>→</i>
+            <span>02 <b>X</b><small>必須メンション＋タグ</small></span><i>→</i>
+            <span>03 <b>Googleフォーム</b><small>Team ID＋作品リンク</small></span>
+          </div>
+          <details class="case-details">
+            <summary>次回の公募で最初に回収する情報</summary>
+            <ol>
+              <li>公式要項URL、公開日、更新日、確認日</li><li>締切の時刻とタイムゾーン</li><li>尺、比率、コーデック、容量などの納品仕様</li><li>提供素材の必須使用条件と改変可能範囲</li><li>AI生成、楽曲、声、フォント、IPの権利条件</li><li>禁止表現、守秘、プラットフォーム規約</li><li>作品名、説明文、メンション、タグなどの必須表記</li><li>投稿順、URL、ID、フォーム項目、完了証跡</li>
+            </ol>
+          </details>
+        </section>
+
+        <section class="case-section" id="film">
+          <div class="case-label">02 / FINAL FILM</div>
+          <h2>完成映像</h2>
+          <div class="case-video">
+            <video controls playsinline preload="metadata" poster="../../assets/workflow/lumia/cover.png"><source src="../../assets/workflow/lumia/lumia-final-720p.mp4" type="video/mp4"></video>
+            <p>『ルミア』完成版／Web確認用720p</p>
+          </div>
+          <dl class="project-facts">
+            <div><dt>作品名</dt><dd>ルミアとその仲間たち『ルミア』</dd></div>
+            <div><dt>形式</dt><dd>オリジナル楽曲による30秒ミュージックビデオ</dd></div>
+            <div><dt>音楽</dt><dd>29.80秒／48kHz／BPM180</dd></div>
+            <div><dt>中核ツール</dt><dd>Claude Code、Codex、Suno、SeaDance 2.0、Higgsfield、Remotion、DaVinci Resolve、TapNow</dd></div>
+          </dl>
+        </section>
+
+        <section class="case-section" id="concept">
+          <div class="case-label">03 / CONCEPT & LANGUAGE DEVICE</div>
+          <h2>問いは歌詞に。<br>答えは映像に。</h2>
+          <blockquote class="case-quote">誰も呼んでくれないから、<br>自分で自分の名前を呼ぶ。</blockquote>
+          <div class="concept-grid">
+            <article><span>LANGUAGE DEVICE</span><h3>守り神の職務</h3><p>人類が消えても残り続ける「守る」という役目を、物語を動かす言語装置にした。</p></article>
+            <article><span>KEY PHRASE</span><h3>なにを まもってるの</h3><p>歌詞は問いのまま終わる。最後に仲間が集まることで、映像だけが答えを持つ。</p></article>
+            <article><span>SELF REFERENCE</span><h3>ルミア × 6</h3><p>誰も名前を呼ばない海で、自分の名を自分で繰り返す。孤独を反復で示す。</p></article>
+            <article><span>ETYMOLOGY</span><h3>光・人々・世界</h3><p>lumia／lumen／lume／luminaの語源を、最後に増える「複数の光」で回収する。</p></article>
+          </div>
+        </section>
+
+        <section class="case-section" id="workflow">
+          <div class="case-label">04 / PRODUCTION WORKFLOW</div>
+          <h2>11の制作工程</h2>
+          <p class="case-lead">劇場予告編案の撤回から、公開用キャンバスの整理まで。決まった順ではなく、実際に起きた判断と修正の順に再構成した。</p>
+
+          <div class="stage-list">
+            <section class="stage-card">
+              <div class="stage-card__no">00</div><div class="stage-card__body"><span>CONTEST BRIEF</span><h3>応募要件を制作の設計図にする</h3><p>お題、尺、締切、提供素材、自由条件、禁止事項、必須表記、三段階の提出を最初に固定した。当初の「15秒×2本」は実運用で4本へ変わったため、要項と実行差分を両方残した。</p><dl><div><dt>HUMAN</dt><dd>応募判断と権利条件を承認</dd></div><div><dt>AI</dt><dd>要項の構造化と漏れ検査</dd></div></dl></div>
+            </section>
+            <section class="stage-card">
+              <div class="stage-card__no">01</div><div class="stage-card__body"><span>CONCEPT</span><h3>劇場予告編を捨て、30秒の歌へ</h3><p>設定、事件、人物を一度に説明する案を取り下げ、オリジナル楽曲を中心としたMVへ転換。前作で機能した「言語装置＋一本のキーフレーズ」を再利用した。</p><dl><div><dt>HUMAN</dt><dd>感情の核と説明しない範囲を決定</dd></div><div><dt>AI</dt><dd>過積載な企画を比較・整理</dd></div></dl></div>
+            </section>
+            <section class="stage-card">
+              <div class="stage-card__no">02</div><div class="stage-card__body"><span>LYRICS & MUSIC</span><h3>名前の反復から29.80秒の曲を作る</h3><p>「だれも」の否定形を積み重ね、サビで名前を自分で呼ぶ。提供音声を30秒へ整えた参照音源からSunoで候補を作り、制作者がBPM180のテイクを採用した。</p><dl><div><dt>HUMAN</dt><dd>歌詞と採用曲を決定</dd></div><div><dt>AI</dt><dd>歌詞案、音源解析、LRC検査</dd></div></dl></div>
+            </section>
+            <section class="stage-card stage-card--visual">
+              <div class="stage-card__no">03</div><div class="stage-card__body"><span>VISUAL DEVICE</span><h3>潜水艦の外から丸窓を覗く</h3><p>参照MVのドアスコープ構造を、潜水艦の内外へ翻訳。初期12案は構図固定、キャラの小ささ、深海の暗さで絵柄比較に失敗した。P02の魚眼とO05の生命光を別々に採用した。</p></div><figure><img src="../../assets/workflow/lumia/fisheye-tests.png" alt="魚眼構図の5案" loading="lazy"><figcaption>構図比較P01〜P05。絵柄比較と本番構図を分ける必要があると分かった。</figcaption></figure>
+            </section>
+            <section class="stage-card stage-card--visual">
+              <div class="stage-card__no">04</div><div class="stage-card__body"><span>KEYFRAMES</span><h3>一フレーズ三案を音楽の中で選ぶ</h3><p>歌詞一行につき三枚を基本に生成し、音源、歌詞、候補画像、採用状態を一画面へまとめたカタログで選定。船外の従者と、後半の船内再登場を分け、演出の重複を解消した。</p></div><figure><img src="../../assets/workflow/lumia/key-visual.png" alt="始まりの海の生命光" loading="lazy"><figcaption>イントロと海の基準画になったO05「始まりの海の生命光」。</figcaption></figure>
+            </section>
+            <section class="stage-card stage-card--visual">
+              <div class="stage-card__no">05</div><div class="stage-card__body"><span>FIXED PORTHOLE</span><h3>変えてはいけないものを生成対象から外す</h3><p>ショットごとに窓の中心、直径、ボルト、海が変わる問題を、内側が透明な共通窓枠PNGで解決。人物と船内だけを生成し、外枠を編集レイヤーとして固定した。</p></div><figure><img src="../../assets/workflow/lumia/window-alpha-checker.png" alt="透明な潜水艦窓枠の検証" loading="lazy"><figcaption>チェッカー背景でアルファを検品した1920×1080の共通窓枠。</figcaption></figure>
+            </section>
+            <section class="stage-card">
+              <div class="stage-card__no">06</div><div class="stage-card__body"><span>SESSION DESIGN</span><h3>参照9枚の上限から、30秒を4分割する</h3><p>キャラクター公式シートとショット画像を同時に渡すため、0.00–8.70、8.70–16.03、16.03–24.03、24.03–29.80へ再設計。通常は窓を固定し、サビの超接写だけを意図的な例外にした。</p><dl><div><dt>HUMAN</dt><dd>区切り、順序、例外を決定</dd></div><div><dt>AI</dt><dd>枚数検算、プロンプト、アップロード順</dd></div></dl></div>
+            </section>
+            <section class="stage-card stage-card--visual">
+              <div class="stage-card__no">07</div><div class="stage-card__body"><span>SEEDANCE</span><h3>症状のあるセッションだけを撮り直す</h3><p>Higgsfield経由のSeaDance 2.0、Reference to Video、720p、16:9、無音で生成。プクリの崩れ、順序逆転、参照違いへ名前を付け、該当セッションだけ追加テイクを作った。</p></div><figure><img src="../../assets/workflow/lumia/seedance-qa.png" alt="SeaDance動画のQAコンタクトシート" loading="lazy"><figcaption>順序、窓サイズ、キャラクター同一性を静止画で比較したQAシート。</figcaption></figure>
+            </section>
+            <section class="stage-card">
+              <div class="stage-card__no">08</div><div class="stage-card__body"><span>MANUAL EDIT</span><h3>DaVinci Resolveで29.80秒へ戻す</h3><p>整数秒で生成した4本から採用部分を切り出し、完成音源へ再配置。採用テイク、速度、カラー、音量、書き出し設定はログだけでは復元できないため、推測せず追加ヒアリングへ残した。</p><dl><div><dt>HUMAN</dt><dd>カット、テンポ、音合わせ、書き出し</dd></div><div><dt>AI</dt><dd>素材整理と編集仕様の記録補助</dd></div></dl></div>
+            </section>
+            <section class="stage-card stage-card--visual">
+              <div class="stage-card__no">09</div><div class="stage-card__body"><span>REMOTION TYPE</span><h3>文字を画像から分離し、音へ直接同期する</h3><p>全画像を無文字へ戻し、太い泡文字、一文字ごとの多色、縁取り、キラキラ、円弧配置、リズムバウンスをRemotionで後付け。一律オフセットを捨て、完成MP4を全フレーズ個別に測った。</p></div><figure><img src="../../assets/workflow/lumia/remotion-qa.jpg" alt="Remotion歌詞タイポグラフィのQA" loading="lazy"><figcaption>採用したB案「泡文字ステッカー」と実測同期のQA。</figcaption></figure>
+            </section>
+            <section class="stage-card">
+              <div class="stage-card__no">10</div><div class="stage-card__body"><span>PUBLISHING</span><h3>作品だけでなく、制作キャンバスも提出する</h3><p>TapNowキャンバスへ無文字画像、生成動画、各セッションのプロンプトを並べ、素材から動画への関係を見せた。TapTV公開後、X投稿、Googleフォームの順で提出した。</p><dl><div><dt>HUMAN</dt><dd>作品名、説明文、カバー、公開を承認</dd></div><div><dt>AI</dt><dd>キャンバス整理、文面、サムネイル案</dd></div></dl></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="case-section" id="sessions">
+          <div class="case-label">05 / VIDEO SESSION MAP</div>
+          <h2>4セッション設計</h2>
+          <div class="case-table-wrap">
+            <table class="case-table">
+              <thead><tr><th>Session</th><th>完成タイムライン</th><th>生成尺</th><th>公式参照</th><th>内容</th></tr></thead>
+              <tbody>
+                <tr><td>S01</td><td>0.00–8.70</td><td>9秒</td><td>ルミア、プクリ</td><td>イントロ〜誰も知らない直前</td></tr>
+                <tr><td>S02</td><td>8.70–16.03</td><td>8秒／10秒</td><td>ルミア、クルル、ポワン</td><td>船外の従者〜1回目の問い</td></tr>
+                <tr><td>S03</td><td>16.03–24.03</td><td>8秒</td><td>ルミア、ポワン、クルル</td><td>扉からの再登場〜2回目の問い</td></tr>
+                <tr><td>S04</td><td>24.03–29.80</td><td>6秒</td><td>全4体</td><td>一体ずつ増え、全員が窓へ密着</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="case-note"><b>当初案との差分</b><p>企画資料では15秒×2本を想定。実際はReference to Videoの参照9枚制限を優先し、登場人物とショット数に合わせて4本へ変更した。</p></div>
+        </section>
+
+        <section class="case-section" id="type">
+          <div class="case-label">06 / MEASURED LYRIC TIMING</div>
+          <h2>完成映像から測った字幕同期</h2>
+          <p class="case-lead">元LRCを一律にずらす方法では後半が合わなかった。編集後の完成MP4を聴き、12フレーズと「ルミア」6発を個別に測り直した。</p>
+          <div class="timing-grid">
+            <span><b>0.00</b>今日も見回り</span><span><b>2.13</b>誰もいない街を</span><span><b>4.50</b>波を鎮めても</span><span><b>6.60</b>誰も知らない</span>
+            <span><b>8.70</b>人がいない海に</span><span><b>11.27</b>神様はいる</span><span><b>12.90 / 14.10 / 15.30</b>ルミア×3</span><span><b>16.50</b>何を守ってるの</span>
+            <span><b>18.90</b>誰もいない海を</span><span><b>21.30</b>誰も来ない道を</span><span><b>23.70 / 24.90 / 26.10</b>ルミア×3</span><span><b>27.30</b>何を守ってるの</span>
+          </div>
+          <figure class="case-wide-figure"><img src="../../assets/workflow/lumia/textless-contact-sheet.png" alt="無文字のルミアキーフレーム一覧" loading="lazy"><figcaption>文字を分離したR00〜R16のマスター。字幕の修正でイラストを再生成しなくてよい構造へ変えた。</figcaption></figure>
+        </section>
+
+        <section class="case-section" id="lessons">
+          <div class="case-label">07 / FAILURE & REVISION</div>
+          <h2>失敗を、次回のルールへ</h2>
+          <div class="lesson-list">
+            <article><span>01</span><h3>絵柄比較が一案の色違いに見えた</h3><p><b>原因：</b>構図を固定し、ルミアが小さく、深海が暗かった。</p><p><b>次回：</b>絵柄選定用の人物画と、本番構図を分ける。</p></article>
+            <article><span>02</span><h3>窓サイズがショットごとに跳ねた</h3><p><b>原因：</b>外枠まで毎回生成し直していた。</p><p><b>次回：</b>変えてはいけないものを透明の共通レイヤーへ分離する。</p></article>
+            <article><span>03</span><h3>従者の登場演出が重複した</h3><p><b>原因：</b>部分案だけを見て、全体の役割を比較していなかった。</p><p><b>次回：</b>全タイムラインを俯瞰し、船外と船内へ役割を分ける。</p></article>
+            <article><span>04</span><h3>日本語文字が誤り、動きも読みにくい</h3><p><b>原因：</b>画像生成と動画生成へ文字を任せた。</p><p><b>次回：</b>無文字素材と編集可能なRemotionタイポグラフィへ分離する。</p></article>
+            <article><span>05</span><h3>字幕の後半だけがずれた</h3><p><b>原因：</b>旧LRCと一律オフセットを使った。</p><p><b>次回：</b>完成MP4をフレーズごとに計測する。</p></article>
+            <article><span>06</span><h3>キャラクターデザインが崩れた</h3><p><b>原因：</b>一回の確率的生成に依存した。</p><p><b>次回：</b>公式シートを参照し、症状のあるセッションだけ撮り直す。</p></article>
+          </div>
+          <blockquote class="case-core-lesson"><span>CORE LESSON</span><p>同一性は、プロンプトだけでなく<br>レイヤー構造でも守れる。</p></blockquote>
+        </section>
+
+        <section class="case-section" id="submission">
+          <div class="case-label">08 / SUBMISSION COPY</div>
+          <h2>Googleフォーム提出文面</h2>
+          <p>自由記述欄へ提出するために作成した文面。新しい表現への挑戦、共通IPを通した交流と学び、企画への感謝をまとめた。</p>
+          <blockquote class="submission-copy">今回は、これまで自分があまり取り組んでこなかった二つの新しい表現に挑戦でき、とても刺激的な制作になりました。また、共通のIPをご提供いただいたことで、他のクリエイターの皆さまと交流する機会も生まれました。同じ素材を使って自分自身も制作したからこそ、それぞれの作品に込められた発想や工夫の違いを、より具体的に、身に染みて理解できたように思います。多くの学びと出会いにつながる、本当に素敵な企画をありがとうございました。</blockquote>
+
+          <h3 class="case-subheading">TapTV公開文</h3>
+          <div class="published-copy">
+            <p>人のいない海を、今日もひとり見回る守り神ルミア。<br>誰も呼んでくれない海で、自分の名前を自分で呼びながら、「なにを守ってるの？」と問い続けます。</p>
+            <p>潜水艦の丸窓を隔てた視線と、最後に集まる3体の従者によって、孤独が“複数の光”へ変わる瞬間を描いた30秒MVです。</p>
+            <p>「ルミア」という名には、光・人々・世界へつながる語源があります。人類が消えた世界で、名前そのものが人々の痕跡として残っています。</p>
+          </div>
+        </section>
+
+        <section class="case-section" id="unknowns">
+          <div class="case-label">09 / NEEDS INTERVIEW</div>
+          <h2>まだ本人に確認したいこと</h2>
+          <ol class="unknown-list">
+            <li><span>01</span>DaVinci Resolveで最終採用したS01〜S04のテイク番号と、その決め手</li>
+            <li><span>02</span>カット、速度変更、トランジション、カラー、音量、書き出し設定</li>
+            <li><span>03</span>最終字幕は透過MOVをDaVinciへ重ねたか、Remotionの合成動画を採用したか</li>
+            <li><span>04</span>「二つの新しい表現」は、魚眼の丸窓モンタージュと円弧状ポップタイポグラフィという理解で合っているか</li>
+          </ol>
+        </section>
+
+        <section class="case-section" id="sources">
+          <div class="case-label">10 / SOURCES & CONFIDENCE</div>
+          <h2>出典と確度</h2>
+          <div class="source-list">
+            <article><span>PRIMARY 01</span><h3>コンテスト要件</h3><p>プロジェクト内『01_コンテスト概要.md』。お題、締切、特典、禁止事項、必須表記、提出フローを2026年8月4日に照合。</p></article>
+            <article><span>PRIMARY 02</span><h3>世界観・企画正本</h3><p>世界観バイブル、キャラクター設定、30秒MV企画、歌詞設計。採用判断の根拠として使用。</p></article>
+            <article><span>PRIMARY 03</span><h3>実ファイルと台帳</h3><p>音源、LRC、採用画像、4分割プロンプト、生成台帳、QAシート、Remotion実測同期表、完成MP4。</p></article>
+            <article><span>PROCESS LOG</span><h3>Claude Code／Codex履歴</h3><p>方向転換、生成フィードバック、選定、失敗、修正、公開準備を照合。生ログと個人情報は公開しない。</p></article>
+          </div>
+          <p class="editorial-note">一次資料で確認できたもの、複数成果物から推定したもの、本人への確認が必要なものを混ぜずに記述しています。</p>
+        </section>
+
+        <a class="case-back" href="../">← PROCESS ARCHIVEへ戻る</a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="process-footer">
+    <a href="../../" class="process-footer__brand prism-text">りあ / Leer</a>
+    <p>CREATIVE PROCESS / CASE 001</p>
+    <a href="#" class="process-footer__top">▲ TOP</a>
+  </footer>
+
+  <script src="../workflow.js"></script>
+</body>
+</html>

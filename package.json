@@ -1,27 +1,14 @@
 {
-  "name": "leer-ai-creator-portfolio",
+  "name": "leer-official-site",
   "private": true,
-  "version": "0.1.0",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "りあ / Leer — AI CREATOR 公式サイト",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
-    "build": "tsc && vite build",
-    "preview": "vite preview --host 127.0.0.1"
-  },
-  "dependencies": {
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "framer-motion": "^12.23.26",
-    "lucide-react": "^0.562.0"
+    "dev": "python3 -m http.server 8931 --bind 127.0.0.1 --directory public",
+    "test": "node scripts/verify-site.mjs",
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.1.1",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
-    "autoprefixer": "^10.4.23",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.19",
-    "typescript": "^5.9.3",
-    "vite": "^7.2.7"
+    "wrangler": "^4"
   }
 }

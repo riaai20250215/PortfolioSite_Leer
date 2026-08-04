@@ -1,0 +1,11 @@
+{
+  // りあ / Leer 公式サイト — Cloudflare Workers (静的アセット配信)
+  // デプロイ: npm run deploy (または npx wrangler deploy)
+  // URL: https://leer-official.official-leer.workers.dev/
+  "name": "leer-official",
+  "compatibility_date": "2026-08-03",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application"
+  }
+}

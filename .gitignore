@@ -1,7 +1,8 @@
-node_modules
-dist
-.env
-.tools
-.vite-dev*.log
-.playwright-mcp/
 .DS_Store
+node_modules/
+.wrangler/
+dist/
+*.log
+.env
+.env.*
+!.env.example
