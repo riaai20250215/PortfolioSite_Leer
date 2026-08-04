@@ -497,45 +497,6 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
 .work-link:hover{ opacity: .75; }
 
 /* =====================================================
-   Process / 制作工程
-   ===================================================== */
-.process-feature{
-  display:grid;
-  grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr);
-  min-height:480px;
-  background:linear-gradient(145deg,rgba(20,20,31,.93),rgba(9,18,25,.92));
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:24px;
-  overflow:hidden;
-  text-decoration:none;
-  transition:transform .45s,border-color .45s,box-shadow .45s;
-}
-.process-feature:hover{
-  transform:translateY(-6px);
-  border-color:rgba(115,242,227,.3);
-  box-shadow:0 24px 70px rgba(0,0,0,.48),0 0 50px rgba(115,242,227,.07);
-}
-.process-feature__visual{ position:relative; min-height:360px; overflow:hidden; }
-.process-feature__visual::after{ content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent 58%,rgba(9,18,25,.72)); }
-.process-feature__visual img{ width:100%; height:100%; object-fit:cover; transition:transform .7s; }
-.process-feature:hover .process-feature__visual img{ transform:scale(1.025); }
-.process-feature__visual span{
-  position:absolute; left:18px; top:18px; z-index:2;
-  border:1px solid rgba(115,242,227,.32); border-radius:999px;
-  background:rgba(8,16,22,.68); color:#9bf8ef;
-  font-family:var(--font-en); font-size:.68rem; letter-spacing:.18em;
-  padding:6px 12px; backdrop-filter:blur(8px);
-}
-.process-feature__copy{ align-self:center; padding:clamp(28px,4vw,50px); }
-.process-feature__copy>p{ color:#73f2e3; font-family:var(--font-en); font-size:.68rem; letter-spacing:.2em; }
-.process-feature__copy h3{ font-family:var(--font-serif); font-size:clamp(2.1rem,4vw,3.7rem); line-height:1.45; margin:22px 0; }
-.process-feature__copy>span{ display:block; color:var(--muted); font-size:.84rem; line-height:1.95; }
-.process-feature__copy>strong{ display:block; color:#dff9f5; font-size:.8rem; font-weight:400; letter-spacing:.14em; margin-top:30px; }
-.process-archive-link{ display:flex; align-items:center; justify-content:space-between; gap:30px; border-bottom:1px solid var(--line); padding:26px 4px; }
-.process-archive-link p{ color:var(--muted); font-size:.82rem; }
-.process-archive-link a{ flex:none; color:var(--gold); font-family:var(--font-en); font-size:.72rem; letter-spacing:.16em; text-decoration:none; }
-
-/* =====================================================
    Character (NIL)
    ===================================================== */
 .chara-intro{
@@ -863,8 +824,6 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
 /* タブレット幅: 作品は2列 */
 @media (max-width: 1024px){
   .works-grid{ grid-template-columns: repeat(2, 1fr); }
-  .process-feature{ grid-template-columns:1fr; }
-  .process-feature__visual::after{ background:linear-gradient(0deg,rgba(9,18,25,.75),transparent 45%); }
 }
 
 @media (max-width: 860px){
@@ -921,11 +880,6 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
 
   .profile-card{ flex-direction: column; text-align:center; }
   .profile-text > p:last-child{ text-align:left; }
-
-  .process-feature{ min-height:0; border-radius:18px; }
-  .process-feature__visual{ min-height:0; aspect-ratio:16/9; }
-  .process-feature__copy{ padding:28px 22px 34px; }
-  .process-archive-link{ align-items:flex-start; flex-direction:column; }
 
   .footer-top{ position: static; display:inline-block; margin-top: 24px; transform:none; }
 }

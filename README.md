@@ -12,7 +12,6 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 | TOP | 「LEER」の名前のみのシンプル構成(背景: ナイモノネダリのキービジュアル + 星空 + 名前がふわっと浮かぶ登場アニメ)。SNSリンクと JP/EN 言語切替はヘッダー右上 |
 | NEWS | 受賞・出品・公開のお知らせ |
 | WORKS | 8作品を投稿時期の新しい順に掲載(ルミア / 真夜中の自分会議 / ポスト・アニマ / ナイモノネダリ / The Lost Celestia / 人間(仮)、はじめます。 / Still shining / 声の羅針盤) |
-| PROCESS | 作品ごとの制作工程、コンテスト要件、失敗と改善、制作ノウハウを蓄積する上位アーカイブ。`/workflow/` から閲覧 |
 | CHARACTER | **一時非表示中**(2026-08-03)。ニル / NIL の紹介とビジュアル系譜(v1〜v6)。`index.html` 内にコメントアウトで保持。再表示はコメントブロックを外し、navの CHARACTER リンクも復活させる |
 | PROFILE | プロフィールと経歴タイムライン |
 | LINKS | X / YouTube / Instagram / TikTok |
@@ -23,9 +22,6 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 - `public/style.css` — PRISM NIGHTテーマ(冒頭の`:root`で配色を一括変更可)
 - `public/script.js` — 星空canvas / スクロール演出 / モバイルナビ / ライトボックス / JP・EN言語切替(英訳辞書 `EN` はこのファイル内。テキスト変更時は `data-i18n` キーと対で更新)
 - `public/assets/` — Web用に軽量化した画像(works / character / profile)
-- `public/workflow/` — 制作工程ハブと作品別ケーススタディ
-- `public/workflow/lumia/` — 『ルミア』のコンテスト要件から提出までの制作工程
-- `public/assets/workflow/` — 制作工程ページ用の画像・動画
 
 ## ローカルプレビュー
 
