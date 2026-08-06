@@ -1,11 +1,41 @@
 {
-  // りあ / Leer 公式サイト — Cloudflare Workers (静的アセット配信)
+  // りあ / Leer 公式サイト — Cloudflare Workers (静的アセット + コンテンツAPI)
   // デプロイ: npm run deploy (または npx wrangler deploy)
   // URL: https://leer-official.official-leer.workers.dev/
+  //
+  // KV ネームスペースは作成済み (2026-08-06)。書き込み用トークンは secret 管理:
+  //   npx wrangler secret put ADMIN_TOKEN
   "name": "leer-official",
   "compatibility_date": "2026-08-03",
+  "main": "src/worker.js",
   "assets": {
     "directory": "./public",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    // /api/* だけ Worker が処理し、それ以外は今まで通り静的アセットを返す
+    "run_worker_first": ["/api/*"]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "SITE_CONTENT",
+      "id": "00262707806446feb6b79a50a93ec11f"
+    }
+  ],
+  "vars": {
+    // 管理画面 (leer-creative-archive) からの CORS 許可オリジン。
+    // localhost / 127.0.0.1 と leer-creative-archive.*.workers.dev は既定で許可済み。
+    // 独自ドメインの管理画面を使う場合だけカンマ区切りで足す。
+    "ALLOWED_ORIGINS": "",
+
+    // --- 認証方式 A: Cloudflare Access (独自ドメイン運用時に推奨) ---
+    // Zero Trust > Access > Applications で self-hosted アプリを作り、
+    // 発行された Application Audience (AUD) タグを ACCESS_AUD に入れる。
+    // 未設定 (空文字) の間は Access 検証は行われない。
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": ""
+
+    // --- 認証方式 B: 共有トークン (workers.dev のままならこちら) ---
+    // vars ではなく secret に入れる:
+    //   npx wrangler secret put ADMIN_TOKEN
   }
 }

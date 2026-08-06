@@ -103,8 +103,8 @@
 })();
 
 /* ---------- スクロールリビール ---------- */
+/* content.js が再描画したあとにも呼べるよう window に公開する */
 (() => {
-  const targets = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(
     entries => {
       for (const e of entries) {
@@ -116,7 +116,11 @@
     },
     { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
   );
-  targets.forEach(el => io.observe(el));
+  const observe = (root = document) => {
+    root.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
+  };
+  window.leerObserveReveals = observe;
+  observe();
 })();
 
 /* ---------- ナビのアクティブ表示 ---------- */
@@ -141,56 +145,63 @@
 })();
 
 /* ---------- 言語切り替え (JP / EN) ---------- */
+/* 英語文の大半は public/content.json 由来。
+   下の content:en ブロックは `npm run build` が content.json から自動生成する。
+   実行時に KV から新しいコンテンツを取得できた場合は content.js が上書きする。 */
 (() => {
   const EN = {
     't-news': 'News',
     't-works': 'Works',
     't-profile': 'Profile',
     't-links': 'Links',
-    'news-1': 'Official website launched.',
-    'news-lumia': 'Submitted "Lumia", a 30-second short MV, to the official TapNow project "Lumia and the Ocean of Beginnings". <a href="https://x.com/ria_aicreator/status/2084414571994095778" target="_blank" rel="noopener">View post</a>',
-    'w-lumia-badge': 'TapNow Project Entry',
-    'w-lumia-desc': 'An entry for the official TapNow project "Lumia and the Ocean of Beginnings". A 30-second short MV depicting Lumia and her companions\' world, set to the song "Lumia" — exactly 30 seconds packed with the characters\' charm.',
-    'news-2': '"Mayonaka no Jibun Kaigi" (Midnight Meeting with Myself) won the <strong>Best MV Award</strong> at SousakuAI Agent Creation Cup 2026 Vol.2. <a href="https://x.com/ria_aicreator/status/2083169721801932825" target="_blank" rel="noopener">Announcement post</a>',
-    'news-3': 'Launched the official site for the original anime project "Post Anima". <a href="https://post-anima.official-leer.workers.dev/" target="_blank" rel="noopener">Visit the site</a>',
-    'news-4': '"Naimononedari" won the <strong>Best Visual Award</strong> at SousakuAI Agent Creation Cup 2026 Vol.1. <a href="https://x.com/ria_aicreator/status/2055273706545696859" target="_blank" rel="noopener">Announcement post</a>',
-    'news-5': 'The short anime "Ningen (Kari), Hajimemasu." passed the first-round selection at WAIFF.',
-    'news-6': 'Submitted the anime teaser "Koe no Rashinban" to PocketANIME World Competition.',
-    'news-pinyo': 'Featured on "Pinyokio" as a partner creator of AiHUB Inc. <a href="https://pinyo.jp/" target="_blank" rel="noopener">pinyo.jp</a>',
-    'prof-affil': '<span class="affil-label">AFFILIATION</span>Partner creator of AiHUB Inc. — featured on "<a href="https://pinyo.jp/" target="_blank" rel="noopener">Pinyokio</a>"',
-    'w1-badge': '🏆 Best MV Award',
-    'w2-badge': 'Top 50 Nominees',
-    'w3-badge': '🏆 Best Visual Award',
-    'w4-badge': 'Seedance 2.0 × Lovart Entry',
-    'w5-badge': 'WAIFF First-round Selected',
-    'w6-badge': 'Independent Work',
-    'w5-meta': '2026 — SHORT ANIME (approx. 10 min)',
-    'w1-desc': '2 a.m. — unable to sleep, a one-person "meeting" convenes inside her head. The chair, the clerk, and the one on trial are all the same girl. A 2\'34" hyperpop MV that reimagines sleepless thought-loops through bureaucratic motifs: minutes, sticky notes, and votes. Winner of the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2.',
-    'w2-desc': 'A world where feelings spilled from human hearts turn into monsters. Wounded couriers keep searching for the souls\' addresses — not to erase the feelings, but to return them. A postal-fantasy anime project covering worldbuilding, story, characters, and a full first episode. Selected among the Top 50 nominees at COLOTEK.',
-    'w3-desc': 'Nil, a colorless white-haired girl, wraps herself in fragments of the world\'s colors — other people\'s lives — only to lose them, until she finally embraces "the freedom of becoming nothing". A 2-minute MV. Winner of the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.',
-    'w4-desc': 'A short anime that translates a part of my own life into fantasy. Three staff-bearers trace the whereabouts of a lost starry sky. Submitted to the Seedance 2.0 × Lovart contest.',
-    'w5-desc': 'Rin, a humanoid girl, can derive the "optimal answer" more calmly than anyone. But does that answer truly reach anyone\'s heart? A human drama / sci-fi short about a girl who keeps growing as one existence. Produced over about a month.',
-    'w6-desc': 'An independent AI-produced music video. Two people pass each other across a neon heart, while "the words you gave me" keep glowing through the night.',
-    'w7-desc': 'My first serious work with generative video AI — an anime teaser submitted to PocketANIME World Competition. This is where my journey as an AI creator truly began.',
-    'lnk-post': 'View post →',
-    'lnk-yt': 'Watch on YouTube →',
-    'lnk-site': 'Official site →',
-    'prof-bio': 'I create stories, films, and characters with AI as my creative partner, under the theme of "moving people\'s hearts". I love manga and anime, and encountering generative AI brought me back to creating. I aim for works that linger in your heart and become a small turning point.',
-    'tl1-p': 'Submitted an anime teaser to PocketANIME World Competition — my first serious work with generative video AI.',
-    'tl2-p': 'Passed the first-round selection at WAIFF (World AI Film Festival) with a 10-minute short anime produced over about a month.',
-    'tl3-p': 'Won the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.',
-    'tl4-p': 'Launched an original anime project — worldbuilding, characters, a first episode, and an official site. Selected among the Top 50 nominees at COLOTEK.',
-    'tl5-p': 'Won the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2 — the most competitive category.',
-    'contact': 'For work inquiries and collaborations, feel free to DM me on X.'
+    /* content:en:start */
+    "news-lumia": "Submitted \"Lumia\", a 30-second short MV, to the official TapNow project \"Lumia and the Ocean of Beginnings\". <a href=\"https://x.com/ria_aicreator/status/2084414571994095778\" target=\"_blank\" rel=\"noopener\">View post</a>",
+    "news-1": "Official website launched.",
+    "news-2": "\"Mayonaka no Jibun Kaigi\" (Midnight Meeting with Myself) won the <strong>Best MV Award</strong> at SousakuAI Agent Creation Cup 2026 Vol.2. <a href=\"https://x.com/ria_aicreator/status/2083169721801932825\" target=\"_blank\" rel=\"noopener\">Announcement post</a>",
+    "news-pinyo": "Featured on \"Pinyokio\" as a partner creator of AiHUB Inc. <a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">pinyo.jp</a>",
+    "news-3": "Launched the official site for the original anime project \"Post Anima\". <a href=\"https://post-anima.official-leer.workers.dev/\" target=\"_blank\" rel=\"noopener\">Visit the site</a>",
+    "news-4": "\"Naimononedari\" won the <strong>Best Visual Award</strong> at SousakuAI Agent Creation Cup 2026 Vol.1. <a href=\"https://x.com/ria_aicreator/status/2055273706545696859\" target=\"_blank\" rel=\"noopener\">Announcement post</a>",
+    "news-5": "The short anime \"Ningen (Kari), Hajimemasu.\" passed the first-round selection at WAIFF.",
+    "news-6": "Submitted the anime teaser \"Koe no Rashinban\" to PocketANIME World Competition.",
+    "w-lumia-badge": "TapNow Project Entry",
+    "w-lumia-desc": "An entry for the official TapNow project \"Lumia and the Ocean of Beginnings\". A 30-second short MV depicting Lumia and her companions' world, set to the song \"Lumia\" — exactly 30 seconds packed with the characters' charm.",
+    "lnk-post": "View post →",
+    "w1-badge": "🏆 Best MV Award",
+    "w1-desc": "2 a.m. — unable to sleep, a one-person \"meeting\" convenes inside her head. The chair, the clerk, and the one on trial are all the same girl. A 2'34\" hyperpop MV that reimagines sleepless thought-loops through bureaucratic motifs: minutes, sticky notes, and votes. Winner of the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2.",
+    "w2-badge": "Top 50 Nominees",
+    "w2-desc": "A world where feelings spilled from human hearts turn into monsters. Wounded couriers keep searching for the souls' addresses — not to erase the feelings, but to return them. A postal-fantasy anime project covering worldbuilding, story, characters, and a full first episode. Selected among the Top 50 nominees at COLOTEK.",
+    "lnk-site": "Official site →",
+    "w3-badge": "🏆 Best Visual Award",
+    "w3-desc": "Nil, a colorless white-haired girl, wraps herself in fragments of the world's colors — other people's lives — only to lose them, until she finally embraces \"the freedom of becoming nothing\". A 2-minute MV. Winner of the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
+    "w4-badge": "Seedance 2.0 × Lovart Entry",
+    "w4-desc": "A short anime that translates a part of my own life into fantasy. Three staff-bearers trace the whereabouts of a lost starry sky. Submitted to the Seedance 2.0 × Lovart contest.",
+    "lnk-yt": "Watch on YouTube →",
+    "w5-badge": "WAIFF First-round Selected",
+    "w5-meta": "2026 — SHORT ANIME (approx. 10 min)",
+    "w5-desc": "Rin, a humanoid girl, can derive the \"optimal answer\" more calmly than anyone. But does that answer truly reach anyone's heart? A human drama / sci-fi short about a girl who keeps growing as one existence. Produced over about a month.",
+    "w6-badge": "Independent Work",
+    "w6-desc": "An independent AI-produced music video. Two people pass each other across a neon heart, while \"the words you gave me\" keep glowing through the night.",
+    "w7-desc": "My first serious work with generative video AI — an anime teaser submitted to PocketANIME World Competition. This is where my journey as an AI creator truly began.",
+    "prof-bio": "I create stories, films, and characters with AI as my creative partner, under the theme of \"moving people's hearts\". I love manga and anime, and encountering generative AI brought me back to creating. I aim for works that linger in your heart and become a small turning point.",
+    "prof-affil": "<span class=\"affil-label\">AFFILIATION</span>Partner creator of AiHUB Inc. — featured on \"<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">Pinyokio</a>\"",
+    "tl1-p": "Submitted an anime teaser to PocketANIME World Competition — my first serious work with generative video AI.",
+    "tl2-p": "Passed the first-round selection at WAIFF (World AI Film Festival) with a 10-minute short anime produced over about a month.",
+    "tl3-p": "Won the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
+    "tl4-p": "Launched an original anime project — worldbuilding, characters, a first episode, and an official site. Selected among the Top 50 nominees at COLOTEK.",
+    "tl5-p": "Won the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2 — the most competitive category.",
+    "contact": "For work inquiries and collaborations, feel free to DM me on X.",
+    /* content:en:end */
   };
 
   const btnJa = document.getElementById('langJa');
   const btnEn = document.getElementById('langEn');
   if (!btnJa || !btnEn) return;
-  const els = [...document.querySelectorAll('[data-i18n]')];
+
+  let current = 'ja';
 
   function setLang(lang) {
-    els.forEach(el => {
+    // content.js の再描画で要素が入れ替わるため、毎回引き直す
+    [...document.querySelectorAll('[data-i18n]')].forEach(el => {
       const key = el.dataset.i18n;
       if (lang === 'en') {
         if (el.dataset.ja === undefined) el.dataset.ja = el.innerHTML;
@@ -199,14 +210,20 @@
         el.innerHTML = el.dataset.ja;
       }
     });
-    document.documentElement.lang = lang === 'en' ? 'en' : 'ja';
-    btnJa.classList.toggle('active', lang !== 'en');
-    btnEn.classList.toggle('active', lang === 'en');
-    try { localStorage.setItem('leer-lang', lang); } catch (e) {}
+    current = lang === 'en' ? 'en' : 'ja';
+    document.documentElement.lang = current;
+    btnJa.classList.toggle('active', current !== 'en');
+    btnEn.classList.toggle('active', current === 'en');
+    try { localStorage.setItem('leer-lang', current); } catch (e) {}
   }
 
   btnJa.addEventListener('click', () => setLang('ja'));
   btnEn.addEventListener('click', () => setLang('en'));
+
+  // content.js から呼ぶためのフック
+  window.leerSetEnDict = extra => { Object.assign(EN, extra || {}); };
+  window.leerApplyLang = () => setLang(current);
+  window.leerCurrentLang = () => current;
 
   let saved = null;
   try { saved = localStorage.getItem('leer-lang'); } catch (e) {}

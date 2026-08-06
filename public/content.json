@@ -1,0 +1,364 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-06",
+  "news": [
+    {
+      "id": "news-lumia",
+      "date": "2026-08-04",
+      "dateLabel": "2026.08",
+      "category": "ENTRY",
+      "award": false,
+      "hidden": false,
+      "bodyJa": "TapNow公式企画「ルミアと始まりの海」に、30秒のショートMV『ルミア』を投稿しました。<a href=\"https://x.com/ria_aicreator/status/2084414571994095778\" target=\"_blank\" rel=\"noopener\">作品ポスト</a>",
+      "bodyEn": "Submitted \"Lumia\", a 30-second short MV, to the official TapNow project \"Lumia and the Ocean of Beginnings\". <a href=\"https://x.com/ria_aicreator/status/2084414571994095778\" target=\"_blank\" rel=\"noopener\">View post</a>"
+    },
+    {
+      "id": "news-1",
+      "date": "2026-08",
+      "dateLabel": "2026.08",
+      "category": "INFO",
+      "award": false,
+      "hidden": false,
+      "bodyJa": "公式サイトを開設しました。",
+      "bodyEn": "Official website launched."
+    },
+    {
+      "id": "news-2",
+      "date": "2026-07-31",
+      "dateLabel": "2026.07",
+      "category": "AWARD",
+      "award": true,
+      "hidden": false,
+      "bodyJa": "「真夜中の自分会議」が SousakuAI Agent Creation Cup 2026 Vol.2 で<strong>最優秀MV賞</strong>を受賞しました。<a href=\"https://x.com/ria_aicreator/status/2083169721801932825\" target=\"_blank\" rel=\"noopener\">受賞報告ポスト</a>",
+      "bodyEn": "\"Mayonaka no Jibun Kaigi\" (Midnight Meeting with Myself) won the <strong>Best MV Award</strong> at SousakuAI Agent Creation Cup 2026 Vol.2. <a href=\"https://x.com/ria_aicreator/status/2083169721801932825\" target=\"_blank\" rel=\"noopener\">Announcement post</a>"
+    },
+    {
+      "id": "news-pinyo",
+      "date": "2026-07-09",
+      "dateLabel": "2026.07",
+      "category": "MEDIA",
+      "award": false,
+      "hidden": false,
+      "bodyJa": "AiHUB株式会社の提携クリエイターとして、「Pinyokio」に掲載されました。<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">pinyo.jp</a>",
+      "bodyEn": "Featured on \"Pinyokio\" as a partner creator of AiHUB Inc. <a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">pinyo.jp</a>"
+    },
+    {
+      "id": "news-3",
+      "date": "2026-06",
+      "dateLabel": "2026.06",
+      "category": "RELEASE",
+      "award": false,
+      "hidden": false,
+      "bodyJa": "オリジナルアニメ企画「ポスト・アニマ」の公式紹介サイトを公開しました。<a href=\"https://post-anima.official-leer.workers.dev/\" target=\"_blank\" rel=\"noopener\">公式サイトはこちら</a>",
+      "bodyEn": "Launched the official site for the original anime project \"Post Anima\". <a href=\"https://post-anima.official-leer.workers.dev/\" target=\"_blank\" rel=\"noopener\">Visit the site</a>"
+    },
+    {
+      "id": "news-4",
+      "date": "2026-05-14",
+      "dateLabel": "2026.05",
+      "category": "AWARD",
+      "award": true,
+      "hidden": false,
+      "bodyJa": "「ナイモノネダリ」が SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門で<strong>最優秀ビジュアル賞</strong>を受賞しました。<a href=\"https://x.com/ria_aicreator/status/2055273706545696859\" target=\"_blank\" rel=\"noopener\">受賞報告ポスト</a>",
+      "bodyEn": "\"Naimononedari\" won the <strong>Best Visual Award</strong> at SousakuAI Agent Creation Cup 2026 Vol.1. <a href=\"https://x.com/ria_aicreator/status/2055273706545696859\" target=\"_blank\" rel=\"noopener\">Announcement post</a>"
+    },
+    {
+      "id": "news-5",
+      "date": "2026-01",
+      "dateLabel": "2026.01",
+      "category": "SELECTED",
+      "award": false,
+      "hidden": false,
+      "bodyJa": "短編アニメ「人間（仮）、はじめます。」が WAIFF の一次選考を通過しました。",
+      "bodyEn": "The short anime \"Ningen (Kari), Hajimemasu.\" passed the first-round selection at WAIFF."
+    },
+    {
+      "id": "news-6",
+      "date": "2025-03",
+      "dateLabel": "2025.03",
+      "category": "ENTRY",
+      "award": false,
+      "hidden": false,
+      "bodyJa": "アニメティザー「声の羅針盤」を PocketANIME World Competition に出品しました。",
+      "bodyEn": "Submitted the anime teaser \"Koe no Rashinban\" to PocketANIME World Competition."
+    }
+  ],
+  "works": [
+    {
+      "id": "w-lumia",
+      "hidden": false,
+      "image": "assets/works/lumia.jpg",
+      "imageAlt": "ルミア サムネイル",
+      "badgeJa": "TapNow 企画参加",
+      "badgeEn": "TapNow Project Entry",
+      "metaJa": "2026 — SHORT MV (30秒)",
+      "metaEn": "",
+      "title": "ルミア",
+      "descJa": "TapNow公式企画「ルミアと始まりの海」参加作品。提供キャラクター・ルミアと仲間たちの世界を、楽曲『ルミア』にのせて描いた30秒のショートMV。きっかり30秒の中に、キャラクターたちの可愛さを詰め込みました。",
+      "descEn": "An entry for the official TapNow project \"Lumia and the Ocean of Beginnings\". A 30-second short MV depicting Lumia and her companions' world, set to the song \"Lumia\" — exactly 30 seconds packed with the characters' charm.",
+      "links": [
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2084414571994095778",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
+    {
+      "id": "w1",
+      "hidden": false,
+      "image": "assets/works/mayonaka-jibun-kaigi.jpg",
+      "imageAlt": "真夜中の自分会議 キービジュアル",
+      "badgeJa": "🏆 最優秀MV賞",
+      "badgeEn": "🏆 Best MV Award",
+      "metaJa": "2026 — MUSIC VIDEO",
+      "metaEn": "",
+      "title": "真夜中の自分会議",
+      "descJa": "深夜2時。眠れないまま、頭の中でひとりぶんの「会議」が始まる——。議長も書記も裁かれる側も、全部おなじ一人の女の子。眠れない夜の思考ループを議事録・付箋・採決といった事務的なモチーフに置き換えて描いた、2分34秒のハイパーポップMV。SousakuAI Agent Creation Cup 2026 Vol.2 最優秀MV賞受賞。",
+      "descEn": "2 a.m. — unable to sleep, a one-person \"meeting\" convenes inside her head. The chair, the clerk, and the one on trial are all the same girl. A 2'34\" hyperpop MV that reimagines sleepless thought-loops through bureaucratic motifs: minutes, sticky notes, and votes. Winner of the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2.",
+      "links": [
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2081322989174329732",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
+    {
+      "id": "w2",
+      "hidden": false,
+      "image": "assets/works/post-anima.jpg",
+      "imageAlt": "ポスト・アニマ キービジュアル",
+      "badgeJa": "ノミネート作品50選",
+      "badgeEn": "Top 50 Nominees",
+      "metaJa": "2026 — ORIGINAL ANIME PROJECT",
+      "metaEn": "",
+      "title": "ポスト・アニマ",
+      "descJa": "人の心からこぼれた想いが、怪物になる世界。傷を抱えたクーリエたちは、消すのではなく「還す」ために魂の宛先を探し続ける——。世界観・物語・キャラクターから第1話映像まで手がけた、ポスタルファンタジー・アニメ企画。COLOTEK「次の100年愛されるアニメを。」でノミネート作品50選に選出。",
+      "descEn": "A world where feelings spilled from human hearts turn into monsters. Wounded couriers keep searching for the souls' addresses — not to erase the feelings, but to return them. A postal-fantasy anime project covering worldbuilding, story, characters, and a full first episode. Selected among the Top 50 nominees at COLOTEK.",
+      "links": [
+        {
+          "labelKey": "lnk-site",
+          "href": "https://post-anima.official-leer.workers.dev/",
+          "labelJa": "公式紹介サイトへ →",
+          "labelEn": "Official site →"
+        }
+      ]
+    },
+    {
+      "id": "w3",
+      "hidden": false,
+      "image": "assets/works/naimononedari-thumb.jpg",
+      "imageAlt": "ナイモノネダリ サムネイル",
+      "badgeJa": "🏆 最優秀ビジュアル賞",
+      "badgeEn": "🏆 Best Visual Award",
+      "metaJa": "2026 — MUSIC VIDEO",
+      "metaEn": "",
+      "title": "ナイモノネダリ",
+      "descJa": "色のない白髪の少女ニルが、世界の彩り（＝他者の生）を断片的に纏っては失っていき、最後に「何にもなれないことの自由」を抱きしめる2分間のMV。SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門 最優秀ビジュアル賞受賞。",
+      "descEn": "Nil, a colorless white-haired girl, wraps herself in fragments of the world's colors — other people's lives — only to lose them, until she finally embraces \"the freedom of becoming nothing\". A 2-minute MV. Winner of the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
+      "links": [
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2053256742193262981",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
+    {
+      "id": "w4",
+      "hidden": false,
+      "image": "assets/works/lost-celestia.jpg",
+      "imageAlt": "The Lost Celestia サムネイル",
+      "badgeJa": "Seedance 2.0 × Lovart 出品",
+      "badgeEn": "Seedance 2.0 × Lovart Entry",
+      "metaJa": "2026 — SHORT ANIME",
+      "metaEn": "",
+      "title": "The Lost Celestia",
+      "descJa": "自分の人生の一部を作品に反映させ、ファンタジーに置き換えて描いたショートアニメ。星の杖を携えた三人が、失われた星空の行方をたどる。Seedance 2.0 × Lovart コンテスト応募作品。",
+      "descEn": "A short anime that translates a part of my own life into fantasy. Three staff-bearers trace the whereabouts of a lost starry sky. Submitted to the Seedance 2.0 × Lovart contest.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://youtu.be/dHnEpRE1Eus",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        },
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2043622723377873109",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
+    {
+      "id": "w5",
+      "hidden": false,
+      "image": "assets/works/ningen-kari-thumb.jpg",
+      "imageAlt": "人間（仮）、はじめます。 サムネイル",
+      "badgeJa": "WAIFF 一次選考通過",
+      "badgeEn": "WAIFF First-round Selected",
+      "metaJa": "2026 — SHORT ANIME (約10分)",
+      "metaEn": "2026 — SHORT ANIME (approx. 10 min)",
+      "title": "人間（仮）、はじめます。",
+      "descJa": "ヒューマノイドの少女 Rin は、誰よりも冷静に「最適解」を導き出せる。けれどその答えは、本当に誰かの心に届いているのか——。1つの存在として成長し続ける少女を描くヒューマンドラマ/SF。約1ヶ月をかけて制作。",
+      "descEn": "Rin, a humanoid girl, can derive the \"optimal answer\" more calmly than anyone. But does that answer truly reach anyone's heart? A human drama / sci-fi short about a girl who keeps growing as one existence. Produced over about a month.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://www.youtube.com/watch?v=L6WH6LUSRqI",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        },
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2023005421657887051",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
+    {
+      "id": "w6",
+      "hidden": false,
+      "image": "assets/works/still-shining.jpg",
+      "imageAlt": "Still shining サムネイル",
+      "badgeJa": "自主制作",
+      "badgeEn": "Independent Work",
+      "metaJa": "2025 — MUSIC VIDEO",
+      "metaEn": "",
+      "title": "Still shining",
+      "descJa": "AIで制作した自主制作のミュージックビデオ。ネオンのハートを挟んですれ違う二人と、「君がくれた言葉」がまだ消えずに光り続ける夜を描いた一曲。",
+      "descEn": "An independent AI-produced music video. Two people pass each other across a neon heart, while \"the words you gave me\" keep glowing through the night.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://youtu.be/KB4xCDb-OjI",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        }
+      ]
+    },
+    {
+      "id": "w7",
+      "hidden": false,
+      "image": "assets/works/koe-no-rashinban-thumb.jpg",
+      "imageAlt": "声の羅針盤 サムネイル",
+      "badgeJa": "ENTRY",
+      "badgeEn": "",
+      "metaJa": "2025 — ANIME TEASER",
+      "metaEn": "",
+      "title": "声の羅針盤",
+      "descJa": "動画生成AIに初めて本格的に取り組んだアニメティザー作品。PocketANIME World Competition に出品。ここからAIクリエイターとしての活動が本格的に始まりました。",
+      "descEn": "My first serious work with generative video AI — an anime teaser submitted to PocketANIME World Competition. This is where my journey as an AI creator truly began.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://www.youtube.com/shorts/hX6jMc-WhIE",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        }
+      ]
+    }
+  ],
+  "profile": {
+    "icon": "assets/profile/ria-icon.jpg",
+    "iconAlt": "りあ / Leer のアイコン",
+    "name": "りあ",
+    "nameSuffix": "/ Leer",
+    "role": "AI CREATOR",
+    "bioJa": "「人の心を動かす」をテーマに、AIを創作パートナーとして物語・映像・キャラクターを制作しています。漫画やアニメが好きで、生成AIとの出会いをきっかけに創作活動を再開しました。見たあとに少し心に残る、何かのきっかけになる作品を目指しています。",
+    "bioEn": "I create stories, films, and characters with AI as my creative partner, under the theme of \"moving people's hearts\". I love manga and anime, and encountering generative AI brought me back to creating. I aim for works that linger in your heart and become a small turning point.",
+    "affiliationJa": "<span class=\"affil-label\">AFFILIATION</span>AiHUB株式会社 提携クリエイター — 「<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">Pinyokio</a>」掲載",
+    "affiliationEn": "<span class=\"affil-label\">AFFILIATION</span>Partner creator of AiHUB Inc. — featured on \"<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">Pinyokio</a>\"",
+    "timeline": [
+      {
+        "id": "tl1",
+        "date": "2025.03",
+        "title": "声の羅針盤",
+        "award": false,
+        "hidden": false,
+        "bodyJa": "PocketANIME World Competition にアニメティザーを出品。動画生成AIに初めて本格的に取り組む。",
+        "bodyEn": "Submitted an anime teaser to PocketANIME World Competition — my first serious work with generative video AI."
+      },
+      {
+        "id": "tl2",
+        "date": "2026.01",
+        "title": "人間（仮）、はじめます。",
+        "award": false,
+        "hidden": false,
+        "bodyJa": "WAIFF（World AI Film Festival）一次選考通過。約1ヶ月をかけて制作した約10分の短編アニメ。",
+        "bodyEn": "Passed the first-round selection at WAIFF (World AI Film Festival) with a 10-minute short anime produced over about a month."
+      },
+      {
+        "id": "tl3",
+        "date": "2026.05",
+        "title": "ナイモノネダリ 🏆",
+        "award": true,
+        "hidden": false,
+        "bodyJa": "SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門「最優秀ビジュアル賞」受賞。",
+        "bodyEn": "Won the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1."
+      },
+      {
+        "id": "tl4",
+        "date": "2026.06",
+        "title": "ポスト・アニマ",
+        "award": false,
+        "hidden": false,
+        "bodyJa": "オリジナルアニメ企画を立ち上げ、世界観・キャラクター・第1話映像・公式紹介サイトを制作。COLOTEK「次の100年愛されるアニメを。」でノミネート作品50選に選出。",
+        "bodyEn": "Launched an original anime project — worldbuilding, characters, a first episode, and an official site. Selected among the Top 50 nominees at COLOTEK."
+      },
+      {
+        "id": "tl5",
+        "date": "2026.07",
+        "title": "真夜中の自分会議 🏆",
+        "award": true,
+        "hidden": false,
+        "bodyJa": "SousakuAI Agent Creation Cup 2026 Vol.2「最優秀MV賞」受賞。最激戦区のMV部門での受賞。",
+        "bodyEn": "Won the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2 — the most competitive category."
+      }
+    ]
+  },
+  "links": {
+    "items": [
+      {
+        "id": "x",
+        "icon": "x",
+        "href": "https://x.com/ria_aicreator",
+        "name": "X (Twitter)",
+        "handle": "@ria_aicreator",
+        "hidden": false
+      },
+      {
+        "id": "youtube",
+        "icon": "youtube",
+        "href": "https://www.youtube.com/@ria_aicreator",
+        "name": "YouTube",
+        "handle": "@ria_aicreator",
+        "hidden": false
+      },
+      {
+        "id": "instagram",
+        "icon": "instagram",
+        "href": "https://www.instagram.com/leer.ai.20260418",
+        "name": "Instagram",
+        "handle": "leer.ai.20260418",
+        "hidden": true
+      },
+      {
+        "id": "tiktok",
+        "icon": "tiktok",
+        "href": "https://www.tiktok.com/@leer.ai.20260418",
+        "name": "TikTok",
+        "handle": "@leer.ai.20260418",
+        "hidden": true
+      }
+    ],
+    "contactJa": "お仕事のご依頼・コラボのご相談は、X のDMまでお気軽にどうぞ。",
+    "contactEn": "For work inquiries and collaborations, feel free to DM me on X."
+  }
+}
