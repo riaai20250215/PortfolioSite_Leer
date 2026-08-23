@@ -11,7 +11,7 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 |---|---|
 | TOP | 「LEER」の名前のみのシンプル構成(背景: ナイモノネダリのキービジュアル + 星空 + 名前がふわっと浮かぶ登場アニメ)。SNSリンクと JP/EN 言語切替はヘッダー右上 |
 | NEWS | 受賞・出品・公開のお知らせ |
-| WORKS | 8作品を投稿時期の新しい順に掲載(ルミア / 真夜中の自分会議 / ポスト・アニマ / ナイモノネダリ / The Lost Celestia / 人間(仮)、はじめます。 / Still shining / 声の羅針盤) |
+| WORKS | 9作品を投稿時期の新しい順に掲載(正論アレルギー / ルミア / 真夜中の自分会議 / ポスト・アニマ / ナイモノネダリ / The Lost Celestia / 人間(仮)、はじめます。 / Still shining / 声の羅針盤) |
 | CHARACTER | **一時非表示中**(2026-08-03)。ニル / NIL の紹介とビジュアル系譜(v1〜v6)。`index.html` 内にコメントアウトで保持。再表示はコメントブロックを外し、navの CHARACTER リンクも復活させる |
 | PROFILE | プロフィールと経歴タイムライン |
 | LINKS | X / YouTube / Instagram / TikTok |
@@ -32,7 +32,16 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 ### コンテンツを直す2つの方法
 
 1. **管理画面**(推奨): `leer-creative-archive/public/admin/` で編集 → 「公開サイトへ反映」→ KV に保存され即時反映
-2. **リポジトリ**: `public/content.json` を編集 → `npm run build`(静的HTMLと英訳辞書を再生成)→ `npm test` → `npm run deploy`
+2. **リポジトリ**: `public/content.json` を編集 → `npm run build`(静的HTMLと英訳辞書を再生成)→ `npm test` → `npm run deploy` → **KV へ反映**
+
+> ⚠️ 2 の場合、`npm run deploy` だけでは表示は変わりません。
+> 実行時レンダラは `/api/content`(KV) → `content.json` の順で読むため、KV に保存済みの内容が常に勝ちます。デプロイ後に必ず KV も更新してください。
+> ```bash
+> curl -X PUT https://leer-official.official-leer.workers.dev/api/content \
+>   -H "authorization: Bearer $ADMIN_TOKEN" -H "content-type: application/json" \
+>   --data-binary @public/content.json
+> ```
+> (`ADMIN_TOKEN` は非公開の `.deploy-credentials.env`。Worker が旧内容を `content:previous` に自動バックアップします)
 
 `index.html` の NEWS / WORKS / PROFILE / LINKS を直接手で書き換えないでください
 (`npm test` が content.json とのズレを検出して落ちます)。
@@ -60,3 +69,4 @@ npm run deploy
 - 作品追加: 管理画面の WORKS タブで「＋ 追加」。画像だけは先に `public/assets/works/` へ置いてデプロイが必要(横1280px・JPEG推奨)
 - 作品カードのサムネイルは各作品の公式サムネ(真夜中の自分会議/ナイモノネダリ=制作フォルダ、人間(仮)/Still shining/The Lost Celestia=YouTubeサムネ)。声の羅針盤はCodexで生成した正式版(採用元: PocketANIMEリポジトリ `画像/サムネイル/.../final/koe_no_rashinban_title_01_literary.png`、旧版は `.backup/` に保管)
 - 作品リンク: ナイモノネダリ/人間(仮)=X作品ポスト、人間(仮)/声の羅針盤=YouTube、ポスト・アニマ=公式紹介サイト
+- 正論アレルギー(2026-08-22追加): 自主制作MV。サムネは制作フォルダの `サムネイル.png` を横1280pxのJPEGに変換。リンクは YouTube(ニル名義チャンネル @nil_artist_official) + X作品ポストの2本

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-06",
+  "updatedAt": "2026-08-22",
   "news": [
     {
       "id": "news-lumia",
@@ -84,6 +84,33 @@
     }
   ],
   "works": [
+    {
+      "id": "w-seiron-allergy",
+      "hidden": false,
+      "image": "assets/works/seiron-allergy.jpg",
+      "imageAlt": "正論アレルギー サムネイル",
+      "badgeJa": "自主制作",
+      "badgeEn": "Independent Work",
+      "metaJa": "2026 — MUSIC VIDEO (2分41秒)",
+      "metaEn": "2026 — MUSIC VIDEO (2 min 41 sec)",
+      "title": "正論アレルギー",
+      "descJa": "「あなたのため」と差し出された正論に、体のほうが先に拒絶反応を起こす——診察室を舞台に、説教や忠告という「優しい暴力」への静かな反抗を描いた2分41秒の自主制作MV。声を荒げず、咳き込むことで返事をするニル（NiL）の4曲目。",
+      "descEn": "An independently produced 2-minute-41-second music video set in an examination room. When \"it's for your own good\" is handed over, her body rejects it before her words can. A quiet revolt against the gentle violence of lectures and well-meant advice — the fourth song by NiL, who never raises her voice and answers with a cough instead.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://youtu.be/4kCZCdWTAMU",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        },
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2091087984498204679",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
     {
       "id": "w-lumia",
       "hidden": false,
