@@ -106,6 +106,32 @@ export function renderNews(content, indent = '      ') {
   return indentBlock(blocks.join('\n').split('\n'), indent);
 }
 
+/* ---------- WORKS: バッジ ----------
+   work.badgeType = 'award' (受賞: 金のきらめき + トロフィー) / 'honor' (ノミネート・選出) / 'default' (参加・自主制作)。
+   未指定なら、バッジ文が 🏆 で始まるときだけ award とみなす (管理画面から 🏆 付きで入れても光る)。 */
+const BADGE_TYPES = new Set(['award', 'honor', 'default']);
+const TROPHY_ICON =
+  '<svg class="work-badge-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 2h10v2h4v4a5 5 0 0 1-4.2 4.94A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.8-4.06A5 5 0 0 1 3 8V4h4V2zm0 4H5v2a3 3 0 0 0 2 2.83V6zm10 0v4.83A3 3 0 0 0 19 8V6h-2z"></path></svg>';
+export function badgeText(work) {
+  return String(work?.badgeJa ?? '').replace(/^🏆\s*/u, '').trim();
+}
+export function badgeType(work) {
+  const explicit = String(work?.badgeType ?? '').trim();
+  if (BADGE_TYPES.has(explicit)) return explicit;
+  return /^🏆/u.test(String(work?.badgeJa ?? '')) ? 'award' : 'default';
+}
+function renderBadge(work) {
+  const text = badgeText(work);
+  if (!text) return [];
+  const type = badgeType(work);
+  const key = work.badgeEn ? `${work.id}-badge` : '';
+  if (type === 'award') {
+    /* 英訳は内側の span だけ差し替える (外側にアイコンを残すため) */
+    return [`    <span class="work-badge award">${TROPHY_ICON}<span${i18nAttr(key)}>${escapeHtml(text)}</span></span>`];
+  }
+  return [`    <span class="work-badge ${type}"${i18nAttr(key)}>${escapeHtml(text)}</span>`];
+}
+
 /* ---------- WORKS ---------- */
 /* 作品カード1枚。シリーズでまとめる場合も、まとめない場合も同じ関数を使う */
 function renderWorkCard(work, level = 3) {
@@ -113,7 +139,7 @@ function renderWorkCard(work, level = 3) {
     `<article class="work-card reveal" data-work="${escapeHtml(work.id)}">`,
     '  <div class="work-thumb">',
     `    <img src="${escapeHtml(work.image)}" alt="${escapeHtml(work.imageAlt)}" loading="lazy">`,
-    `    <span class="work-badge"${i18nAttr(work.badgeEn ? `${work.id}-badge` : '')}>${escapeHtml(work.badgeJa)}</span>`,
+    ...renderBadge(work),
     '  </div>',
     '  <div class="work-body">',
     `    <p class="work-meta"${i18nAttr(work.metaEn ? `${work.id}-meta` : '')}>${escapeHtml(work.metaJa)}</p>`,
@@ -283,7 +309,7 @@ export function buildEnDict(content) {
   };
   for (const item of visible(content?.news)) set(item.id, item.bodyEn);
   for (const work of visible(content?.works)) {
-    set(`${work.id}-badge`, work.badgeEn);
+    set(`${work.id}-badge`, String(work.badgeEn ?? '').replace(/^🏆\s*/u, ''));
     set(`${work.id}-meta`, work.metaEn);
     set(`${work.id}-desc`, work.descEn);
     for (const link of visible(work.links)) set(link.labelKey, link.labelEn);
@@ -350,6 +376,7 @@ export function validateContent(content) {
     req(work && typeof work.title === 'string' && work.title.trim() !== '', `works[${i}]: title が必要です`);
     req(work && typeof work.image === 'string' && work.image.trim() !== '', `works[${i}]: image が必要です`);
     req(work?.series === undefined || work?.series === null || typeof work.series === 'string', `works[${i}]: series は文字列 (シリーズの id) である必要があります`);
+    req(work?.badgeType === undefined || work?.badgeType === '' || BADGE_TYPES.has(work.badgeType), `works[${i}]: badgeType は award / honor / default のいずれか`);
     req(work?.links === undefined || Array.isArray(work.links), `works[${i}]: links は配列である必要があります`);
     (Array.isArray(work?.links) ? work.links : []).forEach((link, j) => {
       req(link && isSafeUrl(link.href), `works[${i}].links[${j}]: href が不正です`);

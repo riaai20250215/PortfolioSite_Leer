@@ -20,6 +20,7 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 
 - `public/content.json` — **NEWS / WORKS / PROFILE / LINKS の正本**(管理画面から編集するのもこの内容)
   - `series` 配列 = WORKS のシリーズ見出し(`id` / `kicker` / `titleJa` / `titleEn` / `descJa` / `descEn` / `links[{icon,name,handle,href}]`)。`orientation: "vertical"` を付けると、そのシリーズだけサムネイルを 9:16 で並べ、見出しからカードまでブロックごと幅 820px に絞る(縦型動画用。スマホ幅では左サムネ・右本文の横並びになる)。`columns: 2` で2列(作品が2本のシリーズを大きく見せる用)
+  - 各作品の `badgeType` = `award`(受賞: 金のきらめき+トロフィー) / `honor`(ノミネート・選考通過: 銀の縁と ✦) / `default`(参加・自主制作)。未指定ならバッジ文が 🏆 で始まるときだけ award 扱い。🏆 はアイコンで示すので文字には入れない
   - 各作品の `series` にシリーズの `id` を入れるとその見出しの下にまとまる。`series` が無い作品は最後の「その他の作品」に入る(シリーズを1つも定義しなければ、従来どおりカードだけが並ぶ)
   - 管理画面の WORKS フォームには `series` の入力欄がまだ無い。シリーズの追加・所属の変更は管理画面の JSON 欄か、このファイルを直接編集する
 - `public/index.html` — ページの骨格 + `content.json` から生成した静的HTML(JSONが読めないときのフォールバック)
@@ -76,4 +77,6 @@ npm run deploy
 - 説明文のアコーディオン(2026-09-11追加): 作品カードの説明文は `details`/`summary` で**既定は閉じた状態**(「詳細を見る」→ 開くと「閉じる」)。JSなしで開閉でき、閉じている間はカードの高さが揃う。開閉ラベルの英訳 `t-more` / `t-less` は `script.js` の EN 辞書の**マーカー外**に手書きしてあるので `npm run build` で消えない
 - シリーズ表示(2026-09-11追加): Penny's House シリーズ(BLANK ROOM 名義、YouTube `@BLANK-ROOM-0902` / Instagram・TikTok `blank.room.20260904`)と NiL シリーズ(YouTube `@nil_artist_official`)を新設。MIDNIGHT MART / ONE SMALL MOMENT / PLATFORM は縦型なのでサムネは 720×1280 JPEG(採用サムネ: PLATFORM=`005_PLATFORM_縦型MV/サムネイル候補/採用_platform_03_home`、MIDNIGHT MART=`02_image_material/94_サムネイル_3案/A_自撮りの違和感_9x16`。ONE SMALL MOMENT は未採用のため候補②「夜の3人スナップ」を仮置き)。神様へのクレーム窓口は NiL 公式サイトの `assets/kamisama/cover.jpg` を 1280×720 に切り出し。リンクは YouTube ショート / TikTok の各動画(ONE SMALL MOMENT は TikTok のみ公開)
 - 掲載順(2026-09-11): りあさん指示で **代表作(ポスト・アニマ / 人間(仮)、はじめます。)を先頭**に置いた。「長編のアニメ作品で成果も出ているのでトップに」という理由。グループ名は「長編」と書くと `人間(仮)` のメタ表記 `SHORT ANIME (約10分)` と矛盾するため「代表作 / FEATURED」にしてある
+- バッジ3段階(2026-09-11): りあさん指示「受賞はひと目で分かるキラキラしたラベルに、『縦型MV』『オリジナル曲』の表記は微妙」→ `badgeType` を導入。受賞は金のグラデーションが流れる(`badgeShine`)+右上で光の粒がまたたく(`badgeTwinkle`)。NEWS の AWARD 帯も同じきらめき。`prefers-reduced-motion` では止める。縦型サムネは曲名が上に焼き込まれているのでバッジは下寄せ
+- MIDNIGHT MART の受賞(2026-09-11): Super 30s Creation Cup 2026(SousakuAI × Wan 3.0)**ホラー部門 優秀賞**(結果画像の公式表記は「ホラー部門優秀賞 / Category Excellence Award」、部門3名。りあさんは「最優秀賞」と呼んだが公式表記に合わせた)。NEWS 先頭に追加、作品ポストは https://x.com/ria_aicreator/status/2096525255330394248
 
