@@ -85,6 +85,17 @@
   ],
   "series": [
     {
+      "id": "featured",
+      "hidden": false,
+      "columns": 2,
+      "kicker": "FEATURED",
+      "titleJa": "代表作",
+      "titleEn": "Featured Works",
+      "descJa": "世界観・物語・キャラクターから映像まで一貫して作った、オリジナルのアニメ作品。いちばん長い時間をかけた2作です。",
+      "descEn": "Original anime works built from the ground up — worldbuilding, story, characters and film. The two projects I have spent the most time on.",
+      "links": []
+    },
+    {
       "id": "pennys-house",
       "hidden": false,
       "orientation": "vertical",
@@ -134,6 +145,56 @@
   ],
   "works": [
     {
+      "id": "w2",
+      "hidden": false,
+      "series": "featured",
+      "image": "assets/works/post-anima.jpg",
+      "imageAlt": "ポスト・アニマ キービジュアル",
+      "badgeJa": "ノミネート作品50選",
+      "badgeEn": "Top 50 Nominees",
+      "metaJa": "2026 — ORIGINAL ANIME PROJECT",
+      "metaEn": "",
+      "title": "ポスト・アニマ",
+      "descJa": "人の心からこぼれた想いが、怪物になる世界。傷を抱えたクーリエたちは、消すのではなく「還す」ために魂の宛先を探し続ける——。世界観・物語・キャラクターから第1話映像まで手がけた、ポスタルファンタジー・アニメ企画。COLOTEK「次の100年愛されるアニメを。」でノミネート作品50選に選出。",
+      "descEn": "A world where feelings spilled from human hearts turn into monsters. Wounded couriers keep searching for the souls' addresses — not to erase the feelings, but to return them. A postal-fantasy anime project covering worldbuilding, story, characters, and a full first episode. Selected among the Top 50 nominees at COLOTEK.",
+      "links": [
+        {
+          "labelKey": "lnk-site",
+          "href": "https://post-anima.official-leer.workers.dev/",
+          "labelJa": "公式紹介サイトへ →",
+          "labelEn": "Official site →"
+        }
+      ]
+    },
+    {
+      "id": "w5",
+      "hidden": false,
+      "series": "featured",
+      "image": "assets/works/ningen-kari-thumb.jpg",
+      "imageAlt": "人間（仮）、はじめます。 サムネイル",
+      "badgeJa": "WAIFF 一次選考通過",
+      "badgeEn": "WAIFF First-round Selected",
+      "metaJa": "2026 — SHORT ANIME (約10分)",
+      "metaEn": "2026 — SHORT ANIME (approx. 10 min)",
+      "title": "人間（仮）、はじめます。",
+      "descJa": "ヒューマノイドの少女 Rin は、誰よりも冷静に「最適解」を導き出せる。けれどその答えは、本当に誰かの心に届いているのか——。1つの存在として成長し続ける少女を描くヒューマンドラマ/SF。約1ヶ月をかけて制作。",
+      "descEn": "Rin, a humanoid girl, can derive the \"optimal answer\" more calmly than anyone. But does that answer truly reach anyone's heart? A human drama / sci-fi short about a girl who keeps growing as one existence. Produced over about a month.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://www.youtube.com/watch?v=L6WH6LUSRqI",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        },
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2023005421657887051",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
+    {
       "id": "w-midnight-mart",
       "hidden": false,
       "series": "pennys-house",
@@ -172,8 +233,8 @@
       "metaJa": "2026 — VERTICAL MUSIC VIDEO (1分18秒)",
       "metaEn": "2026 — VERTICAL MUSIC VIDEO (1 min 18 sec)",
       "title": "ONE SMALL MOMENT",
-      "descJa": "夏のプールサイドから夜の街へ。ペニー・ステラ・ガブの3人が魚眼レンズのワンカットで歌い継ぐ、1分18秒の縦型MV。mankyu さん（@manaimovie）の楽曲と魚眼ワンカットMVの設計を、Penny's House の3人に置き換えて制作しました。タイトルはフックの一節「One small moment, but it hit that way」から。",
-      "descEn": "From a summer poolside into the night streets: Penny, Stella and Gav pass the song between them in a 1-minute-18-second one-take fisheye vertical MV. Built on the music and fisheye one-shot MV design by mankyu (@manaimovie), re-cast with the three of Penny's House. The title comes from the hook — \"One small moment, but it hit that way\".",
+      "descJa": "昼のプールサイドから、夜のプールサイドまで。ペニー・ステラ・ガブの3人が、魚眼レンズのワンカット5本を歌い継ぐ1分18秒の縦型MV。mankyu さん（@manaimovie）の楽曲と魚眼ワンカットMVの設計を、Penny's House の3人に置き換えて制作しました。タイトルはフックの一節「One small moment, but it hit that way」から。",
+      "descEn": "From a sunlit poolside to the same pool at night: Penny, Stella and Gav pass the song between them across five fisheye one-take clips, cut together into a 1-minute-18-second vertical MV. Built on the music and fisheye one-shot MV design by mankyu (@manaimovie), re-cast with the three of Penny's House. The title comes from the hook — \"One small moment, but it hit that way\".",
       "links": [
         {
           "labelKey": "lnk-tiktok",
@@ -250,8 +311,8 @@
       "metaJa": "2026 — MUSIC VIDEO",
       "metaEn": "",
       "title": "真夜中の自分会議",
-      "descJa": "深夜2時。眠れないまま、頭の中でひとりぶんの「会議」が始まる——。議長も書記も裁かれる側も、全部おなじ一人の女の子。眠れない夜の思考ループを議事録・付箋・採決といった事務的なモチーフに置き換えて描いた、2分34秒のハイパーポップMV。SousakuAI Agent Creation Cup 2026 Vol.2 最優秀MV賞受賞。",
-      "descEn": "2 a.m. — unable to sleep, a one-person \"meeting\" convenes inside her head. The chair, the clerk, and the one on trial are all the same girl. A 2'34\" hyperpop MV that reimagines sleepless thought-loops through bureaucratic motifs: minutes, sticky notes, and votes. Winner of the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2.",
+      "descJa": "深夜2時。眠れないまま、頭の中でひとりぶんの「会議」が始まる——。議長も書記も裁かれる側も、全部おなじ一人の女の子。眠れない夜の思考ループを議事録・付箋・採決といった事務的なモチーフに置き換えて描いた、2分39秒のハイパーポップMV。SousakuAI Agent Creation Cup 2026 Vol.2 最優秀MV賞受賞。",
+      "descEn": "2 a.m. — unable to sleep, a one-person \"meeting\" convenes inside her head. The chair, the clerk, and the one on trial are all the same girl. A 2'39\" hyperpop MV that reimagines sleepless thought-loops through bureaucratic motifs: minutes, sticky notes, and votes. Winner of the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2.",
       "links": [
         {
           "labelKey": "lnk-post",
@@ -294,8 +355,8 @@
       "metaJa": "2026 — MUSIC VIDEO",
       "metaEn": "",
       "title": "ナイモノネダリ",
-      "descJa": "色のない白髪の少女ニルが、世界の彩り（＝他者の生）を断片的に纏っては失っていき、最後に「何にもなれないことの自由」を抱きしめる2分間のMV。SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門 最優秀ビジュアル賞受賞。",
-      "descEn": "Nil, a colorless white-haired girl, wraps herself in fragments of the world's colors — other people's lives — only to lose them, until she finally embraces \"the freedom of becoming nothing\". A 2-minute MV. Winner of the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
+      "descJa": "色のない白髪の少女ニルが、世界の彩り（＝他者の生）を断片的に纏っては失っていき、最後に「何にもなれないことの自由」を抱きしめる3分41秒のMV。SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門 最優秀ビジュアル賞受賞。",
+      "descEn": "NiL, a colorless white-haired girl, wraps herself in fragments of the world's colors — other people's lives — only to lose them, until she finally embraces \"the freedom of becoming nothing\". A 3-minute-41-second MV. Winner of the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
       "links": [
         {
           "labelKey": "lnk-post",
@@ -327,27 +388,6 @@
       ]
     },
     {
-      "id": "w2",
-      "hidden": false,
-      "image": "assets/works/post-anima.jpg",
-      "imageAlt": "ポスト・アニマ キービジュアル",
-      "badgeJa": "ノミネート作品50選",
-      "badgeEn": "Top 50 Nominees",
-      "metaJa": "2026 — ORIGINAL ANIME PROJECT",
-      "metaEn": "",
-      "title": "ポスト・アニマ",
-      "descJa": "人の心からこぼれた想いが、怪物になる世界。傷を抱えたクーリエたちは、消すのではなく「還す」ために魂の宛先を探し続ける——。世界観・物語・キャラクターから第1話映像まで手がけた、ポスタルファンタジー・アニメ企画。COLOTEK「次の100年愛されるアニメを。」でノミネート作品50選に選出。",
-      "descEn": "A world where feelings spilled from human hearts turn into monsters. Wounded couriers keep searching for the souls' addresses — not to erase the feelings, but to return them. A postal-fantasy anime project covering worldbuilding, story, characters, and a full first episode. Selected among the Top 50 nominees at COLOTEK.",
-      "links": [
-        {
-          "labelKey": "lnk-site",
-          "href": "https://post-anima.official-leer.workers.dev/",
-          "labelJa": "公式紹介サイトへ →",
-          "labelEn": "Official site →"
-        }
-      ]
-    },
-    {
       "id": "w4",
       "hidden": false,
       "image": "assets/works/lost-celestia.jpg",
@@ -369,33 +409,6 @@
         {
           "labelKey": "lnk-post",
           "href": "https://x.com/ria_aicreator/status/2043622723377873109",
-          "labelJa": "作品ポストを見る →",
-          "labelEn": "View post →"
-        }
-      ]
-    },
-    {
-      "id": "w5",
-      "hidden": false,
-      "image": "assets/works/ningen-kari-thumb.jpg",
-      "imageAlt": "人間（仮）、はじめます。 サムネイル",
-      "badgeJa": "WAIFF 一次選考通過",
-      "badgeEn": "WAIFF First-round Selected",
-      "metaJa": "2026 — SHORT ANIME (約10分)",
-      "metaEn": "2026 — SHORT ANIME (approx. 10 min)",
-      "title": "人間（仮）、はじめます。",
-      "descJa": "ヒューマノイドの少女 Rin は、誰よりも冷静に「最適解」を導き出せる。けれどその答えは、本当に誰かの心に届いているのか——。1つの存在として成長し続ける少女を描くヒューマンドラマ/SF。約1ヶ月をかけて制作。",
-      "descEn": "Rin, a humanoid girl, can derive the \"optimal answer\" more calmly than anyone. But does that answer truly reach anyone's heart? A human drama / sci-fi short about a girl who keeps growing as one existence. Produced over about a month.",
-      "links": [
-        {
-          "labelKey": "lnk-yt",
-          "href": "https://www.youtube.com/watch?v=L6WH6LUSRqI",
-          "labelJa": "YouTubeで観る →",
-          "labelEn": "Watch on YouTube →"
-        },
-        {
-          "labelKey": "lnk-post",
-          "href": "https://x.com/ria_aicreator/status/2023005421657887051",
           "labelJa": "作品ポストを見る →",
           "labelEn": "View post →"
         }

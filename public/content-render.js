@@ -108,7 +108,7 @@ export function renderNews(content, indent = '      ') {
 
 /* ---------- WORKS ---------- */
 /* 作品カード1枚。シリーズでまとめる場合も、まとめない場合も同じ関数を使う */
-function renderWorkCard(work) {
+function renderWorkCard(work, level = 3) {
   const lines = [
     `<article class="work-card reveal" data-work="${escapeHtml(work.id)}">`,
     '  <div class="work-thumb">',
@@ -117,9 +117,21 @@ function renderWorkCard(work) {
     '  </div>',
     '  <div class="work-body">',
     `    <p class="work-meta"${i18nAttr(work.metaEn ? `${work.id}-meta` : '')}>${escapeHtml(work.metaJa)}</p>`,
-    `    <h3 class="work-title">${escapeHtml(work.title)}</h3>`,
-    `    <p class="work-desc"${i18nAttr(work.descEn ? `${work.id}-desc` : '')}>${sanitizeHtml(work.descJa)}</p>`
+    `    <h${level} class="work-title">${escapeHtml(work.title)}</h${level}>`
   ];
+  /* 説明文は既定で閉じたアコーディオン (details/summary)。JSなしで開閉でき、
+     閉じている間はカードの高さが揃う。開閉ラベルの出し分けは style.css 側。 */
+  if (work.descJa) {
+    lines.push(
+      '    <details class="work-details">',
+      '      <summary class="work-toggle">',
+      '        <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>',
+      '        <span class="work-toggle-close" data-i18n="t-less">閉じる</span>',
+      '      </summary>',
+      `      <p class="work-desc"${i18nAttr(work.descEn ? `${work.id}-desc` : '')}>${sanitizeHtml(work.descJa)}</p>`,
+      '    </details>'
+    );
+  }
   for (const link of visible(work.links)) {
     const key = link.labelEn ? link.labelKey || '' : '';
     lines.push(
@@ -159,7 +171,7 @@ function renderSeriesLinks(series) {
     const icon = LINK_ICONS[link.icon] || LINK_ICONS.x;
     lines.push(
       `      <a class="series-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener">`,
-      `        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="${icon.path}"/></svg>`,
+      `        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="${icon.path}"></path></svg>`,
       `        <span class="series-link-name">${escapeHtml(link.name || icon.label)}</span>`
     );
     if (link.handle) lines.push(`        <span class="series-link-id">${escapeHtml(link.handle)}</span>`);
@@ -170,11 +182,15 @@ function renderSeriesLinks(series) {
 }
 
 function renderSeriesBlock(series, works, other = false) {
-  const gridClass = series.orientation === 'vertical' ? 'works-grid vertical' : 'works-grid';
+  /* orientation: vertical → 9:16 サムネ + ブロック全体を細く / columns: 2 → 2列 */
+  const vertical = series.orientation === 'vertical';
+  const gridClass = ['works-grid', vertical ? 'vertical' : '', series.columns === 2 ? 'cols-2' : '']
+    .filter(Boolean)
+    .join(' ');
   const titleKey = other ? 't-works-other' : series.titleEn ? `series-${series.id}-title` : '';
   const descKey = series.descEn ? `series-${series.id}-desc` : '';
   const lines = [
-    `<div class="works-series${other ? ' works-series-other' : ''} reveal" id="series-${escapeHtml(series.id)}">`,
+    `<div class="works-series${other ? ' works-series-other' : ''}${vertical ? ' works-series-narrow' : ''} reveal" id="series-${escapeHtml(series.id)}">`,
     '  <div class="series-head">',
     '    <div class="series-heading">'
   ];
@@ -182,7 +198,7 @@ function renderSeriesBlock(series, works, other = false) {
   lines.push(`      <h3 class="series-title"${i18nAttr(titleKey)}>${escapeHtml(series.titleJa)}</h3>`);
   if (series.descJa) lines.push(`      <p class="series-desc"${i18nAttr(descKey)}>${sanitizeHtml(series.descJa)}</p>`);
   lines.push('    </div>', ...renderSeriesLinks(series), '  </div>', `  <div class="${gridClass}">`);
-  lines.push(indentBlock(works.map(renderWorkCard).join('\n\n').split('\n'), '    '));
+  lines.push(indentBlock(works.map(work => renderWorkCard(work, 4)).join('\n\n').split('\n'), '    '));
   lines.push('  </div>', '</div>');
   return lines.join('\n');
 }
@@ -195,7 +211,7 @@ export function renderWorks(content, indent = '      ') {
       blocks.push(renderSeriesBlock(OTHER_SERIES, rest, true));
     } else {
       /* シリーズ未設定のときは、これまで通りカードだけを並べる */
-      blocks.push(['<div class="works-grid">', indentBlock(rest.map(renderWorkCard).join('\n\n').split('\n'), '  '), '</div>'].join('\n'));
+      blocks.push(['<div class="works-grid">', indentBlock(rest.map(work => renderWorkCard(work)).join('\n\n').split('\n'), '  '), '</div>'].join('\n'));
     }
   }
   return indentBlock(blocks.join('\n\n').split('\n'), indent);
@@ -241,7 +257,7 @@ export function renderLinks(content, indent = '      ') {
     const icon = LINK_ICONS[item.icon] || LINK_ICONS.x;
     return [
       `<a class="link-card" href="${escapeHtml(item.href)}" target="_blank" rel="noopener">`,
-      `  <svg viewBox="0 0 24 24" width="${icon.size}" height="${icon.size}" fill="currentColor"><path d="${icon.path}"/></svg>`,
+      `  <svg viewBox="0 0 24 24" width="${icon.size}" height="${icon.size}" fill="currentColor"><path d="${icon.path}"></path></svg>`,
       `  <span class="link-name">${escapeHtml(item.name)}</span>`,
       `  <span class="link-id">${escapeHtml(item.handle)}</span>`,
       '</a>'
@@ -334,7 +350,8 @@ export function validateContent(content) {
     req(work && typeof work.title === 'string' && work.title.trim() !== '', `works[${i}]: title が必要です`);
     req(work && typeof work.image === 'string' && work.image.trim() !== '', `works[${i}]: image が必要です`);
     req(work?.series === undefined || work?.series === null || typeof work.series === 'string', `works[${i}]: series は文字列 (シリーズの id) である必要があります`);
-    (work?.links ?? []).forEach((link, j) => {
+    req(work?.links === undefined || Array.isArray(work.links), `works[${i}]: links は配列である必要があります`);
+    (Array.isArray(work?.links) ? work.links : []).forEach((link, j) => {
       req(link && isSafeUrl(link.href), `works[${i}].links[${j}]: href が不正です`);
     });
   });
@@ -350,7 +367,9 @@ export function validateContent(content) {
       }
       req(item && typeof item.titleJa === 'string' && item.titleJa.trim() !== '', `series[${i}]: titleJa が必要です`);
       req(!item?.orientation || item.orientation === 'vertical' || item.orientation === 'landscape', `series[${i}]: orientation は vertical / landscape のいずれか`);
-      (item?.links ?? []).forEach((link, j) => {
+      req(item?.columns === undefined || item.columns === 2 || item.columns === 3, `series[${i}]: columns は 2 / 3 のいずれか`);
+      req(item?.links === undefined || Array.isArray(item.links), `series[${i}]: links は配列である必要があります`);
+      (Array.isArray(item?.links) ? item.links : []).forEach((link, j) => {
         req(link && isSafeUrl(link.href), `series[${i}].links[${j}]: href が不正です`);
         req(link && LINK_ICONS[link?.icon] !== undefined, `series[${i}].links[${j}]: icon は ${Object.keys(LINK_ICONS).join(' / ')} のいずれか`);
       });

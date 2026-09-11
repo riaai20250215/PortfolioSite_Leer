@@ -11,7 +11,7 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 |---|---|
 | TOP | 「LEER」の名前のみのシンプル構成(背景: ナイモノネダリのキービジュアル + 星空 + 名前がふわっと浮かぶ登場アニメ)。SNSリンクと JP/EN 言語切替はヘッダー右上 |
 | NEWS | 受賞・出品・公開のお知らせ |
-| WORKS | 13作品を**シリーズごと**に掲載。Penny's House シリーズ(MIDNIGHT MART / ONE SMALL MOMENT / PLATFORM、縦型 9:16 サムネ) → NiL シリーズ(正論アレルギー / 真夜中の自分会議 / 神様へのクレーム窓口 / ナイモノネダリ) → その他の作品(ルミア / ポスト・アニマ / The Lost Celestia / 人間(仮)、はじめます。 / Still shining / 声の羅針盤)。各シリーズの見出しには公式アカウント(YouTube / Instagram / TikTok)のリンク |
+| WORKS | 13作品を**シリーズごと**に掲載。代表作(ポスト・アニマ / 人間(仮)、はじめます。、2列で大きく) → Penny's House シリーズ(MIDNIGHT MART / ONE SMALL MOMENT / PLATFORM、縦型 9:16 サムネ) → NiL シリーズ(正論アレルギー / 真夜中の自分会議 / 神様へのクレーム窓口 / ナイモノネダリ) → その他の作品(ルミア / The Lost Celestia / Still shining / 声の羅針盤)。各シリーズの見出しには公式アカウント(YouTube / Instagram / TikTok)のリンク。**作品の説明文は既定で閉じたアコーディオン**(「詳細を見る」/ details・summary) |
 | CHARACTER | **一時非表示中**(2026-08-03)。ニル / NIL の紹介とビジュアル系譜(v1〜v6)。`index.html` 内にコメントアウトで保持。再表示はコメントブロックを外し、navの CHARACTER リンクも復活させる |
 | PROFILE | プロフィールと経歴タイムライン |
 | LINKS | X / YouTube / Instagram / TikTok |
@@ -19,7 +19,7 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 ## ファイル
 
 - `public/content.json` — **NEWS / WORKS / PROFILE / LINKS の正本**(管理画面から編集するのもこの内容)
-  - `series` 配列 = WORKS のシリーズ見出し(`id` / `kicker` / `titleJa` / `titleEn` / `descJa` / `descEn` / `links[{icon,name,handle,href}]`)。`orientation: "vertical"` を付けると、そのシリーズだけサムネイルを 9:16 で並べる(縦型動画用。スマホ幅では左サムネ・右本文の横並びになる)
+  - `series` 配列 = WORKS のシリーズ見出し(`id` / `kicker` / `titleJa` / `titleEn` / `descJa` / `descEn` / `links[{icon,name,handle,href}]`)。`orientation: "vertical"` を付けると、そのシリーズだけサムネイルを 9:16 で並べ、見出しからカードまでブロックごと幅 820px に絞る(縦型動画用。スマホ幅では左サムネ・右本文の横並びになる)。`columns: 2` で2列(作品が2本のシリーズを大きく見せる用)
   - 各作品の `series` にシリーズの `id` を入れるとその見出しの下にまとまる。`series` が無い作品は最後の「その他の作品」に入る(シリーズを1つも定義しなければ、従来どおりカードだけが並ぶ)
   - 管理画面の WORKS フォームには `series` の入力欄がまだ無い。シリーズの追加・所属の変更は管理画面の JSON 欄か、このファイルを直接編集する
 - `public/index.html` — ページの骨格 + `content.json` から生成した静的HTML(JSONが読めないときのフォールバック)
@@ -44,7 +44,7 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 >   -H "authorization: Bearer $ADMIN_TOKEN" -H "content-type: application/json" \
 >   --data-binary @public/content.json
 > ```
-> (`ADMIN_TOKEN` は非公開の `.deploy-credentials.env`。Worker が旧内容を `content:previous` に自動バックアップします)
+> (`ADMIN_TOKEN` は非公開の `.deploy-credentials.env`。Worker が旧内容を `site-content:previous` に自動バックアップします)
 
 `index.html` の NEWS / WORKS / PROFILE / LINKS を直接手で書き換えないでください
 (`npm test` が content.json とのズレを検出して落ちます)。
@@ -73,4 +73,7 @@ npm run deploy
 - 作品カードのサムネイルは各作品の公式サムネ(真夜中の自分会議/ナイモノネダリ=制作フォルダ、人間(仮)/Still shining/The Lost Celestia=YouTubeサムネ)。声の羅針盤はCodexで生成した正式版(採用元: PocketANIMEリポジトリ `画像/サムネイル/.../final/koe_no_rashinban_title_01_literary.png`、旧版は `.backup/` に保管)
 - 作品リンク: ナイモノネダリ/人間(仮)=X作品ポスト、人間(仮)/声の羅針盤=YouTube、ポスト・アニマ=公式紹介サイト
 - 正論アレルギー(2026-08-22追加): 自主制作MV。サムネは制作フォルダの `サムネイル.png` を横1280pxのJPEGに変換。リンクは YouTube(ニル名義チャンネル @nil_artist_official) + X作品ポストの2本
+- 説明文のアコーディオン(2026-09-11追加): 作品カードの説明文は `details`/`summary` で**既定は閉じた状態**(「詳細を見る」→ 開くと「閉じる」)。JSなしで開閉でき、閉じている間はカードの高さが揃う。開閉ラベルの英訳 `t-more` / `t-less` は `script.js` の EN 辞書の**マーカー外**に手書きしてあるので `npm run build` で消えない
 - シリーズ表示(2026-09-11追加): Penny's House シリーズ(BLANK ROOM 名義、YouTube `@BLANK-ROOM-0902` / Instagram・TikTok `blank.room.20260904`)と NiL シリーズ(YouTube `@nil_artist_official`)を新設。MIDNIGHT MART / ONE SMALL MOMENT / PLATFORM は縦型なのでサムネは 720×1280 JPEG(採用サムネ: PLATFORM=`005_PLATFORM_縦型MV/サムネイル候補/採用_platform_03_home`、MIDNIGHT MART=`02_image_material/94_サムネイル_3案/A_自撮りの違和感_9x16`。ONE SMALL MOMENT は未採用のため候補②「夜の3人スナップ」を仮置き)。神様へのクレーム窓口は NiL 公式サイトの `assets/kamisama/cover.jpg` を 1280×720 に切り出し。リンクは YouTube ショート / TikTok の各動画(ONE SMALL MOMENT は TikTok のみ公開)
+- 掲載順(2026-09-11): りあさん指示で **代表作(ポスト・アニマ / 人間(仮)、はじめます。)を先頭**に置いた。「長編のアニメ作品で成果も出ているのでトップに」という理由。グループ名は「長編」と書くと `人間(仮)` のメタ表記 `SHORT ANIME (約10分)` と矛盾するため「代表作 / FEATURED」にしてある
+
