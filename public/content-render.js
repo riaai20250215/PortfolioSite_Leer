@@ -107,28 +107,97 @@ export function renderNews(content, indent = '      ') {
 }
 
 /* ---------- WORKS ---------- */
+/* 作品カード1枚。シリーズでまとめる場合も、まとめない場合も同じ関数を使う */
+function renderWorkCard(work) {
+  const lines = [
+    `<article class="work-card reveal" data-work="${escapeHtml(work.id)}">`,
+    '  <div class="work-thumb">',
+    `    <img src="${escapeHtml(work.image)}" alt="${escapeHtml(work.imageAlt)}" loading="lazy">`,
+    `    <span class="work-badge"${i18nAttr(work.badgeEn ? `${work.id}-badge` : '')}>${escapeHtml(work.badgeJa)}</span>`,
+    '  </div>',
+    '  <div class="work-body">',
+    `    <p class="work-meta"${i18nAttr(work.metaEn ? `${work.id}-meta` : '')}>${escapeHtml(work.metaJa)}</p>`,
+    `    <h3 class="work-title">${escapeHtml(work.title)}</h3>`,
+    `    <p class="work-desc"${i18nAttr(work.descEn ? `${work.id}-desc` : '')}>${sanitizeHtml(work.descJa)}</p>`
+  ];
+  for (const link of visible(work.links)) {
+    const key = link.labelEn ? link.labelKey || '' : '';
+    lines.push(
+      `    <a class="work-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener"${i18nAttr(key)}>${escapeHtml(link.labelJa)}</a>`
+    );
+  }
+  lines.push('  </div>', '</article>');
+  return lines.join('\n');
+}
+
+/* ---------- WORKS: シリーズ ----------
+   content.series = [{ id, kicker, titleJa, titleEn, descJa, descEn, orientation, links:[{icon,name,handle,href}] }]
+   各作品の work.series にシリーズの id を入れると、そのシリーズの見出しの下にまとまる。
+   series が無い作品 (または存在しない id) は最後の「その他の作品」に入る。
+   orientation: 'vertical' のシリーズはサムネイルを 9:16 で並べる (縦型動画用)。 */
+const OTHER_SERIES = { id: 'other', kicker: 'OTHER WORKS', titleJa: 'その他の作品', titleEn: 'Other Works', links: [] };
+const seriesKey = value => String(value ?? '').trim();
+
+/** 表示する作品をシリーズごとに分ける */
+export function groupWorks(content) {
+  const works = visible(content?.works);
+  const series = visible(content?.series);
+  const groups = series
+    .map(item => ({ series: item, works: works.filter(work => seriesKey(work.series) === item.id) }))
+    .filter(group => group.works.length > 0);
+  const known = new Set(series.map(item => item.id));
+  const rest = works.filter(work => !known.has(seriesKey(work.series)));
+  return { groups, rest };
+}
+
+function renderSeriesLinks(series) {
+  const links = visible(series.links);
+  if (!links.length) return [];
+  const label = series.linksLabel || `${series.titleJa}の公式アカウント`;
+  const lines = [`    <nav class="series-links" aria-label="${escapeHtml(label)}">`];
+  for (const link of links) {
+    const icon = LINK_ICONS[link.icon] || LINK_ICONS.x;
+    lines.push(
+      `      <a class="series-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener">`,
+      `        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="${icon.path}"/></svg>`,
+      `        <span class="series-link-name">${escapeHtml(link.name || icon.label)}</span>`
+    );
+    if (link.handle) lines.push(`        <span class="series-link-id">${escapeHtml(link.handle)}</span>`);
+    lines.push('      </a>');
+  }
+  lines.push('    </nav>');
+  return lines;
+}
+
+function renderSeriesBlock(series, works, other = false) {
+  const gridClass = series.orientation === 'vertical' ? 'works-grid vertical' : 'works-grid';
+  const titleKey = other ? 't-works-other' : series.titleEn ? `series-${series.id}-title` : '';
+  const descKey = series.descEn ? `series-${series.id}-desc` : '';
+  const lines = [
+    `<div class="works-series${other ? ' works-series-other' : ''} reveal" id="series-${escapeHtml(series.id)}">`,
+    '  <div class="series-head">',
+    '    <div class="series-heading">'
+  ];
+  if (series.kicker) lines.push(`      <p class="series-kicker">${escapeHtml(series.kicker)}</p>`);
+  lines.push(`      <h3 class="series-title"${i18nAttr(titleKey)}>${escapeHtml(series.titleJa)}</h3>`);
+  if (series.descJa) lines.push(`      <p class="series-desc"${i18nAttr(descKey)}>${sanitizeHtml(series.descJa)}</p>`);
+  lines.push('    </div>', ...renderSeriesLinks(series), '  </div>', `  <div class="${gridClass}">`);
+  lines.push(indentBlock(works.map(renderWorkCard).join('\n\n').split('\n'), '    '));
+  lines.push('  </div>', '</div>');
+  return lines.join('\n');
+}
+
 export function renderWorks(content, indent = '      ') {
-  const blocks = visible(content?.works).map(work => {
-    const lines = [
-      '<article class="work-card reveal">',
-      '  <div class="work-thumb">',
-      `    <img src="${escapeHtml(work.image)}" alt="${escapeHtml(work.imageAlt)}" loading="lazy">`,
-      `    <span class="work-badge"${i18nAttr(work.badgeEn ? `${work.id}-badge` : '')}>${escapeHtml(work.badgeJa)}</span>`,
-      '  </div>',
-      '  <div class="work-body">',
-      `    <p class="work-meta"${i18nAttr(work.metaEn ? `${work.id}-meta` : '')}>${escapeHtml(work.metaJa)}</p>`,
-      `    <h3 class="work-title">${escapeHtml(work.title)}</h3>`,
-      `    <p class="work-desc"${i18nAttr(work.descEn ? `${work.id}-desc` : '')}>${sanitizeHtml(work.descJa)}</p>`
-    ];
-    for (const link of visible(work.links)) {
-      const key = link.labelEn ? link.labelKey || '' : '';
-      lines.push(
-        `    <a class="work-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener"${i18nAttr(key)}>${escapeHtml(link.labelJa)}</a>`
-      );
+  const { groups, rest } = groupWorks(content);
+  const blocks = groups.map(group => renderSeriesBlock(group.series, group.works));
+  if (rest.length) {
+    if (groups.length) {
+      blocks.push(renderSeriesBlock(OTHER_SERIES, rest, true));
+    } else {
+      /* シリーズ未設定のときは、これまで通りカードだけを並べる */
+      blocks.push(['<div class="works-grid">', indentBlock(rest.map(renderWorkCard).join('\n\n').split('\n'), '  '), '</div>'].join('\n'));
     }
-    lines.push('  </div>', '</article>');
-    return lines.join('\n');
-  });
+  }
   return indentBlock(blocks.join('\n\n').split('\n'), indent);
 }
 
@@ -203,6 +272,12 @@ export function buildEnDict(content) {
     set(`${work.id}-desc`, work.descEn);
     for (const link of visible(work.links)) set(link.labelKey, link.labelEn);
   }
+  for (const item of visible(content?.series)) {
+    set(`series-${item.id}-title`, item.titleEn);
+    set(`series-${item.id}-desc`, item.descEn);
+  }
+  const grouped = groupWorks(content);
+  if (grouped.groups.length && grouped.rest.length) set('t-works-other', OTHER_SERIES.titleEn);
   set('prof-bio', content?.profile?.bioEn);
   set('prof-affil', content?.profile?.affiliationEn);
   for (const item of visible(content?.profile?.timeline)) set(`${item.id}-p`, item.bodyEn);
@@ -214,7 +289,7 @@ export function buildEnDict(content) {
 /* key: index.html のマーカー名 / selector: ブラウザ側のコンテナ */
 export const SECTIONS = [
   { key: 'news', selector: '.news-list', render: renderNews, indent: '      ' },
-  { key: 'works', selector: '.works-grid', render: renderWorks, indent: '      ' },
+  { key: 'works', selector: '.works-body', render: renderWorks, indent: '      ' },
   { key: 'profile', selector: '.profile-card', render: renderProfileCard, indent: '      ' },
   { key: 'timeline', selector: '.timeline', render: renderTimeline, indent: '      ' },
   { key: 'links', selector: '.links-grid', render: renderLinks, indent: '      ' },
@@ -258,10 +333,29 @@ export function validateContent(content) {
     }
     req(work && typeof work.title === 'string' && work.title.trim() !== '', `works[${i}]: title が必要です`);
     req(work && typeof work.image === 'string' && work.image.trim() !== '', `works[${i}]: image が必要です`);
+    req(work?.series === undefined || work?.series === null || typeof work.series === 'string', `works[${i}]: series は文字列 (シリーズの id) である必要があります`);
     (work?.links ?? []).forEach((link, j) => {
       req(link && isSafeUrl(link.href), `works[${i}].links[${j}]: href が不正です`);
     });
   });
+
+  if (content.series !== undefined) {
+    req(Array.isArray(content.series), 'series は配列である必要があります');
+    (Array.isArray(content.series) ? content.series : []).forEach((item, i) => {
+      req(item && typeof item.id === 'string' && item.id.trim() !== '', `series[${i}]: id が必要です`);
+      if (item && item.id) {
+        req(!seen.has(`series:${item.id}`), `series[${i}]: id が重複しています (${item.id})`);
+        req(item.id !== OTHER_SERIES.id, `series[${i}]: id "${OTHER_SERIES.id}" は予約語です`);
+        seen.add(`series:${item.id}`);
+      }
+      req(item && typeof item.titleJa === 'string' && item.titleJa.trim() !== '', `series[${i}]: titleJa が必要です`);
+      req(!item?.orientation || item.orientation === 'vertical' || item.orientation === 'landscape', `series[${i}]: orientation は vertical / landscape のいずれか`);
+      (item?.links ?? []).forEach((link, j) => {
+        req(link && isSafeUrl(link.href), `series[${i}].links[${j}]: href が不正です`);
+        req(link && LINK_ICONS[link?.icon] !== undefined, `series[${i}].links[${j}]: icon は ${Object.keys(LINK_ICONS).join(' / ')} のいずれか`);
+      });
+    });
+  }
 
   content.profile.timeline.forEach((item, i) => {
     req(item && typeof item.id === 'string' && item.id.trim() !== '', `timeline[${i}]: id が必要です`);

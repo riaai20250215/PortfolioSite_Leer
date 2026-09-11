@@ -496,6 +496,94 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
 }
 .work-link:hover{ opacity: .75; }
 
+/* --- Works: シリーズごとのまとまり (Penny's House / NiL / その他) --- */
+.works-body{
+  display: grid;
+  gap: clamp(56px, 8vw, 96px);
+}
+.series-head{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+  position: relative;
+  padding-bottom: 18px;
+  margin-bottom: clamp(20px, 3vw, 28px);
+  border-bottom: 1px solid var(--line);
+}
+/* 見出し下の線に、プリズムの光を少しだけ差す */
+.series-head::after{
+  content:'';
+  position:absolute; left:0; bottom:-1px;
+  width: 140px; height: 1px;
+  background: var(--prism);
+}
+.series-heading{ min-width: 0; flex: 1 1 360px; }
+.series-kicker{
+  font-family: var(--font-en);
+  font-weight: 300;
+  font-size: .78rem;
+  letter-spacing: .42em;
+  color: var(--gold);
+}
+.series-title{
+  margin-top: 4px;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+  letter-spacing: .06em;
+  line-height: 1.4;
+}
+.series-desc{
+  margin-top: 8px;
+  max-width: 62ch;
+  font-size: .85rem;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.series-links{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 0 1 auto;
+}
+.series-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: var(--font-en);
+  font-weight: 400;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  color: #dcd8e6;
+  background: rgba(20,20,31,.72);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px 8px 12px;
+  transition: transform .35s, border-color .35s, box-shadow .35s;
+}
+.series-link:hover{
+  transform: translateY(-2px);
+  border-color: var(--gold-dim);
+  box-shadow: 0 10px 28px rgba(0,0,0,.4), 0 2px 18px rgba(231,200,122,.1);
+}
+.series-link svg{ flex: none; opacity: .92; }
+.series-link-id{
+  font-weight: 300;
+  color: var(--muted);
+  word-break: break-all;
+}
+/* その他の作品: 見出しは控えめに */
+.works-series-other .series-title{ font-size: 1.1rem; }
+
+/* 縦型動画のシリーズ: サムネイルを 9:16 で並べる */
+.works-grid.vertical .work-thumb{ aspect-ratio: 9 / 16; }
+.works-grid.vertical .work-thumb::after{
+  background: linear-gradient(180deg, transparent 70%, rgba(10,10,17,.55));
+}
+
 /* =====================================================
    Character (NIL)
    ===================================================== */
@@ -830,9 +918,30 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
   .links-grid{ grid-template-columns: repeat(2, 1fr); }
 }
 
+/* 縦型シリーズはタブレット幅でも3列のまま (2列だと1枚が大きくなりすぎる) */
+@media (max-width: 1024px){
+  .works-grid.vertical{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 760px){
+  .works-grid.vertical{ grid-template-columns: repeat(2, 1fr); }
+}
+
 /* スマホ幅: 作品は1列 */
 @media (max-width: 640px){
   .works-grid{ grid-template-columns: 1fr; }
+  /* 縦型は「左にサムネイル・右に本文」の横並びにして、縦に伸びすぎないようにする */
+  .works-grid.vertical{ grid-template-columns: 1fr; }
+  .works-grid.vertical .work-card{
+    display: grid;
+    grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .works-grid.vertical .work-thumb{ aspect-ratio: auto; height: 100%; min-height: 250px; }
+  .works-grid.vertical .work-body{ padding: 16px 16px 18px; }
+  .works-grid.vertical .work-title{ font-size: 1.05rem; }
+  .works-grid.vertical .work-desc{ font-size: .8rem; }
+  .works-grid.vertical .work-link{ margin-right: 12px; }
+  .series-head{ align-items: flex-start; }
 }
 
 @media (max-width: 720px){

@@ -11,7 +11,7 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 |---|---|
 | TOP | 「LEER」の名前のみのシンプル構成(背景: ナイモノネダリのキービジュアル + 星空 + 名前がふわっと浮かぶ登場アニメ)。SNSリンクと JP/EN 言語切替はヘッダー右上 |
 | NEWS | 受賞・出品・公開のお知らせ |
-| WORKS | 9作品を投稿時期の新しい順に掲載(正論アレルギー / ルミア / 真夜中の自分会議 / ポスト・アニマ / ナイモノネダリ / The Lost Celestia / 人間(仮)、はじめます。 / Still shining / 声の羅針盤) |
+| WORKS | 13作品を**シリーズごと**に掲載。Penny's House シリーズ(MIDNIGHT MART / ONE SMALL MOMENT / PLATFORM、縦型 9:16 サムネ) → NiL シリーズ(正論アレルギー / 真夜中の自分会議 / 神様へのクレーム窓口 / ナイモノネダリ) → その他の作品(ルミア / ポスト・アニマ / The Lost Celestia / 人間(仮)、はじめます。 / Still shining / 声の羅針盤)。各シリーズの見出しには公式アカウント(YouTube / Instagram / TikTok)のリンク |
 | CHARACTER | **一時非表示中**(2026-08-03)。ニル / NIL の紹介とビジュアル系譜(v1〜v6)。`index.html` 内にコメントアウトで保持。再表示はコメントブロックを外し、navの CHARACTER リンクも復活させる |
 | PROFILE | プロフィールと経歴タイムライン |
 | LINKS | X / YouTube / Instagram / TikTok |
@@ -19,6 +19,9 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 ## ファイル
 
 - `public/content.json` — **NEWS / WORKS / PROFILE / LINKS の正本**(管理画面から編集するのもこの内容)
+  - `series` 配列 = WORKS のシリーズ見出し(`id` / `kicker` / `titleJa` / `titleEn` / `descJa` / `descEn` / `links[{icon,name,handle,href}]`)。`orientation: "vertical"` を付けると、そのシリーズだけサムネイルを 9:16 で並べる(縦型動画用。スマホ幅では左サムネ・右本文の横並びになる)
+  - 各作品の `series` にシリーズの `id` を入れるとその見出しの下にまとまる。`series` が無い作品は最後の「その他の作品」に入る(シリーズを1つも定義しなければ、従来どおりカードだけが並ぶ)
+  - 管理画面の WORKS フォームには `series` の入力欄がまだ無い。シリーズの追加・所属の変更は管理画面の JSON 欄か、このファイルを直接編集する
 - `public/index.html` — ページの骨格 + `content.json` から生成した静的HTML(JSONが読めないときのフォールバック)
 - `public/content-render.js` — content.json → HTML の共有レンダラ(ブラウザ・ビルド・Worker で共用)
 - `public/content.js` — 実行時に `/api/content` → `content.json` の順で読み、変化があった部分だけ描き直す
@@ -70,3 +73,4 @@ npm run deploy
 - 作品カードのサムネイルは各作品の公式サムネ(真夜中の自分会議/ナイモノネダリ=制作フォルダ、人間(仮)/Still shining/The Lost Celestia=YouTubeサムネ)。声の羅針盤はCodexで生成した正式版(採用元: PocketANIMEリポジトリ `画像/サムネイル/.../final/koe_no_rashinban_title_01_literary.png`、旧版は `.backup/` に保管)
 - 作品リンク: ナイモノネダリ/人間(仮)=X作品ポスト、人間(仮)/声の羅針盤=YouTube、ポスト・アニマ=公式紹介サイト
 - 正論アレルギー(2026-08-22追加): 自主制作MV。サムネは制作フォルダの `サムネイル.png` を横1280pxのJPEGに変換。リンクは YouTube(ニル名義チャンネル @nil_artist_official) + X作品ポストの2本
+- シリーズ表示(2026-09-11追加): Penny's House シリーズ(BLANK ROOM 名義、YouTube `@BLANK-ROOM-0902` / Instagram・TikTok `blank.room.20260904`)と NiL シリーズ(YouTube `@nil_artist_official`)を新設。MIDNIGHT MART / ONE SMALL MOMENT / PLATFORM は縦型なのでサムネは 720×1280 JPEG(採用サムネ: PLATFORM=`005_PLATFORM_縦型MV/サムネイル候補/採用_platform_03_home`、MIDNIGHT MART=`02_image_material/94_サムネイル_3案/A_自撮りの違和感_9x16`。ONE SMALL MOMENT は未採用のため候補②「夜の3人スナップ」を仮置き)。神様へのクレーム窓口は NiL 公式サイトの `assets/kamisama/cover.jpg` を 1280×720 に切り出し。リンクは YouTube ショート / TikTok の各動画(ONE SMALL MOMENT は TikTok のみ公開)

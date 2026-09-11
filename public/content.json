@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-22",
+  "updatedAt": "2026-09-11",
   "news": [
     {
       "id": "news-lumia",
@@ -83,10 +83,138 @@
       "bodyEn": "Submitted the anime teaser \"Koe no Rashinban\" to PocketANIME World Competition."
     }
   ],
+  "series": [
+    {
+      "id": "pennys-house",
+      "hidden": false,
+      "orientation": "vertical",
+      "kicker": "PENNY'S HOUSE",
+      "titleJa": "Penny's House シリーズ",
+      "titleEn": "Penny's House Series",
+      "descJa": "ペニー・ステラ・ガブ、3人のシェアハウスの日常を描く3DCGシリーズ。縦型のミュージックビデオとショートを、レーベル BLANK ROOM から発信しています。",
+      "descEn": "A 3DCG series about Penny, Stella and Gav sharing a house. Vertical music videos and shorts, released under the BLANK ROOM label.",
+      "links": [
+        {
+          "icon": "youtube",
+          "name": "YouTube",
+          "handle": "@BLANK-ROOM-0902",
+          "href": "https://www.youtube.com/@BLANK-ROOM-0902"
+        },
+        {
+          "icon": "instagram",
+          "name": "Instagram",
+          "handle": "blank.room.20260904",
+          "href": "https://www.instagram.com/blank.room.20260904/"
+        },
+        {
+          "icon": "tiktok",
+          "name": "TikTok",
+          "handle": "@blank.room.20260904",
+          "href": "https://www.tiktok.com/@blank.room.20260904"
+        }
+      ]
+    },
+    {
+      "id": "nil",
+      "hidden": false,
+      "kicker": "NiL",
+      "titleJa": "NiL シリーズ",
+      "titleEn": "NiL Series",
+      "descJa": "オリジナルキャラクター、ニル（NiL）が歌うミュージックビデオのシリーズ。欠落、運命、自分自身、優しい暴力——4つの怒りを、声を荒げない静かな反抗に変えて歌う4曲。",
+      "descEn": "A music-video series sung by the original character NiL. Four songs that turn four kinds of anger — at what is missing, at fate, at herself, at gentle violence — into quiet defiance.",
+      "links": [
+        {
+          "icon": "youtube",
+          "name": "YouTube",
+          "handle": "@nil_artist_official",
+          "href": "https://www.youtube.com/@nil_artist_official"
+        }
+      ]
+    }
+  ],
   "works": [
+    {
+      "id": "w-midnight-mart",
+      "hidden": false,
+      "series": "pennys-house",
+      "image": "assets/works/midnight-mart.jpg",
+      "imageAlt": "MIDNIGHT MART サムネイル",
+      "badgeJa": "ホラー特別編",
+      "badgeEn": "Horror Special",
+      "metaJa": "2026 — HORROR SHORT (2分)",
+      "metaEn": "2026 — HORROR SHORT (2 min)",
+      "title": "MIDNIGHT MART",
+      "descJa": "深夜、夜食を買いに入ったスーパーマーケット。商品は棚いっぱい、機械も動いているのに、客はひとりもいない。レジには、まったく同じ顔の店員が2体——。ガブのスマートフォンに残されていた撮影データ、という体で綴るファウンドフッテージ・ホラー。Penny's House のノンカノン特別編。2分・セリフなし・BGMなし。",
+      "descEn": "A late-night supermarket: shelves fully stocked, machines humming, and not a single customer. At the register stand two clerks with exactly the same face. Found-footage horror told through the recording left on Gav's phone. A non-canon special of Penny's House — two minutes, no dialogue, no music.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://www.youtube.com/shorts/1MrlDO8u1ng",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        },
+        {
+          "labelKey": "lnk-tiktok",
+          "href": "https://www.tiktok.com/@blank.room.20260904/video/7683813515496344853",
+          "labelJa": "TikTokで観る →",
+          "labelEn": "Watch on TikTok →"
+        }
+      ]
+    },
+    {
+      "id": "w-one-small-moment",
+      "hidden": false,
+      "series": "pennys-house",
+      "image": "assets/works/one-small-moment.jpg",
+      "imageAlt": "ONE SMALL MOMENT サムネイル",
+      "badgeJa": "縦型MV",
+      "badgeEn": "Vertical MV",
+      "metaJa": "2026 — VERTICAL MUSIC VIDEO (1分18秒)",
+      "metaEn": "2026 — VERTICAL MUSIC VIDEO (1 min 18 sec)",
+      "title": "ONE SMALL MOMENT",
+      "descJa": "夏のプールサイドから夜の街へ。ペニー・ステラ・ガブの3人が魚眼レンズのワンカットで歌い継ぐ、1分18秒の縦型MV。mankyu さん（@manaimovie）の楽曲と魚眼ワンカットMVの設計を、Penny's House の3人に置き換えて制作しました。タイトルはフックの一節「One small moment, but it hit that way」から。",
+      "descEn": "From a summer poolside into the night streets: Penny, Stella and Gav pass the song between them in a 1-minute-18-second one-take fisheye vertical MV. Built on the music and fisheye one-shot MV design by mankyu (@manaimovie), re-cast with the three of Penny's House. The title comes from the hook — \"One small moment, but it hit that way\".",
+      "links": [
+        {
+          "labelKey": "lnk-tiktok",
+          "href": "https://www.tiktok.com/@blank.room.20260904/video/7682347648199773460",
+          "labelJa": "TikTokで観る →",
+          "labelEn": "Watch on TikTok →"
+        }
+      ]
+    },
+    {
+      "id": "w-platform",
+      "hidden": false,
+      "series": "pennys-house",
+      "image": "assets/works/platform.jpg",
+      "imageAlt": "PLATFORM サムネイル",
+      "badgeJa": "オリジナル曲",
+      "badgeEn": "Original Song",
+      "metaJa": "2026 — VERTICAL MUSIC VIDEO (48秒)",
+      "metaEn": "2026 — VERTICAL MUSIC VIDEO (48 sec)",
+      "title": "PLATFORM",
+      "descJa": "終電のあとの高架駅の階段から、路地を抜けて、家の玄関まで。厚底靴のペニー・ステラ・ガブが、魚眼レンズのワンカットで歌い歩く48秒の縦型MV。曲も歌詞も自作のシティポップ／ヌーディスコ。PLATFORM＝厚底靴、駅のホーム、そして発信の場所。",
+      "descEn": "From the stairs of an elevated station after the last train, down an alley, to the front door of home. Penny, Stella and Gav in platform shoes sing their way through a 48-second one-take fisheye vertical MV. Original city-pop / nu-disco song and lyrics. PLATFORM: the shoes, the station, and the place we speak from.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://www.youtube.com/shorts/qVXDUDwOh-Y",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        },
+        {
+          "labelKey": "lnk-tiktok",
+          "href": "https://www.tiktok.com/@blank.room.20260904/video/7681948403537939733",
+          "labelJa": "TikTokで観る →",
+          "labelEn": "Watch on TikTok →"
+        }
+      ]
+    },
     {
       "id": "w-seiron-allergy",
       "hidden": false,
+      "series": "nil",
       "image": "assets/works/seiron-allergy.jpg",
       "imageAlt": "正論アレルギー サムネイル",
       "badgeJa": "自主制作",
@@ -106,6 +234,72 @@
         {
           "labelKey": "lnk-post",
           "href": "https://x.com/ria_aicreator/status/2091087984498204679",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
+    {
+      "id": "w1",
+      "hidden": false,
+      "series": "nil",
+      "image": "assets/works/mayonaka-jibun-kaigi.jpg",
+      "imageAlt": "真夜中の自分会議 キービジュアル",
+      "badgeJa": "🏆 最優秀MV賞",
+      "badgeEn": "🏆 Best MV Award",
+      "metaJa": "2026 — MUSIC VIDEO",
+      "metaEn": "",
+      "title": "真夜中の自分会議",
+      "descJa": "深夜2時。眠れないまま、頭の中でひとりぶんの「会議」が始まる——。議長も書記も裁かれる側も、全部おなじ一人の女の子。眠れない夜の思考ループを議事録・付箋・採決といった事務的なモチーフに置き換えて描いた、2分34秒のハイパーポップMV。SousakuAI Agent Creation Cup 2026 Vol.2 最優秀MV賞受賞。",
+      "descEn": "2 a.m. — unable to sleep, a one-person \"meeting\" convenes inside her head. The chair, the clerk, and the one on trial are all the same girl. A 2'34\" hyperpop MV that reimagines sleepless thought-loops through bureaucratic motifs: minutes, sticky notes, and votes. Winner of the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2.",
+      "links": [
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2081322989174329732",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
+    {
+      "id": "w-kamisama",
+      "hidden": false,
+      "series": "nil",
+      "image": "assets/works/kamisama-claim-desk.jpg",
+      "imageAlt": "神様へのクレーム窓口 サムネイル",
+      "badgeJa": "Zopia AI動画コンテスト 応募",
+      "badgeEn": "Zopia AI Video Contest Entry",
+      "metaJa": "2026 — MUSIC VIDEO (1分)",
+      "metaEn": "2026 — MUSIC VIDEO (1 min)",
+      "title": "神様へのクレーム窓口",
+      "descJa": "人生の不具合を神様に問い合わせたら、返ってきたのは「仕様です。」——だからニルは、舌打ちで天国の役所をぶっ壊す。白×赤×黒×金の「神聖×事務的」な世界に、申請書・赤いハンコ・壊れた光輪を散らした1分のダークポップMV。「ナイモノネダリ」に続く、ニル（NiL）の2曲目。",
+      "descEn": "She filed a complaint with God about the bugs in her life, and the answer came back: \"That's by design.\" So NiL clicks her tongue and tears down heaven's bureau. A one-minute dark-pop MV in a sacred-yet-clerical world of white, red, black and gold, scattered with forms, red stamps and a broken halo. NiL's second song, following \"Naimononedari\".",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://www.youtube.com/watch?v=7V8ioPxL3bk",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        }
+      ]
+    },
+    {
+      "id": "w3",
+      "hidden": false,
+      "series": "nil",
+      "image": "assets/works/naimononedari-thumb.jpg",
+      "imageAlt": "ナイモノネダリ サムネイル",
+      "badgeJa": "🏆 最優秀ビジュアル賞",
+      "badgeEn": "🏆 Best Visual Award",
+      "metaJa": "2026 — MUSIC VIDEO",
+      "metaEn": "",
+      "title": "ナイモノネダリ",
+      "descJa": "色のない白髪の少女ニルが、世界の彩り（＝他者の生）を断片的に纏っては失っていき、最後に「何にもなれないことの自由」を抱きしめる2分間のMV。SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門 最優秀ビジュアル賞受賞。",
+      "descEn": "Nil, a colorless white-haired girl, wraps herself in fragments of the world's colors — other people's lives — only to lose them, until she finally embraces \"the freedom of becoming nothing\". A 2-minute MV. Winner of the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
+      "links": [
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2053256742193262981",
           "labelJa": "作品ポストを見る →",
           "labelEn": "View post →"
         }
@@ -133,27 +327,6 @@
       ]
     },
     {
-      "id": "w1",
-      "hidden": false,
-      "image": "assets/works/mayonaka-jibun-kaigi.jpg",
-      "imageAlt": "真夜中の自分会議 キービジュアル",
-      "badgeJa": "🏆 最優秀MV賞",
-      "badgeEn": "🏆 Best MV Award",
-      "metaJa": "2026 — MUSIC VIDEO",
-      "metaEn": "",
-      "title": "真夜中の自分会議",
-      "descJa": "深夜2時。眠れないまま、頭の中でひとりぶんの「会議」が始まる——。議長も書記も裁かれる側も、全部おなじ一人の女の子。眠れない夜の思考ループを議事録・付箋・採決といった事務的なモチーフに置き換えて描いた、2分34秒のハイパーポップMV。SousakuAI Agent Creation Cup 2026 Vol.2 最優秀MV賞受賞。",
-      "descEn": "2 a.m. — unable to sleep, a one-person \"meeting\" convenes inside her head. The chair, the clerk, and the one on trial are all the same girl. A 2'34\" hyperpop MV that reimagines sleepless thought-loops through bureaucratic motifs: minutes, sticky notes, and votes. Winner of the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2.",
-      "links": [
-        {
-          "labelKey": "lnk-post",
-          "href": "https://x.com/ria_aicreator/status/2081322989174329732",
-          "labelJa": "作品ポストを見る →",
-          "labelEn": "View post →"
-        }
-      ]
-    },
-    {
       "id": "w2",
       "hidden": false,
       "image": "assets/works/post-anima.jpg",
@@ -171,27 +344,6 @@
           "href": "https://post-anima.official-leer.workers.dev/",
           "labelJa": "公式紹介サイトへ →",
           "labelEn": "Official site →"
-        }
-      ]
-    },
-    {
-      "id": "w3",
-      "hidden": false,
-      "image": "assets/works/naimononedari-thumb.jpg",
-      "imageAlt": "ナイモノネダリ サムネイル",
-      "badgeJa": "🏆 最優秀ビジュアル賞",
-      "badgeEn": "🏆 Best Visual Award",
-      "metaJa": "2026 — MUSIC VIDEO",
-      "metaEn": "",
-      "title": "ナイモノネダリ",
-      "descJa": "色のない白髪の少女ニルが、世界の彩り（＝他者の生）を断片的に纏っては失っていき、最後に「何にもなれないことの自由」を抱きしめる2分間のMV。SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門 最優秀ビジュアル賞受賞。",
-      "descEn": "Nil, a colorless white-haired girl, wraps herself in fragments of the world's colors — other people's lives — only to lose them, until she finally embraces \"the freedom of becoming nothing\". A 2-minute MV. Winner of the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
-      "links": [
-        {
-          "labelKey": "lnk-post",
-          "href": "https://x.com/ria_aicreator/status/2053256742193262981",
-          "labelJa": "作品ポストを見る →",
-          "labelEn": "View post →"
         }
       ]
     },
