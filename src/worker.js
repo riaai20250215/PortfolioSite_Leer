@@ -35,6 +35,11 @@ export default {
     const cors = corsHeaders(request, env);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
 
+    if(url.pathname==='/api/auth'&&request.method==='GET'){
+      const auth=await authorize(request,env);
+      return json(auth.ok?{ok:true,canWrite:Boolean(env.SITE_CONTENT)}:{ok:false,error:'本番への接続を確認できませんでした。'},auth.ok?200:auth.status,cors);
+    }
+
     if (url.pathname === '/api/status' && request.method === 'GET') {
       return json(
         {
@@ -65,7 +70,7 @@ async function getContent(request, env, cors) {
     const stored = await env.SITE_CONTENT.get(KV_KEY);
     if (stored) {
       return new Response(stored, {
-        headers: { ...headers, 'content-type': 'application/json; charset=utf-8', 'x-content-source': 'kv' }
+        headers: { ...headers, 'content-type': 'application/json; charset=utf-8', 'x-content-source': 'kv', etag:await revision(stored) }
       });
     }
   }
@@ -74,8 +79,9 @@ async function getContent(request, env, cors) {
     const assetUrl = new URL('/content.json', request.url);
     const asset = await env.ASSETS.fetch(new Request(assetUrl, { method: 'GET' }));
     if (asset.ok) {
-      return new Response(asset.body, {
-        headers: { ...headers, 'content-type': 'application/json; charset=utf-8', 'x-content-source': 'static' }
+      const body=await asset.text();
+      return new Response(body, {
+        headers: { ...headers, 'content-type': 'application/json; charset=utf-8', 'x-content-source': 'static', etag:await revision(body) }
       });
     }
   }
@@ -101,20 +107,28 @@ async function putContent(request, env, cors, ctx) {
   const problems = validateContent(payload);
   if (problems.length) return json({ ok: false, error: '検証エラー', problems }, 422, cors);
 
+  // Editors send the revision they loaded, so stale pages do not overwrite newer edits.
+  const expected=request.headers.get('if-match');
+  const previous = await env.SITE_CONTENT.get(KV_KEY);
+  if(expected){
+    let current=previous;
+    if(!current){const response=await getContent(request,env,cors);current=await response.text();}
+    if(expected!==await revision(current))return json({ok:false,error:'別の画面で本番が更新されました。下書きを残して、本番から再読込してください。'},412,cors);
+    if(JSON.stringify(JSON.parse(current))===JSON.stringify(payload))return json({ok:true,unchanged:true,savedAt:payload.savedAt||null,revision:await revision(current)},200,cors);
+  }
   const now = new Date().toISOString();
   const next = { ...payload, version: payload.version ?? 1, updatedAt: payload.updatedAt || now.slice(0, 10), savedAt: now };
   const body = JSON.stringify(next, null, 2);
   if (body.length > 400_000) return json({ ok: false, error: 'コンテンツが大きすぎます (400KB 上限)' }, 413, cors);
 
   // 直前の内容を1世代だけ退避しておく (取り違え時の巻き戻し用)
-  const previous = await env.SITE_CONTENT.get(KV_KEY);
   if (previous) {
     const backup = env.SITE_CONTENT.put(`${KV_KEY}:previous`, previous);
     if (ctx?.waitUntil) ctx.waitUntil(backup); else await backup;
   }
   await env.SITE_CONTENT.put(KV_KEY, body);
 
-  return json({ ok: true, savedAt: now, by: auth.identity }, 200, cors);
+  return json({ ok: true, savedAt: now, revision:await revision(body), by: auth.identity }, 200, cors);
 }
 
 /* ---------- 認証 ---------- */
@@ -209,7 +223,8 @@ function corsHeaders(request, env) {
   const origin = request.headers.get('origin');
   const headers = {
     'access-control-allow-methods': 'GET, PUT, POST, OPTIONS',
-    'access-control-allow-headers': 'content-type, authorization',
+    'access-control-allow-headers': 'content-type, authorization, if-match',
+    'access-control-expose-headers': 'etag',
     'access-control-max-age': '86400',
     vary: 'Origin'
   };
@@ -233,3 +248,5 @@ function json(body, status, headers) {
     headers: { ...headers, 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' }
   });
 }
+
+async function revision(body){const hash=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(body));return '"'+Array.from(new Uint8Array(hash),b=>b.toString(16).padStart(2,'0')).join('')+'"';}

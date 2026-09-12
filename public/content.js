@@ -18,6 +18,10 @@ const PREVIEW_ORIGINS = [
   /^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/i
 ];
 
+let previewParentOrigin='',previewContent=null,previewReceived=false;
+const renderedSections=new Map();
+const previewMode=new URLSearchParams(location.search).has('preview')&&window.parent!==window;
+
 const normalize = html =>
   String(html ?? '')
     .replace(/<!--[\s\S]*?-->/g, '')
@@ -43,7 +47,9 @@ export function applyContent(content) {
       console.warn(`[leer] ${section.key} の描画に失敗しました`, error);
       continue;
     }
-    if (normalize(markup) === normalize(target.innerHTML)) continue;
+    const normalized=normalize(markup),previous=renderedSections.get(section.key)??normalize(target.innerHTML);
+    renderedSections.set(section.key,normalized);
+    if(normalized===previous)continue;
     target.innerHTML = markup;
     changed = true;
   }
@@ -53,6 +59,7 @@ export function applyContent(content) {
     if (typeof window.leerSetEnDict === 'function') window.leerSetEnDict(buildEnDict(content));
     if (typeof window.leerApplyLang === 'function') window.leerApplyLang();
   }
+  if(previewParentOrigin){previewContent=content;decoratePreview();}
   return true;
 }
 
@@ -67,6 +74,7 @@ async function load() {
   for (const url of [API_ENDPOINT, STATIC_ENDPOINT]) {
     try {
       const data = await fetchJson(url);
+      if(previewReceived)return;
       if (applyContent(data)) return;
     } catch (error) {
       /* 取得できなくても静的HTMLがあるので致命的ではない */
@@ -76,13 +84,44 @@ async function load() {
 }
 
 /* ---------- 管理画面からのライブプレビュー ---------- */
-window.addEventListener('message', event => {
-  const payload = event.data;
-  if (!payload || payload.type !== 'leer:preview' || !payload.content) return;
-  if (event.source !== window.parent || window.parent === window) return;
-  if (!PREVIEW_ORIGINS.some(re => re.test(event.origin))) return;
-  applyContent(payload.content);
+window.addEventListener('message',event=>{
+ if(!previewMode||event.source!==window.parent||!PREVIEW_ORIGINS.some(re=>re.test(event.origin)))return;
+ const m=event.data;if(!m)return;
+ if(m.type==='leer:preview'&&m.content){
+  previewReceived=true;previewParentOrigin=event.origin;
+  if(applyContent(m.content))window.parent.postMessage({type:'leer:preview-applied'},previewParentOrigin);
+ }
+ if(m.type==='leer:focus'&&previewParentOrigin){
+  const section={news:'news',works:'works',profile:'profile',timeline:'profile',links:'links',contact:'links'}[m.kind];
+  if(!section)return;
+  const target=m.id?[...document.querySelectorAll('[data-leer-kind]')].find(el=>el.dataset.leerKind===m.kind&&el.dataset.leerId===m.id):document.getElementById(section);
+  (target||document.getElementById(section))?.scrollIntoView({behavior:'smooth',block:'center'});
+ }
 });
+function decoratePreview(){
+ if(!document.getElementById('leer-editor-style')){
+  const style=document.createElement('style');style.id='leer-editor-style';style.textContent=`[data-leer-kind]{cursor:pointer;outline-offset:6px;transition:outline-color .15s}[data-leer-kind]:hover,[data-leer-kind]:focus-visible{outline:1px dashed #e7c87a}[data-leer-kind] a{cursor:pointer}`;document.head.append(style);
+ }
+ const c=previewContent;
+ const tag=(el,kind,item,index)=>{if(!el)return;el.dataset.leerKind=kind;el.dataset.leerId=item?.id||'';el.dataset.leerIndex=String(index);el.tabIndex=0;el.title='クリックして編集';};
+ for(const [kind,selector,list] of [['news','.news-item',c.news],['timeline','.timeline-item',c.profile.timeline],['links','.link-card',c.links.items]]){
+  const visible=list.map((item,index)=>({item,index})).filter(({item})=>!item.hidden);
+  document.querySelectorAll(selector).forEach((el,i)=>{const row=visible[i];if(row)tag(el,kind,row.item,row.index)});
+ }
+ /* 作品はシリーズごとに並ぶので DOM 順 ≠ 配列順。カードが持つ id で引く */
+ document.querySelectorAll('.work-card').forEach(el=>{const i=c.works.findIndex(w=>w.id===el.dataset.work);if(i>=0)tag(el,'works',c.works[i],i)});
+ tag(document.querySelector('.profile-card'),'profile',null,0);
+ tag(document.querySelector('.contact-note'),'contact',null,0);
+}
+function pick(event){
+ if(!previewParentOrigin)return;
+ if(event.type==='keydown'&&!['Enter',' '].includes(event.key))return;
+ if(event.target.closest('summary'))return;  /* 説明文の開閉は本来の動作に任せる */
+ const el=event.target.closest('[data-leer-kind]');if(!el)return;
+ event.preventDefault();event.stopImmediatePropagation();
+ window.parent.postMessage({type:'leer:select',kind:el.dataset.leerKind,id:el.dataset.leerId,index:Number(el.dataset.leerIndex)},previewParentOrigin);
+}
+document.addEventListener('click',pick,true);document.addEventListener('keydown',pick,true);
 
 window.leerApplyContent = applyContent;
 
