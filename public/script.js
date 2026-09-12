@@ -216,6 +216,7 @@
     "tl3-p": "Won the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
     "tl4-p": "Launched an original anime project — worldbuilding, characters, a first episode, and an official site. Selected among the Top 50 nominees at COLOTEK.",
     "tl5-p": "Won the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2 — the most competitive category.",
+    "tl6-p": "Won the Horror Category Excellence Award at Super 30s Creation Cup 2026 (SousakuAI × Wan 3.0) — a first attempt at 3DCG found-footage horror, made as a Penny's House special.",
     "contact": "For work inquiries and collaborations, feel free to DM me on X.",
     /* content:en:end */
   };

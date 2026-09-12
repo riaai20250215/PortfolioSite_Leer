@@ -467,15 +467,25 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
   overflow-wrap: normal;
   text-align: center;
 }
+/* honor は銀。金 (award) と同じ金属の作りにして、輝きの強さだけ落とす
+   (色は .silver-text と同じ白銀。流れるアニメと光の粒は付けない) */
 .work-badge.honor{
-  color: #f3f1f8;
-  border-color: rgba(220,216,230,.5);
-  background: rgba(14,14,22,.72);
+  color: #1c1a26;
+  font-weight: 700;
+  letter-spacing: .08em;
+  background: linear-gradient(110deg,
+    #b9b7c9 0%, #e4e2ee 18%, #ffffff 34%, #cfcddd 52%, #a7a5ba 68%, #e6e4f0 86%, #c4c2d4 100%);
+  border-color: rgba(255,255,255,.9);
+  box-shadow:
+    0 0 0 1px rgba(207,205,221,.35),
+    0 6px 18px rgba(150,148,172,.28),
+    inset 0 1px 0 rgba(255,255,255,.75);
+  backdrop-filter: none;
 }
 .work-badge.honor::before{
   content:'✦';
-  font-size: .7em;
-  color: #dcd8e6;
+  font-size: .74em;
+  color: #4a4860;
 }
 .work-badge.award{
   color: #1a1406;
