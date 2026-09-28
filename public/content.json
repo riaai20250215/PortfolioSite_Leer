@@ -1,7 +1,17 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-11",
+  "updatedAt": "2026-09-26",
   "news": [
+    {
+      "id": "news-ai-creators",
+      "date": "2026-09-17",
+      "dateLabel": "2026.09",
+      "category": "MEDIA",
+      "award": false,
+      "hidden": false,
+      "bodyJa": "企業とAIクリエイターをつなぐプラットフォーム「AIクリエイターズ（AI Creators）」に、登録クリエイターとして掲載されました。<a href=\"https://ai-creators.tech/creators/leer/\" target=\"_blank\" rel=\"noopener\">プロフィールページ</a>",
+      "bodyEn": "Listed as a registered creator on \"AI Creators\", a platform connecting companies with AI creators. <a href=\"https://en.ai-creators.tech/creators/leer/\" target=\"_blank\" rel=\"noopener\">Profile page</a>"
+    },
     {
       "id": "news-midnight-mart",
       "date": "2026-09-11",
@@ -11,6 +21,16 @@
       "hidden": false,
       "bodyJa": "Penny's House 特別編『MIDNIGHT MART』が Super 30s Creation Cup 2026（SousakuAI × Wan 3.0）で<strong>ホラー部門 優秀賞</strong>を受賞しました。<a href=\"https://x.com/sousakuai/status/2098399365194990061\" target=\"_blank\" rel=\"noopener\">結果発表ポスト</a>",
       "bodyEn": "\"MIDNIGHT MART\", a Penny's House special, won the <strong>Horror Category Excellence Award</strong> at Super 30s Creation Cup 2026 (SousakuAI × Wan 3.0). <a href=\"https://x.com/sousakuai/status/2098399365194990061\" target=\"_blank\" rel=\"noopener\">Results post</a>"
+    },
+    {
+      "id": "news-archives-2026",
+      "date": "2026-08-27",
+      "dateLabel": "2026.08",
+      "category": "MEDIA",
+      "award": false,
+      "hidden": false,
+      "bodyJa": "VIDEO SALON編集部 編『AI映像制作アーカイブス2026』（2026年8月27日発売）巻末のクリエイター名鑑「AI CREATORS FILE 2026」に掲載されました。<a href=\"https://x.com/videosalon/status/2092756024331760118\" target=\"_blank\" rel=\"noopener\">発売告知ポスト</a>",
+      "bodyEn": "Featured in \"AI CREATORS FILE 2026\", the creator directory in \"AI Video Production Archives 2026\" (edited by VIDEO SALON, released August 27, 2026). <a href=\"https://x.com/videosalon/status/2092756024331760118\" target=\"_blank\" rel=\"noopener\">Announcement post</a>"
     },
     {
       "id": "news-lumia",
@@ -112,8 +132,8 @@
       "kicker": "PENNY'S HOUSE",
       "titleJa": "Penny's House シリーズ",
       "titleEn": "Penny's House Series",
-      "descJa": "ペニー・ステラ・ガブ、3人のシェアハウスの日常を描く3DCGシリーズ。縦型のミュージックビデオとショートを、レーベル BLANK ROOM から発信しています。",
-      "descEn": "A 3DCG series about Penny, Stella and Gav sharing a house. Vertical music videos and shorts, released under the BLANK ROOM label.",
+      "descJa": "ペニー・ステラ・ガブ、3人のシェアハウスの日常を描く3DCGシリーズ。<br>縦型のミュージックビデオとショートを、レーベル BLANK ROOM から発信しています。",
+      "descEn": "A 3DCG series about Penny, Stella and Gav sharing a house.<br>Vertical music videos and shorts, released under the BLANK ROOM label.",
       "links": [
         {
           "icon": "youtube",
@@ -141,14 +161,34 @@
       "kicker": "NiL",
       "titleJa": "NiL シリーズ",
       "titleEn": "NiL Series",
-      "descJa": "オリジナルキャラクター、ニル（NiL）が歌うミュージックビデオのシリーズ。欠落、運命、自分自身、優しい暴力——4つの怒りを、声を荒げない静かな反抗に変えて歌う4曲。",
-      "descEn": "A music-video series sung by the original character NiL. Four songs that turn four kinds of anger — at what is missing, at fate, at herself, at gentle violence — into quiet defiance.",
+      "descJa": "オリジナルキャラクター、ニル（NiL）が歌うミュージックビデオのシリーズ。欠落、運命、自分自身、優しい暴力——4つの怒りを、声を荒げない静かな反抗に変えて歌った4曲に続き、『Snowflake』から新しい章が始まる。",
+      "descEn": "A music-video series sung by the original character NiL. After four songs that turned four kinds of anger — at what is missing, at fate, at herself, at gentle violence — into quiet defiance, a new chapter begins with \"Snowflake\".",
       "links": [
         {
           "icon": "youtube",
           "name": "YouTube",
-          "handle": "@nil_artist_official",
-          "href": "https://www.youtube.com/@nil_artist_official"
+          "handle": "@ria_aicreator",
+          "href": "https://www.youtube.com/@ria_aicreator"
+        }
+      ],
+      "linksNoteJa": "再生リスト「NiL」から、NiL 関連の全動画が見られます",
+      "linksNoteEn": "Every NiL video is in the \"NiL\" playlist",
+      "linksNoteHref": "https://www.youtube.com/playlist?list=PLN47NbrjTozE"
+    },
+    {
+      "id": "lyric-motion",
+      "hidden": false,
+      "kicker": "LYRIC MOTION",
+      "titleJa": "MV リリックモーションシリーズ",
+      "titleEn": "Lyric Motion MV Series",
+      "descJa": "一度聴いたら離れない短い曲に、立体の文字と紙の質感で動きをつけた3Dリリックモーション。",
+      "descEn": "3D lyric-motion videos for short, catchy songs — extruded letters and paper textures moving to every word.",
+      "links": [
+        {
+          "icon": "youtube",
+          "name": "YouTube",
+          "handle": "@ria_aicreator",
+          "href": "https://www.youtube.com/@ria_aicreator"
         }
       ]
     }
@@ -294,6 +334,44 @@
       ]
     },
     {
+      "id": "w-celebration",
+      "hidden": false,
+      "series": "pennys-house",
+      "image": "assets/works/celebration.jpg",
+      "imageAlt": "Celebration サムネイル",
+      "badgeType": "default",
+      "badgeJa": "SousakuAI CPP制作",
+      "badgeEn": "SousakuAI CPP Collab",
+      "metaJa": "2026 — VERTICAL MUSIC VIDEO (53秒)",
+      "metaEn": "2026 — VERTICAL MUSIC VIDEO (53 sec)",
+      "title": "Celebration",
+      "descJa": "SousakuAI 1周年を祝う縦型MV。ペニー・ステラ・ガブがケーキとサプライズでゲストの海ちゃんを迎える53秒。SousakuAI からのクリエイターコラボ依頼を受け、CPP(クリエイターパートナー制度)の一環として制作を担当。生成は SousakuAI 上の Seedance 2.5。",
+      "descEn": "A vertical MV celebrating SousakuAI's 1st anniversary. Penny, Stella and Gav welcome guest character Umi-chan with a cake and a surprise, in 53 seconds. Produced on commission from SousakuAI as part of its Creator Partner Program (CPP). Generated with Seedance 2.5 on the SousakuAI platform."
+    },
+    {
+      "id": "w-snowflake",
+      "hidden": false,
+      "series": "nil",
+      "image": "assets/works/snowflake.jpg",
+      "imageAlt": "Snowflake サムネイル",
+      "badgeType": "default",
+      "badgeJa": "自主制作",
+      "badgeEn": "Independent Work",
+      "metaJa": "2026 — MUSIC VIDEO (1分35秒)",
+      "metaEn": "2026 — MUSIC VIDEO (1 min 35 sec)",
+      "title": "Snowflake",
+      "descJa": "「繊細で打たれ弱い奴」を指す英語のスラング“Snowflake”は、二つとして同じ形がない雪の結晶の名前でもある。ニル（NiL）は言い返さず、精密な六角形のまま降り続けて、ひと晩で街を白く沈める。貼られたレッテルへの静かな反抗を、歌詞が一音ずつ舞うリリックモーションで描いた1分35秒のMV。怒りの4曲に続く、新しい章の始まり。",
+      "descEn": "\"Snowflake\" is English slang for someone fragile and easily hurt — and also the name of a crystal of which no two are alike. NiL doesn't argue back; she keeps falling as a precise hexagon until the whole city is buried in white overnight. A 1-minute-35-second MV of quiet defiance against the labels others pin on you, told through lyric motion where every syllable drifts in on its own. After the four songs of anger, a new chapter begins.",
+      "links": [
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2103049225621909912",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
+    {
       "id": "w-seiron-allergy",
       "hidden": false,
       "series": "nil",
@@ -388,6 +466,130 @@
           "href": "https://x.com/ria_aicreator/status/2053256742193262981",
           "labelJa": "作品ポストを見る →",
           "labelEn": "View post →"
+        }
+      ]
+    },
+    {
+      "id": "w-lyric-gum",
+      "hidden": false,
+      "series": "lyric-motion",
+      "image": "assets/works/lyric-gum.jpg",
+      "imageAlt": "ガム サムネイル",
+      "badgeType": "default",
+      "badgeJa": "自主制作",
+      "badgeEn": "Original",
+      "metaJa": "2026 — LYRIC MOTION",
+      "metaEn": "2026 — LYRIC MOTION",
+      "title": "ガム",
+      "descJa": "「ガム」の3Dリリックモーション。曲は Suno、文字組みは852話さんの JIZURA、映像は Three.js で作りました。",
+      "descEn": "A 3D lyric-motion video for \"Gum\". Music by Suno, typography with JIZURA by 852wa, visuals built in Three.js.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://youtu.be/35A1CBB2r5Q",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        }
+      ]
+    },
+    {
+      "id": "w-lyric-kurage",
+      "hidden": false,
+      "series": "lyric-motion",
+      "image": "assets/works/lyric-kurage.jpg",
+      "imageAlt": "クラゲ サムネイル",
+      "badgeType": "default",
+      "badgeJa": "自主制作",
+      "badgeEn": "Original",
+      "metaJa": "2026 — LYRIC MOTION",
+      "metaEn": "2026 — LYRIC MOTION",
+      "title": "クラゲ",
+      "descJa": "「クラゲ」の3Dリリックモーション。曲は Suno、文字組みは852話さんの JIZURA、映像は Three.js で作りました。",
+      "descEn": "A 3D lyric-motion video for \"Jellyfish\". Music by Suno, typography with JIZURA by 852wa, visuals built in Three.js.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://youtu.be/0vt2QPT9y7Q",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        }
+      ]
+    },
+    {
+      "id": "w-lyric-muffler",
+      "hidden": false,
+      "series": "lyric-motion",
+      "image": "assets/works/lyric-muffler.jpg",
+      "imageAlt": "マフラー サムネイル",
+      "badgeType": "default",
+      "badgeJa": "自主制作",
+      "badgeEn": "Original",
+      "metaJa": "2026 — LYRIC MOTION",
+      "metaEn": "2026 — LYRIC MOTION",
+      "title": "マフラー",
+      "descJa": "「マフラー」の3Dリリックモーション。曲は Suno、文字組みは852話さんの JIZURA、映像は Three.js で作りました。",
+      "descEn": "A 3D lyric-motion video for \"Muffler\". Music by Suno, typography with JIZURA by 852wa, visuals built in Three.js.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://youtu.be/2-v3ctE2HMM",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        }
+      ]
+    },
+    {
+      "id": "w-lyric-rousoku",
+      "hidden": false,
+      "series": "lyric-motion",
+      "image": "assets/works/lyric-rousoku.jpg",
+      "imageAlt": "ロウソク サムネイル",
+      "badgeType": "default",
+      "badgeJa": "自主制作",
+      "badgeEn": "Original",
+      "metaJa": "2026 — LYRIC MOTION",
+      "metaEn": "2026 — LYRIC MOTION",
+      "title": "ロウソク",
+      "descJa": "「ロウソク」の3Dリリックモーション。曲は Suno、文字組みは852話さんの JIZURA、映像は Three.js で作りました。",
+      "descEn": "A 3D lyric-motion video for \"Candle\". Music by Suno, typography with JIZURA by 852wa, visuals built in Three.js.",
+      "links": [
+        {
+          "labelKey": "lnk-yt",
+          "href": "https://youtu.be/aMS7Mc93MsI",
+          "labelJa": "YouTubeで観る →",
+          "labelEn": "Watch on YouTube →"
+        }
+      ]
+    },
+    {
+      "id": "w-trick-or-rewind",
+      "hidden": false,
+      "image": "assets/works/trick-or-rewind.jpg",
+      "imageAlt": "Trick or Rewind サムネイル",
+      "badgeType": "default",
+      "badgeJa": "TapNow 企画参加",
+      "badgeEn": "TapNow Project Entry",
+      "metaJa": "2026 — MUSIC VIDEO (90秒)",
+      "metaEn": "2026 — MUSIC VIDEO (90 sec)",
+      "title": "Trick or Rewind",
+      "descJa": "TapNow × 松丸彗吾さんのコラボ企画「PATCHWORK DEAD」参加作品。腕や目玉が簡単に外れてしまう住人たちを、逆再生にすればばらばらの部品がひとりでに組み上がって踊り出すように見えるのではないか、と考えて作ったハロウィンのダンスMVです。崩れ落ちる動きを先に生成して巻き戻し、曲も逆さ言葉や回文で巻き戻しを遊ぶように作りました。",
+      "descEn": "An entry for \"PATCHWORK DEAD\", a TapNow collaboration with Keigo Matsumaru. The townsfolk lose arms and eyeballs all too easily — so what if, played in reverse, their scattered parts snapped back together and started to dance? A Halloween dance MV built by generating collapses first and rewinding them, set to an original song full of reversed words and palindromes.",
+      "links": [
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2103673152194875558",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        },
+        {
+          "href": "https://app.tapnow.ai/tapflow/view/18817869",
+          "labelJa": "TapNow のキャンバスを見る →",
+          "labelEn": "View TapNow canvas →"
+        },
+        {
+          "href": "https://patchwork-dead.k-matsumaru.workers.dev/",
+          "labelJa": "企画ページを見る →",
+          "labelEn": "View project page →"
         }
       ]
     },
@@ -494,8 +696,8 @@
     "role": "AI CREATOR",
     "bioJa": "「人の心を動かす」をテーマに、AIを創作パートナーとして物語・映像・キャラクターを制作しています。漫画やアニメが好きで、生成AIとの出会いをきっかけに創作活動を再開しました。見たあとに少し心に残る、何かのきっかけになる作品を目指しています。",
     "bioEn": "I create stories, films, and characters with AI as my creative partner, under the theme of \"moving people's hearts\". I love manga and anime, and encountering generative AI brought me back to creating. I aim for works that linger in your heart and become a small turning point.",
-    "affiliationJa": "<span class=\"affil-label\">AFFILIATION</span>AiHUB株式会社 提携クリエイター — 「<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">Pinyokio</a>」掲載",
-    "affiliationEn": "<span class=\"affil-label\">AFFILIATION</span>Partner creator of AiHUB Inc. — featured on \"<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">Pinyokio</a>\"",
+    "affiliationJa": "<span class=\"affil-label\">AFFILIATION</span>AiHUB株式会社 提携クリエイター — 「<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">Pinyokio</a>」掲載 ／ 「<a href=\"https://ai-creators.tech/creators/leer/\" target=\"_blank\" rel=\"noopener\">AI Creators</a>」登録クリエイター",
+    "affiliationEn": "<span class=\"affil-label\">AFFILIATION</span>Partner creator of AiHUB Inc. — featured on \"<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">Pinyokio</a>\" / registered creator on \"<a href=\"https://en.ai-creators.tech/creators/leer/\" target=\"_blank\" rel=\"noopener\">AI Creators</a>\"",
     "timeline": [
       {
         "id": "tl1",

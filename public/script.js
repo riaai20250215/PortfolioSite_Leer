@@ -123,9 +123,47 @@
   observe();
 })();
 
+/* ---------- 作品の横スライド (4枚を超えたシリーズ) ---------- */
+/* content.js が WORKS を描き直しても効くよう、クリックとスクロールは document で拾う */
+(() => {
+  const update = slider => {
+    const nav = slider.parentElement?.querySelector('.works-slider-nav');
+    if (!nav) return;
+    const max = slider.scrollWidth - slider.clientWidth - 2;
+    nav.querySelector('[data-slider-dir="-1"]').disabled = slider.scrollLeft <= 2;
+    nav.querySelector('[data-slider-dir="1"]').disabled = slider.scrollLeft >= max;
+  };
+  const updateAll = () => document.querySelectorAll('.works-slider').forEach(update);
+  window.leerUpdateSliders = updateAll;
+
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('[data-slider-dir]');
+    if (!btn) return;
+    const slider = btn.closest('.works-slider-wrap')?.querySelector('.works-slider');
+    if (!slider) return;
+    /* 1枚ぶん (カード幅 + 隙間) ずつ送る */
+    const card = slider.querySelector('.work-card');
+    const gap = parseFloat(getComputedStyle(slider).columnGap) || 0;
+    const step = card ? card.getBoundingClientRect().width + gap : slider.clientWidth;
+    slider.scrollBy({ left: Number(btn.dataset.sliderDir) * step });
+  });
+  document.addEventListener(
+    'scroll',
+    e => {
+      if (e.target instanceof Element && e.target.classList.contains('works-slider')) update(e.target);
+    },
+    true
+  );
+  window.addEventListener('resize', updateAll);
+  updateAll();
+})();
+
 /* ---------- ナビのアクティブ表示 ---------- */
 (() => {
-  const links = [...document.querySelectorAll('.site-nav a')];
+  /* 同一ページ内のアンカー (#news 等) だけを見る。
+     作品一覧ページのナビは '../#news' のような別ページ参照なので対象外 */
+  const links = [...document.querySelectorAll('.site-nav a')]
+    .filter(a => (a.getAttribute('href') || '').startsWith('#'));
   const sections = links
     .map(a => document.querySelector(a.getAttribute('href')))
     .filter(Boolean);
@@ -157,8 +195,16 @@
     /* 作品カードの説明文アコーディオン (content.json 由来ではないので手書き) */
     't-more': 'Read more',
     't-less': 'Close',
+    /* 作品一覧ページへの導線 (同上) */
+    't-works-more': 'See the rest<span aria-hidden="true"> \u2192</span>',
+    't-works-all': 'View all works<span aria-hidden="true"> \u2192</span>',
+    't-works-all-title': 'All Works',
+    't-works-all-lead': 'Every work, grouped by series.',
+    't-works-back': '\u2190 Back to home',
     /* content:en:start */
+    "news-ai-creators": "Listed as a registered creator on \"AI Creators\", a platform connecting companies with AI creators. <a href=\"https://en.ai-creators.tech/creators/leer/\" target=\"_blank\" rel=\"noopener\">Profile page</a>",
     "news-midnight-mart": "\"MIDNIGHT MART\", a Penny's House special, won the <strong>Horror Category Excellence Award</strong> at Super 30s Creation Cup 2026 (SousakuAI × Wan 3.0). <a href=\"https://x.com/sousakuai/status/2098399365194990061\" target=\"_blank\" rel=\"noopener\">Results post</a>",
+    "news-archives-2026": "Featured in \"AI CREATORS FILE 2026\", the creator directory in \"AI Video Production Archives 2026\" (edited by VIDEO SALON, released August 27, 2026). <a href=\"https://x.com/videosalon/status/2092756024331760118\" target=\"_blank\" rel=\"noopener\">Announcement post</a>",
     "news-lumia": "Submitted \"Lumia\", a 30-second short MV, to the official TapNow project \"Lumia and the Ocean of Beginnings\". <a href=\"https://x.com/ria_aicreator/status/2084414571994095778\" target=\"_blank\" rel=\"noopener\">View post</a>",
     "news-1": "Official website launched.",
     "news-2": "\"Mayonaka no Jibun Kaigi\" (Midnight Meeting with Myself) won the <strong>Best MV Award</strong> at SousakuAI Agent Creation Cup 2026 Vol.2. <a href=\"https://x.com/ria_aicreator/status/2083169721801932825\" target=\"_blank\" rel=\"noopener\">Announcement post</a>",
@@ -185,6 +231,12 @@
     "w-platform-badge": "Independent Work",
     "w-platform-meta": "2026 — VERTICAL MUSIC VIDEO (48 sec)",
     "w-platform-desc": "From the stairs of an elevated station after the last train, down an alley, to the front door of home. Penny, Stella and Gav in platform shoes sing their way through a 48-second one-take fisheye vertical MV. Original city-pop / nu-disco song and lyrics. PLATFORM: the shoes, the station, and the place we speak from.",
+    "w-celebration-badge": "SousakuAI CPP Collab",
+    "w-celebration-meta": "2026 — VERTICAL MUSIC VIDEO (53 sec)",
+    "w-celebration-desc": "A vertical MV celebrating SousakuAI's 1st anniversary. Penny, Stella and Gav welcome guest character Umi-chan with a cake and a surprise, in 53 seconds. Produced on commission from SousakuAI as part of its Creator Partner Program (CPP). Generated with Seedance 2.5 on the SousakuAI platform.",
+    "w-snowflake-badge": "Independent Work",
+    "w-snowflake-meta": "2026 — MUSIC VIDEO (1 min 35 sec)",
+    "w-snowflake-desc": "\"Snowflake\" is English slang for someone fragile and easily hurt — and also the name of a crystal of which no two are alike. NiL doesn't argue back; she keeps falling as a precise hexagon until the whole city is buried in white overnight. A 1-minute-35-second MV of quiet defiance against the labels others pin on you, told through lyric motion where every syllable drifts in on its own. After the four songs of anger, a new chapter begins.",
     "w-seiron-allergy-badge": "Independent Work",
     "w-seiron-allergy-meta": "2026 — MUSIC VIDEO (2 min 41 sec)",
     "w-seiron-allergy-desc": "An independently produced 2-minute-41-second music video set in an examination room. When \"it's for your own good\" is handed over, her body rejects it before her words can. A quiet revolt against the gentle violence of lectures and well-meant advice — the fourth song by NiL, who never raises her voice and answers with a cough instead.",
@@ -195,6 +247,21 @@
     "w-kamisama-desc": "She filed a complaint with God about the bugs in her life, and the answer came back: \"That's by design.\" So NiL clicks her tongue and tears down heaven's bureau. A one-minute dark-pop MV in a sacred-yet-clerical world of white, red, black and gold, scattered with forms, red stamps and a broken halo. NiL's second song, following \"Naimononedari\".",
     "w3-badge": "Best Visual Award",
     "w3-desc": "NiL, a colorless white-haired girl, wraps herself in fragments of the world's colors — other people's lives — only to lose them, until she finally embraces \"the freedom of becoming nothing\". A 3-minute-41-second MV. Winner of the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
+    "w-lyric-gum-badge": "Original",
+    "w-lyric-gum-meta": "2026 — LYRIC MOTION",
+    "w-lyric-gum-desc": "A 3D lyric-motion video for \"Gum\". Music by Suno, typography with JIZURA by 852wa, visuals built in Three.js.",
+    "w-lyric-kurage-badge": "Original",
+    "w-lyric-kurage-meta": "2026 — LYRIC MOTION",
+    "w-lyric-kurage-desc": "A 3D lyric-motion video for \"Jellyfish\". Music by Suno, typography with JIZURA by 852wa, visuals built in Three.js.",
+    "w-lyric-muffler-badge": "Original",
+    "w-lyric-muffler-meta": "2026 — LYRIC MOTION",
+    "w-lyric-muffler-desc": "A 3D lyric-motion video for \"Muffler\". Music by Suno, typography with JIZURA by 852wa, visuals built in Three.js.",
+    "w-lyric-rousoku-badge": "Original",
+    "w-lyric-rousoku-meta": "2026 — LYRIC MOTION",
+    "w-lyric-rousoku-desc": "A 3D lyric-motion video for \"Candle\". Music by Suno, typography with JIZURA by 852wa, visuals built in Three.js.",
+    "w-trick-or-rewind-badge": "TapNow Project Entry",
+    "w-trick-or-rewind-meta": "2026 — MUSIC VIDEO (90 sec)",
+    "w-trick-or-rewind-desc": "An entry for \"PATCHWORK DEAD\", a TapNow collaboration with Keigo Matsumaru. The townsfolk lose arms and eyeballs all too easily — so what if, played in reverse, their scattered parts snapped back together and started to dance? A Halloween dance MV built by generating collapses first and rewinding them, set to an original song full of reversed words and palindromes.",
     "w-lumia-badge": "TapNow Project Entry",
     "w-lumia-desc": "An entry for the official TapNow project \"Lumia and the Ocean of Beginnings\". A 30-second short MV depicting Lumia and her companions' world, set to the song \"Lumia\" — exactly 30 seconds packed with the characters' charm.",
     "w4-badge": "Seedance 2.0 × Lovart Entry",
@@ -205,12 +272,15 @@
     "series-featured-title": "Featured Works",
     "series-featured-desc": "Original anime works built from the ground up — worldbuilding, story, characters and film. The two projects I have spent the most time on.",
     "series-pennys-house-title": "Penny's House Series",
-    "series-pennys-house-desc": "A 3DCG series about Penny, Stella and Gav sharing a house. Vertical music videos and shorts, released under the BLANK ROOM label.",
+    "series-pennys-house-desc": "A 3DCG series about Penny, Stella and Gav sharing a house.<br>Vertical music videos and shorts, released under the BLANK ROOM label.",
     "series-nil-title": "NiL Series",
-    "series-nil-desc": "A music-video series sung by the original character NiL. Four songs that turn four kinds of anger — at what is missing, at fate, at herself, at gentle violence — into quiet defiance.",
+    "series-nil-desc": "A music-video series sung by the original character NiL. After four songs that turned four kinds of anger — at what is missing, at fate, at herself, at gentle violence — into quiet defiance, a new chapter begins with \"Snowflake\".",
+    "series-nil-note": "Every NiL video is in the \"NiL\" playlist",
+    "series-lyric-motion-title": "Lyric Motion MV Series",
+    "series-lyric-motion-desc": "3D lyric-motion videos for short, catchy songs — extruded letters and paper textures moving to every word.",
     "t-works-other": "Other Works",
     "prof-bio": "I create stories, films, and characters with AI as my creative partner, under the theme of \"moving people's hearts\". I love manga and anime, and encountering generative AI brought me back to creating. I aim for works that linger in your heart and become a small turning point.",
-    "prof-affil": "<span class=\"affil-label\">AFFILIATION</span>Partner creator of AiHUB Inc. — featured on \"<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">Pinyokio</a>\"",
+    "prof-affil": "<span class=\"affil-label\">AFFILIATION</span>Partner creator of AiHUB Inc. — featured on \"<a href=\"https://pinyo.jp/\" target=\"_blank\" rel=\"noopener\">Pinyokio</a>\" / registered creator on \"<a href=\"https://en.ai-creators.tech/creators/leer/\" target=\"_blank\" rel=\"noopener\">AI Creators</a>\"",
     "tl1-p": "Submitted an anime teaser to PocketANIME World Competition — my first serious work with generative video AI.",
     "tl2-p": "Passed the first-round selection at WAIFF (World AI Film Festival) with a 10-minute short anime produced over about a month.",
     "tl3-p": "Won the Best Visual Award at SousakuAI Agent Creation Cup 2026 Vol.1.",
@@ -286,4 +356,58 @@
   close.addEventListener('click', hide);
   box.addEventListener('click', e => { if (e.target === box) hide(); });
   window.addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) hide(); });
+})();
+
+/* ---------- ヒーローのキービジュアル切り替え ---------- */
+(() => {
+  const bg = document.getElementById('heroBg');
+  if (!bg) return;
+  const slides = [...bg.querySelectorAll('.hero-slide')];
+  const credit = document.getElementById('heroCredit');
+  if (slides.length < 2) return;
+
+  // 動きを減らす設定なら1枚目のまま固定する
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const INTERVAL = 7000;
+  let index = 0;
+  let timer = null;
+
+  // 2枚目以降は初期表示の邪魔をしないよう、読み込み完了後に取りに行く
+  const preload = () => {
+    slides.slice(1).forEach(slide => {
+      const src = slide.dataset.bg;
+      if (!src || slide.style.backgroundImage) return;
+      const img = new Image();
+      img.onload = () => { slide.style.backgroundImage = `url('${src}')`; };
+      img.src = src;
+    });
+  };
+  if (document.readyState === 'complete') preload();
+  else window.addEventListener('load', preload, { once: true });
+
+  const show = i => {
+    slides[index].classList.remove('is-active');
+    index = i;
+    slides[index].classList.add('is-active');
+    const text = slides[index].dataset.credit;
+    if (credit && text) credit.textContent = text;
+  };
+
+  const next = () => {
+    // まだ読み込めていない画は飛ばす
+    for (let step = 1; step <= slides.length; step++) {
+      const i = (index + step) % slides.length;
+      if (slides[i].style.backgroundImage) { show(i); return; }
+    }
+  };
+
+  const start = () => { if (!timer) timer = setInterval(next, INTERVAL); };
+  const stop = () => { clearInterval(timer); timer = null; };
+
+  // 裏のタブで回し続けない
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop(); else start();
+  });
+  start();
 })();

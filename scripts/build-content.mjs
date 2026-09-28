@@ -14,13 +14,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SECTIONS, buildEnDict, validateContent } from '../public/content-render.js';
+import { PAGES } from './pages.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const check = process.argv.includes('--check');
 
 const contentPath = path.join(root, 'public/content.json');
-const htmlPath = path.join(root, 'public/index.html');
 const scriptPath = path.join(root, 'public/script.js');
+
 
 const content = JSON.parse(fs.readFileSync(contentPath, 'utf8'));
 const errors = validateContent(content);
@@ -30,22 +31,26 @@ if (errors.length) {
   process.exit(1);
 }
 
-/* ---------- index.html ---------- */
-let html = fs.readFileSync(htmlPath, 'utf8');
-for (const section of SECTIONS) {
-  const start = `<!--content:${section.key}:start-->`;
-  const end = `<!--content:${section.key}:end-->`;
-  const re = new RegExp(`${start}[\\s\\S]*?${end}`);
-  if (!re.test(html)) {
-    console.error(`index.html にマーカー ${start} … ${end} が見つかりません`);
-    process.exit(1);
+/* ---------- 各ページの静的HTML ---------- */
+const renderedPages = PAGES.map(page => {
+  const file = path.join(root, page.file);
+  let html = fs.readFileSync(file, 'utf8');
+  for (const section of SECTIONS.filter(item => page.keys.includes(item.key))) {
+    const start = `<!--content:${section.key}:start-->`;
+    const end = `<!--content:${section.key}:end-->`;
+    const re = new RegExp(`${start}[\\s\\S]*?${end}`);
+    if (!re.test(html)) {
+      console.error(`${page.file} にマーカー ${start} … ${end} が見つかりません`);
+      process.exit(1);
+    }
+    const body = section.render(content, section.indent);
+    const replacement = section.indent
+      ? `${start}\n${body}\n${section.indent}${end}`
+      : `${start}${body}${end}`;
+    html = html.replace(re, () => replacement);
   }
-  const body = section.render(content, section.indent);
-  const replacement = section.indent
-    ? `${start}\n${body}\n${section.indent}${end}`
-    : `${start}${body}${end}`;
-  html = html.replace(re, () => replacement);
-}
+  return { file, next: html };
+});
 
 /* ---------- script.js の英語辞書 ---------- */
 let script = fs.readFileSync(scriptPath, 'utf8');
@@ -62,7 +67,7 @@ script = script.replace(enRe, () => `${enStart}\n${dictLines.join('\n')}\n    ${
 
 /* ---------- 書き込み / 差分チェック ---------- */
 const targets = [
-  { file: htmlPath, next: html },
+  ...renderedPages,
   { file: scriptPath, next: script }
 ];
 

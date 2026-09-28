@@ -133,12 +133,13 @@ function renderBadge(work) {
 }
 
 /* ---------- WORKS ---------- */
-/* 作品カード1枚。シリーズでまとめる場合も、まとめない場合も同じ関数を使う */
-function renderWorkCard(work, level = 3) {
+/* 作品カード1枚。シリーズでまとめる場合も、まとめない場合も同じ関数を使う
+   assetPrefix: 下の階層のページ (/works/) から呼ぶときに画像パスへ足す前置き ('../') */
+function renderWorkCard(work, level = 3, { assetPrefix = '' } = {}) {
   const lines = [
     `<article class="work-card reveal" data-work="${escapeHtml(work.id)}">`,
     '  <div class="work-thumb">',
-    `    <img src="${escapeHtml(work.image)}" alt="${escapeHtml(work.imageAlt)}" loading="lazy">`,
+    `    <img src="${escapeHtml(assetPrefix + work.image)}" alt="${escapeHtml(work.imageAlt)}" loading="lazy">`,
     ...renderBadge(work),
     '  </div>',
     '  <div class="work-body">',
@@ -190,9 +191,19 @@ export function groupWorks(content) {
 
 function renderSeriesLinks(series) {
   const links = visible(series.links);
-  if (!links.length) return [];
+  if (!links.length && !series.linksNoteJa) return [];
   const label = series.linksLabel || `${series.titleJa}の公式アカウント`;
   const lines = [`    <nav class="series-links" aria-label="${escapeHtml(label)}">`];
+  /* linksNoteJa / linksNoteEn / linksNoteHref: アカウントのボタンの上に添える一文 (例: 再生リストへの案内) */
+  if (series.linksNoteJa) {
+    const key = series.linksNoteEn ? `series-${series.id}-note` : '';
+    const text = `<span${i18nAttr(key)}>${sanitizeHtml(series.linksNoteJa)}</span>`;
+    lines.push(
+      series.linksNoteHref
+        ? `      <a class="series-links-note" href="${escapeHtml(series.linksNoteHref)}" target="_blank" rel="noopener">${text}<span aria-hidden="true"> →</span></a>`
+        : `      <p class="series-links-note">${text}</p>`
+    );
+  }
   for (const link of links) {
     const icon = LINK_ICONS[link.icon] || LINK_ICONS.x;
     lines.push(
@@ -207,39 +218,80 @@ function renderSeriesLinks(series) {
   return lines;
 }
 
-function renderSeriesBlock(series, works, other = false) {
+function renderSeriesBlock(series, works, other = false, { limit = 0, assetPrefix = '' } = {}) {
   /* orientation: vertical → 9:16 サムネ + ブロック全体を細く / columns: 2 → 2列 */
   const vertical = series.orientation === 'vertical';
-  const gridClass = ['works-grid', vertical ? 'vertical' : '', series.columns === 2 ? 'cols-2' : '']
+  /* トップページは1行 (4枚) の表示域のまま。あふれたシリーズは横にスライドして残りを見せる */
+  const slider = limit > 0 && works.length > limit;
+  const gridClass = ['works-grid', vertical ? 'vertical' : '', series.columns === 2 ? 'cols-2' : '', slider ? 'works-slider' : '']
     .filter(Boolean)
     .join(' ');
   const titleKey = other ? 't-works-other' : series.titleEn ? `series-${series.id}-title` : '';
   const descKey = series.descEn ? `series-${series.id}-desc` : '';
   const lines = [
-    `<div class="works-series${other ? ' works-series-other' : ''}${vertical ? ' works-series-narrow' : ''} reveal" id="series-${escapeHtml(series.id)}">`,
+    `<div class="works-series${other ? ' works-series-other' : ''}${vertical ? ' works-series-narrow' : ''}${series.id === 'lyric-motion' ? ' works-series--stacked-links' : ''} reveal" id="series-${escapeHtml(series.id)}">`,
     '  <div class="series-head">',
     '    <div class="series-heading">'
   ];
   if (series.kicker) lines.push(`      <p class="series-kicker">${escapeHtml(series.kicker)}</p>`);
   lines.push(`      <h3 class="series-title"${i18nAttr(titleKey)}>${escapeHtml(series.titleJa)}</h3>`);
   if (series.descJa) lines.push(`      <p class="series-desc"${i18nAttr(descKey)}>${sanitizeHtml(series.descJa)}</p>`);
-  lines.push('    </div>', ...renderSeriesLinks(series), '  </div>', `  <div class="${gridClass}">`);
-  lines.push(indentBlock(works.map(work => renderWorkCard(work, 4)).join('\n\n').split('\n'), '    '));
-  lines.push('  </div>', '</div>');
+  lines.push('    </div>', ...renderSeriesLinks(series), '  </div>');
+  const cards = indentBlock(works.map(work => renderWorkCard(work, 4, { assetPrefix })).join('\n\n').split('\n'), slider ? '      ' : '    ');
+  if (slider) {
+    /* 送りボタンは script.js がクリックを拾う (再描画されても効くよう document で委譲) */
+    lines.push(
+      '  <div class="works-slider-wrap">',
+      `    <div class="${gridClass}" tabindex="0">`,
+      cards,
+      '    </div>',
+      '    <div class="works-slider-nav">',
+      '      <button class="works-slider-btn" type="button" data-slider-dir="-1" aria-label="前の作品"><span aria-hidden="true">‹</span></button>',
+      '      <button class="works-slider-btn" type="button" data-slider-dir="1" aria-label="次の作品"><span aria-hidden="true">›</span></button>',
+      '    </div>',
+      '  </div>'
+    );
+  } else {
+    lines.push(`  <div class="${gridClass}">`, cards, '  </div>');
+  }
+  lines.push('</div>');
   return lines.join('\n');
 }
 
+/* トップページの WORKS。1シリーズの表示域は SERIES_LIMIT 枚 (1行) で、
+   それを超えたシリーズは横スライドで残りを見せる。全作品の一覧は /works/。 */
+export const SERIES_LIMIT = 4;
+const WORKS_PAGE_HREF = 'works/';
+
 export function renderWorks(content, indent = '      ') {
   const { groups, rest } = groupWorks(content);
-  const blocks = groups.map(group => renderSeriesBlock(group.series, group.works));
+  const options = { limit: SERIES_LIMIT };
+  const blocks = groups.map(group => renderSeriesBlock(group.series, group.works, false, options));
   if (rest.length) {
     if (groups.length) {
-      blocks.push(renderSeriesBlock(OTHER_SERIES, rest, true));
+      blocks.push(renderSeriesBlock(OTHER_SERIES, rest, true, options));
     } else {
       /* シリーズ未設定のときは、これまで通りカードだけを並べる */
       blocks.push(['<div class="works-grid">', indentBlock(rest.map(work => renderWorkCard(work)).join('\n\n').split('\n'), '  '), '</div>'].join('\n'));
     }
   }
+  blocks.push(
+    [
+      '<p class="works-all-link reveal">',
+      `  <a class="works-more-link" href="${WORKS_PAGE_HREF}" data-i18n="t-works-all">すべての作品を見る<span aria-hidden="true"> →</span></a>`,
+      '</p>'
+    ].join('\n')
+  );
+  return indentBlock(blocks.join('\n\n').split('\n'), indent);
+}
+
+/* 一覧ページ (/works/) の WORKS。枚数の上限なしで全作品を並べる。
+   1つ下の階層なので、画像パスには '../' を足す。 */
+export function renderAllWorks(content, indent = '      ') {
+  const { groups, rest } = groupWorks(content);
+  const options = { assetPrefix: '../' };
+  const blocks = groups.map(group => renderSeriesBlock(group.series, group.works, false, options));
+  if (rest.length) blocks.push(renderSeriesBlock(OTHER_SERIES, rest, true, options));
   return indentBlock(blocks.join('\n\n').split('\n'), indent);
 }
 
@@ -317,6 +369,7 @@ export function buildEnDict(content) {
   for (const item of visible(content?.series)) {
     set(`series-${item.id}-title`, item.titleEn);
     set(`series-${item.id}-desc`, item.descEn);
+    set(`series-${item.id}-note`, item.linksNoteEn);
   }
   const grouped = groupWorks(content);
   if (grouped.groups.length && grouped.rest.length) set('t-works-other', OTHER_SERIES.titleEn);
@@ -332,6 +385,9 @@ export function buildEnDict(content) {
 export const SECTIONS = [
   { key: 'news', selector: '.news-list', render: renderNews, indent: '      ' },
   { key: 'works', selector: '.works-body', render: renderWorks, indent: '      ' },
+  /* 作品一覧ページ (public/works/index.html) だけが持つコンテナ。
+     トップページには .works-all-body が無いので、この節は素通りする。 */
+  { key: 'works-all', selector: '.works-all-body', render: renderAllWorks, indent: '      ' },
   { key: 'profile', selector: '.profile-card', render: renderProfileCard, indent: '      ' },
   { key: 'timeline', selector: '.timeline', render: renderTimeline, indent: '      ' },
   { key: 'links', selector: '.links-grid', render: renderLinks, indent: '      ' },

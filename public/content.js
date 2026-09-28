@@ -56,6 +56,7 @@ export function applyContent(content) {
 
   if (changed) {
     if (typeof window.leerObserveReveals === 'function') window.leerObserveReveals();
+    if (typeof window.leerUpdateSliders === 'function') window.leerUpdateSliders();
     if (typeof window.leerSetEnDict === 'function') window.leerSetEnDict(buildEnDict(content));
     if (typeof window.leerApplyLang === 'function') window.leerApplyLang();
   }

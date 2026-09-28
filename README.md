@@ -11,7 +11,8 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
 |---|---|
 | TOP | 「LEER」の名前のみのシンプル構成(背景: ナイモノネダリのキービジュアル + 星空 + 名前がふわっと浮かぶ登場アニメ)。SNSリンクと JP/EN 言語切替はヘッダー右上 |
 | NEWS | 受賞・出品・公開のお知らせ |
-| WORKS | 13作品を**シリーズごと**に掲載。代表作(ポスト・アニマ / 人間(仮)、はじめます。、2列で大きく) → Penny's House シリーズ(MIDNIGHT MART / ONE SMALL MOMENT / PLATFORM、縦型 9:16 サムネ) → NiL シリーズ(正論アレルギー / 真夜中の自分会議 / 神様へのクレーム窓口 / ナイモノネダリ) → その他の作品(ルミア / The Lost Celestia / Still shining / 声の羅針盤)。各シリーズの見出しには公式アカウント(YouTube / Instagram / TikTok)のリンク。**作品の説明文は既定で閉じたアコーディオン**(「詳細を見る」/ details・summary) |
+| WORKS | 14作品を**シリーズごと**に掲載。代表作(ポスト・アニマ / 人間(仮)、はじめます。、2列で大きく) → Penny's House シリーズ(MIDNIGHT MART / ONE SMALL MOMENT / PLATFORM / Celebration、縦型 9:16 サムネ) → NiL シリーズ(正論アレルギー / 真夜中の自分会議 / 神様へのクレーム窓口 / ナイモノネダリ) → その他の作品(ルミア / The Lost Celestia / Still shining / 声の羅針盤)。各シリーズの見出しには公式アカウント(YouTube / Instagram / TikTok)のリンク。**作品の説明文は既定で閉じたアコーディオン**(「詳細を見る」/ details・summary)。**1シリーズの表示域は4列×1行**で、5本目からは同じ表示域のまま横スライド(‹ › ボタン) |
+| WORKS 一覧ページ | `/works/` — 全作品をシリーズごとに、枚数の上限なしで並べる。トップの WORKS 末尾の「すべての作品を見る →」から入る |
 | CHARACTER | **一時非表示中**(2026-08-03)。ニル / NIL の紹介とビジュアル系譜(v1〜v6)。`index.html` 内にコメントアウトで保持。再表示はコメントブロックを外し、navの CHARACTER リンクも復活させる |
 | PROFILE | プロフィールと経歴タイムライン |
 | LINKS | X / YouTube / Instagram / TikTok |
@@ -24,6 +25,8 @@ AIクリエイター **りあ / Leer**([@ria_aicreator](https://x.com/ria_aicrea
   - 各作品の `series` にシリーズの `id` を入れるとその見出しの下にまとまる。`series` が無い作品は最後の「その他の作品」に入る(シリーズを1つも定義しなければ、従来どおりカードだけが並ぶ)
   - 管理画面の WORKS フォームには `series` の入力欄がまだ無い。シリーズの追加・所属の変更は管理画面の JSON 欄か、このファイルを直接編集する
 - `public/index.html` — ページの骨格 + `content.json` から生成した静的HTML(JSONが読めないときのフォールバック)
+- `public/works/index.html` — **作品一覧ページ(`/works/`)**。骨格は手書き、`<!--content:works-all:start-->` の中身は `npm run build` が生成する。1つ下の階層なので画像パスは `../assets/...`(レンダラ側で `assetPrefix` を足している)
+- `scripts/pages.mjs` — どのページにどのセクションを埋めるかの表。生成(`build-content.mjs`)と照合(`verify-site.mjs`)が同じ表を見る
 - `public/content-render.js` — content.json → HTML の共有レンダラ(ブラウザ・ビルド・Worker で共用)
 - `public/content.js` — 実行時に `/api/content` → `content.json` の順で読み、変化があった部分だけ描き直す
 - `public/style.css` — PRISM NIGHTテーマ(冒頭の`:root`で配色を一括変更可)
@@ -68,6 +71,9 @@ npm run deploy
 ```
 
 ## 更新メモ
+
+- 横スライドと NiL の窓口変更(2026-09-25): りあさん指示「表示域はこのままで横にスライドしたら他の作品も見られる形に」。トップで `SERIES_LIMIT`(4) を超えたシリーズは `.works-slider`(grid-auto-flow: column + scroll-snap、カード幅は4列グリッドと同じ)になり、「その他の作品も見る →」は廃止。送りボタンは script.js が document で委譲して拾う。series に `linksNoteJa` / `linksNoteEn` / `linksNoteHref` を足すと、アカウントのボタンの上に一文(リンク可)を添えられる(りあさん指示でボタンは文の下・右寄せ)。NiL は YouTube を `@ria_aicreator` に変え、再生リスト「NiL」への案内を添えた。Snowflake を NiL の先頭に追加
+- 作品を4列にして一覧ページを新設(2026-09-21): りあさん指示「4つの動画は横並びで、NiL とその他も同じく4列に。今後4つ目以降はボタンで別ページへ」。`.works-grid` の既定を3列→**4列**、縦型シリーズの `max-width: 820px` は4列だと1枚187pxまで細るので**解除**(本文幅いっぱい)。レスポンシブは 4列 → 3列(≤1024px) → 2列・縦型3列(≤860px) → 1列(≤640px)。**1シリーズ4枚まで**(`SERIES_LIMIT`)で、あふれたシリーズにだけ「その他の作品も見る →」が出る。WORKS の末尾には常設で「すべての作品を見る →」。飛び先は新設の `/works/`
 
 - ニュース追加: 管理画面の NEWS タブで「＋ 追加」(または `public/content.json` の `news` 先頭に追記 → `npm run build`)
 - 作品追加: 管理画面の WORKS タブで「＋ 追加」。画像だけは先に `public/assets/works/` へ置いてデプロイが必要(横1280px・JPEG推奨)

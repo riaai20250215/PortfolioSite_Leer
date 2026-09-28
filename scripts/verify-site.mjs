@@ -3,16 +3,22 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {SECTIONS, validateContent} from '../public/content-render.js';
+import {PAGES} from './pages.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = [
   'public/index.html',
+  'public/works/index.html',
 ];
 
 const resolveLocalReference = (page, reference) => {
   if (/^(?:https?:|mailto:|data:|#)/.test(reference)) return null;
   const clean = reference.split(/[?#]/)[0];
-  const candidate = path.resolve(path.dirname(path.join(root, page)), clean);
+  if (!clean) return null;
+  /* '/style.css' のようなルート相対は public/ から、それ以外はページの位置から引く */
+  const candidate = clean.startsWith('/')
+    ? path.join(root, 'public', clean)
+    : path.resolve(path.dirname(path.join(root, page)), clean);
   return clean.endsWith('/') ? path.join(candidate, 'index.html') : candidate;
 };
 
@@ -45,22 +51,28 @@ for (const asset of [content.profile.icon, ...content.works.map(work => work.ima
 }
 
 /* --- 静的フォールバックが content.json と同じ内容を含んでいること --- */
-for (const section of SECTIONS) {
-  assert.ok(
-    home.includes(`<!--content:${section.key}:start-->`) && home.includes(`<!--content:${section.key}:end-->`),
-    `index.html is missing the ${section.key} content markers`
-  );
-}
 const normalize = value => value.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ');
-const normalizedHome = normalize(home);
-for (const section of SECTIONS) {
-  const rendered = normalize(section.render(content, ''));
-  assert.ok(
-    normalizedHome.includes(rendered.trim()),
-    `index.html の ${section.key} が content.json と一致しません (npm run build を実行してください)`
-  );
+for (const { file, keys } of PAGES) {
+  const html = fs.readFileSync(path.join(root, file), 'utf8');
+  const normalized = normalize(html);
+  for (const section of SECTIONS.filter(item => keys.includes(item.key))) {
+    assert.ok(
+      html.includes(`<!--content:${section.key}:start-->`) && html.includes(`<!--content:${section.key}:end-->`),
+      `${file} is missing the ${section.key} content markers`
+    );
+    assert.ok(
+      normalized.includes(normalize(section.render(content, '')).trim()),
+      `${file} の ${section.key} が content.json と一致しません (npm run build を実行してください)`
+    );
+  }
+  assert.match(html, /<script type="module" src="(?:\.\.\/)?content\.js"><\/script>/, `${file} must load content.js`);
 }
-assert.match(home, /<script type="module" src="content\.js"><\/script>/, 'index.html must load content.js');
+
+/* --- 作品一覧ページ: トップから辿れること / 画像パスが1つ上を向いていること --- */
+const worksPage = fs.readFileSync(path.join(root, 'public/works/index.html'), 'utf8');
+assert.match(home, /href="works\/"/, 'index.html must link to the works archive page');
+assert.doesNotMatch(worksPage, /noindex/, 'The works page must stay indexable');
+assert.doesNotMatch(worksPage, /src="assets\//, 'works/index.html must reference assets with ../');
 
 /* --- Worker / 管理APIの設定 --- */
 const wrangler = fs.readFileSync(path.join(root, 'wrangler.jsonc'), 'utf8');

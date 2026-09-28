@@ -9,16 +9,15 @@
 <meta property="og:description" content="「人の心を動かす」をテーマに、AIを創作パートナーとして物語・映像・キャラクターを制作。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:url" content="https://leer-official.official-leer.workers.dev/">
 <meta property="og:site_name" content="りあ / Leer 公式サイト">
-<meta property="og:image" content="https://leer-official.official-leer.workers.dev/ogp.jpg">
+<meta property="og:image" content="https://leer-official.official-leer.workers.dev/ogp-leer-2026.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="ナイモノネダリのキービジュアル — 星々と赤いモチーフに囲まれた白銀の少女ニル">
+<meta property="og:image:alt" content="Leer のキービジュアル — 虹色の光とガラスの欠片に囲まれた少女">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="りあ / Leer — AI CREATOR 公式サイト">
 <meta name="twitter:description" content="「人の心を動かす」をテーマに、AIを創作パートナーとして物語・映像・キャラクターを制作。">
-<meta name="twitter:image" content="https://leer-official.official-leer.workers.dev/ogp.jpg">
+<meta name="twitter:image" content="https://leer-official.official-leer.workers.dev/ogp-leer-2026.jpg">
 <link rel="canonical" href="https://leer-official.official-leer.workers.dev/">
 <meta name="theme-color" content="#0a0a11">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='p' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238ee7ff'/%3E%3Cstop offset='.5' stop-color='%23ff9ad5'/%3E%3Cstop offset='1' stop-color='%23ffd98b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='%230a0a11'/%3E%3Cpath d='M50 12 L58 42 L88 50 L58 58 L50 88 L42 58 L12 50 L42 42 Z' fill='url(%23p)'/%3E%3C/svg%3E">
@@ -77,14 +76,18 @@
 
   <!-- ============ TOP / HERO ============ -->
   <section class="hero" id="top">
-    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-bg" id="heroBg" aria-hidden="true">
+      <div class="hero-slide hero-slide--a is-active" data-bg="assets/hero/hero-a-icon.jpg" data-credit="KEY VISUAL — Leer (2026)" style="background-image:url('assets/hero/hero-a-icon.jpg')"></div>
+      <div class="hero-slide hero-slide--d" data-bg="assets/hero/hero-d-meadow.jpg" data-credit="KEY VISUAL — Penny's House (2026)"></div>
+      <div class="hero-slide hero-slide--f" data-bg="assets/hero/hero-f-water.jpg" data-credit="KEY VISUAL — Penny's House (2026)"></div>
+    </div>
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-inner">
       <!-- 2026-08-03 ユーザー指示によりトップは名前のみのシンプル構成に変更
            (キャッチコピー「人の心を動かす」等は PROFILE セクションに記載あり) -->
       <h1 class="hero-title"><span class="silver-text">LEER</span></h1>
     </div>
-    <p class="hero-credit" aria-hidden="true">KEY VISUAL — ナイモノネダリ (2026)</p>
+    <p class="hero-credit" id="heroCredit" aria-hidden="true">KEY VISUAL — Leer (2026)</p>
     <a class="hero-scroll" href="#news" aria-label="スクロールして続きを見る"><span></span>SCROLL</a>
   </section>
 
@@ -97,9 +100,19 @@
     <ul class="news-list" data-content="news">
       <!--content:news:start-->
       <li class="news-item reveal">
+        <time datetime="2026-09-17">2026.09</time>
+        <span class="news-cat">MEDIA</span>
+        <p data-i18n="news-ai-creators">企業とAIクリエイターをつなぐプラットフォーム「AIクリエイターズ（AI Creators）」に、登録クリエイターとして掲載されました。<a href="https://ai-creators.tech/creators/leer/" target="_blank" rel="noopener">プロフィールページ</a></p>
+      </li>
+      <li class="news-item reveal">
         <time datetime="2026-09-11">2026.09</time>
         <span class="news-cat award">AWARD</span>
         <p data-i18n="news-midnight-mart">Penny's House 特別編『MIDNIGHT MART』が Super 30s Creation Cup 2026（SousakuAI × Wan 3.0）で<strong>ホラー部門 優秀賞</strong>を受賞しました。<a href="https://x.com/sousakuai/status/2098399365194990061" target="_blank" rel="noopener">結果発表ポスト</a></p>
+      </li>
+      <li class="news-item reveal">
+        <time datetime="2026-08-27">2026.08</time>
+        <span class="news-cat">MEDIA</span>
+        <p data-i18n="news-archives-2026">VIDEO SALON編集部 編『AI映像制作アーカイブス2026』（2026年8月27日発売）巻末のクリエイター名鑑「AI CREATORS FILE 2026」に掲載されました。<a href="https://x.com/videosalon/status/2092756024331760118" target="_blank" rel="noopener">発売告知ポスト</a></p>
       </li>
       <li class="news-item reveal">
         <time datetime="2026-08-04">2026.08</time>
@@ -208,7 +221,7 @@
           <div class="series-heading">
             <p class="series-kicker">PENNY'S HOUSE</p>
             <h3 class="series-title" data-i18n="series-pennys-house-title">Penny's House シリーズ</h3>
-            <p class="series-desc" data-i18n="series-pennys-house-desc">ペニー・ステラ・ガブ、3人のシェアハウスの日常を描く3DCGシリーズ。縦型のミュージックビデオとショートを、レーベル BLANK ROOM から発信しています。</p>
+            <p class="series-desc" data-i18n="series-pennys-house-desc">ペニー・ステラ・ガブ、3人のシェアハウスの日常を描く3DCGシリーズ。<br>縦型のミュージックビデオとショートを、レーベル BLANK ROOM から発信しています。</p>
           </div>
           <nav class="series-links" aria-label="Penny's House シリーズの公式アカウント">
             <a class="series-link" href="https://www.youtube.com/@BLANK-ROOM-0902" target="_blank" rel="noopener">
@@ -288,6 +301,24 @@
               <a class="work-link" href="https://www.tiktok.com/@blank.room.20260904/video/7681948403537939733" target="_blank" rel="noopener" data-i18n="lnk-tiktok">TikTokで観る →</a>
             </div>
           </article>
+
+          <article class="work-card reveal" data-work="w-celebration">
+            <div class="work-thumb">
+              <img src="assets/works/celebration.jpg" alt="Celebration サムネイル" loading="lazy">
+              <span class="work-badge default" data-i18n="w-celebration-badge">SousakuAI CPP制作</span>
+            </div>
+            <div class="work-body">
+              <p class="work-meta" data-i18n="w-celebration-meta">2026 — VERTICAL MUSIC VIDEO (53秒)</p>
+              <h4 class="work-title">Celebration</h4>
+              <details class="work-details">
+                <summary class="work-toggle">
+                  <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                  <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                </summary>
+                <p class="work-desc" data-i18n="w-celebration-desc">SousakuAI 1周年を祝う縦型MV。ペニー・ステラ・ガブがケーキとサプライズでゲストの海ちゃんを迎える53秒。SousakuAI からのクリエイターコラボ依頼を受け、CPP(クリエイターパートナー制度)の一環として制作を担当。生成は SousakuAI 上の Seedance 2.5。</p>
+              </details>
+            </div>
+          </article>
         </div>
       </div>
 
@@ -296,91 +327,211 @@
           <div class="series-heading">
             <p class="series-kicker">NiL</p>
             <h3 class="series-title" data-i18n="series-nil-title">NiL シリーズ</h3>
-            <p class="series-desc" data-i18n="series-nil-desc">オリジナルキャラクター、ニル（NiL）が歌うミュージックビデオのシリーズ。欠落、運命、自分自身、優しい暴力——4つの怒りを、声を荒げない静かな反抗に変えて歌う4曲。</p>
+            <p class="series-desc" data-i18n="series-nil-desc">オリジナルキャラクター、ニル（NiL）が歌うミュージックビデオのシリーズ。欠落、運命、自分自身、優しい暴力——4つの怒りを、声を荒げない静かな反抗に変えて歌った4曲に続き、『Snowflake』から新しい章が始まる。</p>
           </div>
           <nav class="series-links" aria-label="NiL シリーズの公式アカウント">
-            <a class="series-link" href="https://www.youtube.com/@nil_artist_official" target="_blank" rel="noopener">
+            <a class="series-links-note" href="https://www.youtube.com/playlist?list=PLN47NbrjTozE" target="_blank" rel="noopener"><span data-i18n="series-nil-note">再生リスト「NiL」から、NiL 関連の全動画が見られます</span><span aria-hidden="true"> →</span></a>
+            <a class="series-link" href="https://www.youtube.com/@ria_aicreator" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12z"></path></svg>
               <span class="series-link-name">YouTube</span>
-              <span class="series-link-id">@nil_artist_official</span>
+              <span class="series-link-id">@ria_aicreator</span>
+            </a>
+          </nav>
+        </div>
+        <div class="works-slider-wrap">
+          <div class="works-grid works-slider" tabindex="0">
+            <article class="work-card reveal" data-work="w-snowflake">
+              <div class="work-thumb">
+                <img src="assets/works/snowflake.jpg" alt="Snowflake サムネイル" loading="lazy">
+                <span class="work-badge default" data-i18n="w-snowflake-badge">自主制作</span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta" data-i18n="w-snowflake-meta">2026 — MUSIC VIDEO (1分35秒)</p>
+                <h4 class="work-title">Snowflake</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w-snowflake-desc">「繊細で打たれ弱い奴」を指す英語のスラング“Snowflake”は、二つとして同じ形がない雪の結晶の名前でもある。ニル（NiL）は言い返さず、精密な六角形のまま降り続けて、ひと晩で街を白く沈める。貼られたレッテルへの静かな反抗を、歌詞が一音ずつ舞うリリックモーションで描いた1分35秒のMV。怒りの4曲に続く、新しい章の始まり。</p>
+                </details>
+                <a class="work-link" href="https://x.com/ria_aicreator/status/2103049225621909912" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+              </div>
+            </article>
+
+            <article class="work-card reveal" data-work="w-seiron-allergy">
+              <div class="work-thumb">
+                <img src="assets/works/seiron-allergy.jpg" alt="正論アレルギー サムネイル" loading="lazy">
+                <span class="work-badge default" data-i18n="w-seiron-allergy-badge">自主制作</span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta" data-i18n="w-seiron-allergy-meta">2026 — MUSIC VIDEO (2分41秒)</p>
+                <h4 class="work-title">正論アレルギー</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w-seiron-allergy-desc">「あなたのため」と差し出された正論に、体のほうが先に拒絶反応を起こす——診察室を舞台に、説教や忠告という「優しい暴力」への静かな反抗を描いた2分41秒の自主制作MV。声を荒げず、咳き込むことで返事をするニル（NiL）の4曲目。</p>
+                </details>
+                <a class="work-link" href="https://youtu.be/4kCZCdWTAMU" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
+                <a class="work-link" href="https://x.com/ria_aicreator/status/2091087984498204679" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+              </div>
+            </article>
+
+            <article class="work-card reveal" data-work="w1">
+              <div class="work-thumb">
+                <img src="assets/works/mayonaka-jibun-kaigi.jpg" alt="真夜中の自分会議 キービジュアル" loading="lazy">
+                <span class="work-badge award"><svg class="work-badge-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 2h10v2h4v4a5 5 0 0 1-4.2 4.94A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.8-4.06A5 5 0 0 1 3 8V4h4V2zm0 4H5v2a3 3 0 0 0 2 2.83V6zm10 0v4.83A3 3 0 0 0 19 8V6h-2z"></path></svg><span data-i18n="w1-badge">最優秀MV賞</span></span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta">2026 — MUSIC VIDEO</p>
+                <h4 class="work-title">真夜中の自分会議</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w1-desc">深夜2時。眠れないまま、頭の中でひとりぶんの「会議」が始まる——。議長も書記も裁かれる側も、全部おなじ一人の女の子。眠れない夜の思考ループを議事録・付箋・採決といった事務的なモチーフに置き換えて描いた、2分39秒のハイパーポップMV。SousakuAI Agent Creation Cup 2026 Vol.2 最優秀MV賞受賞。</p>
+                </details>
+                <a class="work-link" href="https://x.com/ria_aicreator/status/2081322989174329732" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+              </div>
+            </article>
+
+            <article class="work-card reveal" data-work="w-kamisama">
+              <div class="work-thumb">
+                <img src="assets/works/kamisama-claim-desk.jpg" alt="神様へのクレーム窓口 サムネイル" loading="lazy">
+                <span class="work-badge default" data-i18n="w-kamisama-badge">Zopia AI動画コンテスト 応募</span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta" data-i18n="w-kamisama-meta">2026 — MUSIC VIDEO (1分)</p>
+                <h4 class="work-title">神様へのクレーム窓口</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w-kamisama-desc">人生の不具合を神様に問い合わせたら、返ってきたのは「仕様です。」——だからニルは、舌打ちで天国の役所をぶっ壊す。白×赤×黒×金の「神聖×事務的」な世界に、申請書・赤いハンコ・壊れた光輪を散らした1分のダークポップMV。「ナイモノネダリ」に続く、ニル（NiL）の2曲目。</p>
+                </details>
+                <a class="work-link" href="https://www.youtube.com/watch?v=7V8ioPxL3bk" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
+              </div>
+            </article>
+
+            <article class="work-card reveal" data-work="w3">
+              <div class="work-thumb">
+                <img src="assets/works/naimononedari-thumb.jpg" alt="ナイモノネダリ サムネイル" loading="lazy">
+                <span class="work-badge award"><svg class="work-badge-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 2h10v2h4v4a5 5 0 0 1-4.2 4.94A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.8-4.06A5 5 0 0 1 3 8V4h4V2zm0 4H5v2a3 3 0 0 0 2 2.83V6zm10 0v4.83A3 3 0 0 0 19 8V6h-2z"></path></svg><span data-i18n="w3-badge">最優秀ビジュアル賞</span></span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta">2026 — MUSIC VIDEO</p>
+                <h4 class="work-title">ナイモノネダリ</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w3-desc">色のない白髪の少女ニルが、世界の彩り（＝他者の生）を断片的に纏っては失っていき、最後に「何にもなれないことの自由」を抱きしめる3分41秒のMV。SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門 最優秀ビジュアル賞受賞。</p>
+                </details>
+                <a class="work-link" href="https://x.com/ria_aicreator/status/2053256742193262981" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+              </div>
+            </article>
+          </div>
+          <div class="works-slider-nav">
+            <button class="works-slider-btn" type="button" data-slider-dir="-1" aria-label="前の作品"><span aria-hidden="true">‹</span></button>
+            <button class="works-slider-btn" type="button" data-slider-dir="1" aria-label="次の作品"><span aria-hidden="true">›</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="works-series works-series--stacked-links reveal" id="series-lyric-motion">
+        <div class="series-head">
+          <div class="series-heading">
+            <p class="series-kicker">LYRIC MOTION</p>
+            <h3 class="series-title" data-i18n="series-lyric-motion-title">MV リリックモーションシリーズ</h3>
+            <p class="series-desc" data-i18n="series-lyric-motion-desc">一度聴いたら離れない短い曲に、立体の文字と紙の質感で動きをつけた3Dリリックモーション。</p>
+          </div>
+          <nav class="series-links" aria-label="MV リリックモーションシリーズの公式アカウント">
+            <a class="series-link" href="https://www.youtube.com/@ria_aicreator" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12z"></path></svg>
+              <span class="series-link-name">YouTube</span>
+              <span class="series-link-id">@ria_aicreator</span>
             </a>
           </nav>
         </div>
         <div class="works-grid">
-          <article class="work-card reveal" data-work="w-seiron-allergy">
+          <article class="work-card reveal" data-work="w-lyric-gum">
             <div class="work-thumb">
-              <img src="assets/works/seiron-allergy.jpg" alt="正論アレルギー サムネイル" loading="lazy">
-              <span class="work-badge default" data-i18n="w-seiron-allergy-badge">自主制作</span>
+              <img src="assets/works/lyric-gum.jpg" alt="ガム サムネイル" loading="lazy">
+              <span class="work-badge default" data-i18n="w-lyric-gum-badge">自主制作</span>
             </div>
             <div class="work-body">
-              <p class="work-meta" data-i18n="w-seiron-allergy-meta">2026 — MUSIC VIDEO (2分41秒)</p>
-              <h4 class="work-title">正論アレルギー</h4>
+              <p class="work-meta" data-i18n="w-lyric-gum-meta">2026 — LYRIC MOTION</p>
+              <h4 class="work-title">ガム</h4>
               <details class="work-details">
                 <summary class="work-toggle">
                   <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
                   <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
                 </summary>
-                <p class="work-desc" data-i18n="w-seiron-allergy-desc">「あなたのため」と差し出された正論に、体のほうが先に拒絶反応を起こす——診察室を舞台に、説教や忠告という「優しい暴力」への静かな反抗を描いた2分41秒の自主制作MV。声を荒げず、咳き込むことで返事をするニル（NiL）の4曲目。</p>
+                <p class="work-desc" data-i18n="w-lyric-gum-desc">「ガム」の3Dリリックモーション。曲は Suno、文字組みは852話さんの JIZURA、映像は Three.js で作りました。</p>
               </details>
-              <a class="work-link" href="https://youtu.be/4kCZCdWTAMU" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
-              <a class="work-link" href="https://x.com/ria_aicreator/status/2091087984498204679" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+              <a class="work-link" href="https://youtu.be/35A1CBB2r5Q" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
             </div>
           </article>
 
-          <article class="work-card reveal" data-work="w1">
+          <article class="work-card reveal" data-work="w-lyric-kurage">
             <div class="work-thumb">
-              <img src="assets/works/mayonaka-jibun-kaigi.jpg" alt="真夜中の自分会議 キービジュアル" loading="lazy">
-              <span class="work-badge award"><svg class="work-badge-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 2h10v2h4v4a5 5 0 0 1-4.2 4.94A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.8-4.06A5 5 0 0 1 3 8V4h4V2zm0 4H5v2a3 3 0 0 0 2 2.83V6zm10 0v4.83A3 3 0 0 0 19 8V6h-2z"></path></svg><span data-i18n="w1-badge">最優秀MV賞</span></span>
+              <img src="assets/works/lyric-kurage.jpg" alt="クラゲ サムネイル" loading="lazy">
+              <span class="work-badge default" data-i18n="w-lyric-kurage-badge">自主制作</span>
             </div>
             <div class="work-body">
-              <p class="work-meta">2026 — MUSIC VIDEO</p>
-              <h4 class="work-title">真夜中の自分会議</h4>
+              <p class="work-meta" data-i18n="w-lyric-kurage-meta">2026 — LYRIC MOTION</p>
+              <h4 class="work-title">クラゲ</h4>
               <details class="work-details">
                 <summary class="work-toggle">
                   <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
                   <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
                 </summary>
-                <p class="work-desc" data-i18n="w1-desc">深夜2時。眠れないまま、頭の中でひとりぶんの「会議」が始まる——。議長も書記も裁かれる側も、全部おなじ一人の女の子。眠れない夜の思考ループを議事録・付箋・採決といった事務的なモチーフに置き換えて描いた、2分39秒のハイパーポップMV。SousakuAI Agent Creation Cup 2026 Vol.2 最優秀MV賞受賞。</p>
+                <p class="work-desc" data-i18n="w-lyric-kurage-desc">「クラゲ」の3Dリリックモーション。曲は Suno、文字組みは852話さんの JIZURA、映像は Three.js で作りました。</p>
               </details>
-              <a class="work-link" href="https://x.com/ria_aicreator/status/2081322989174329732" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+              <a class="work-link" href="https://youtu.be/0vt2QPT9y7Q" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
             </div>
           </article>
 
-          <article class="work-card reveal" data-work="w-kamisama">
+          <article class="work-card reveal" data-work="w-lyric-muffler">
             <div class="work-thumb">
-              <img src="assets/works/kamisama-claim-desk.jpg" alt="神様へのクレーム窓口 サムネイル" loading="lazy">
-              <span class="work-badge default" data-i18n="w-kamisama-badge">Zopia AI動画コンテスト 応募</span>
+              <img src="assets/works/lyric-muffler.jpg" alt="マフラー サムネイル" loading="lazy">
+              <span class="work-badge default" data-i18n="w-lyric-muffler-badge">自主制作</span>
             </div>
             <div class="work-body">
-              <p class="work-meta" data-i18n="w-kamisama-meta">2026 — MUSIC VIDEO (1分)</p>
-              <h4 class="work-title">神様へのクレーム窓口</h4>
+              <p class="work-meta" data-i18n="w-lyric-muffler-meta">2026 — LYRIC MOTION</p>
+              <h4 class="work-title">マフラー</h4>
               <details class="work-details">
                 <summary class="work-toggle">
                   <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
                   <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
                 </summary>
-                <p class="work-desc" data-i18n="w-kamisama-desc">人生の不具合を神様に問い合わせたら、返ってきたのは「仕様です。」——だからニルは、舌打ちで天国の役所をぶっ壊す。白×赤×黒×金の「神聖×事務的」な世界に、申請書・赤いハンコ・壊れた光輪を散らした1分のダークポップMV。「ナイモノネダリ」に続く、ニル（NiL）の2曲目。</p>
+                <p class="work-desc" data-i18n="w-lyric-muffler-desc">「マフラー」の3Dリリックモーション。曲は Suno、文字組みは852話さんの JIZURA、映像は Three.js で作りました。</p>
               </details>
-              <a class="work-link" href="https://www.youtube.com/watch?v=7V8ioPxL3bk" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
+              <a class="work-link" href="https://youtu.be/2-v3ctE2HMM" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
             </div>
           </article>
 
-          <article class="work-card reveal" data-work="w3">
+          <article class="work-card reveal" data-work="w-lyric-rousoku">
             <div class="work-thumb">
-              <img src="assets/works/naimononedari-thumb.jpg" alt="ナイモノネダリ サムネイル" loading="lazy">
-              <span class="work-badge award"><svg class="work-badge-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 2h10v2h4v4a5 5 0 0 1-4.2 4.94A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.8-4.06A5 5 0 0 1 3 8V4h4V2zm0 4H5v2a3 3 0 0 0 2 2.83V6zm10 0v4.83A3 3 0 0 0 19 8V6h-2z"></path></svg><span data-i18n="w3-badge">最優秀ビジュアル賞</span></span>
+              <img src="assets/works/lyric-rousoku.jpg" alt="ロウソク サムネイル" loading="lazy">
+              <span class="work-badge default" data-i18n="w-lyric-rousoku-badge">自主制作</span>
             </div>
             <div class="work-body">
-              <p class="work-meta">2026 — MUSIC VIDEO</p>
-              <h4 class="work-title">ナイモノネダリ</h4>
+              <p class="work-meta" data-i18n="w-lyric-rousoku-meta">2026 — LYRIC MOTION</p>
+              <h4 class="work-title">ロウソク</h4>
               <details class="work-details">
                 <summary class="work-toggle">
                   <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
                   <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
                 </summary>
-                <p class="work-desc" data-i18n="w3-desc">色のない白髪の少女ニルが、世界の彩り（＝他者の生）を断片的に纏っては失っていき、最後に「何にもなれないことの自由」を抱きしめる3分41秒のMV。SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門 最優秀ビジュアル賞受賞。</p>
+                <p class="work-desc" data-i18n="w-lyric-rousoku-desc">「ロウソク」の3Dリリックモーション。曲は Suno、文字組みは852話さんの JIZURA、映像は Three.js で作りました。</p>
               </details>
-              <a class="work-link" href="https://x.com/ria_aicreator/status/2053256742193262981" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+              <a class="work-link" href="https://youtu.be/aMS7Mc93MsI" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
             </div>
           </article>
         </div>
@@ -393,85 +544,116 @@
             <h3 class="series-title" data-i18n="t-works-other">その他の作品</h3>
           </div>
         </div>
-        <div class="works-grid">
-          <article class="work-card reveal" data-work="w-lumia">
-            <div class="work-thumb">
-              <img src="assets/works/lumia.jpg" alt="ルミア サムネイル" loading="lazy">
-              <span class="work-badge default" data-i18n="w-lumia-badge">TapNow 企画参加</span>
-            </div>
-            <div class="work-body">
-              <p class="work-meta">2026 — SHORT MV (30秒)</p>
-              <h4 class="work-title">ルミア</h4>
-              <details class="work-details">
-                <summary class="work-toggle">
-                  <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
-                  <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
-                </summary>
-                <p class="work-desc" data-i18n="w-lumia-desc">TapNow公式企画「ルミアと始まりの海」参加作品。提供キャラクター・ルミアと仲間たちの世界を、楽曲『ルミア』にのせて描いた30秒のショートMV。きっかり30秒の中に、キャラクターたちの可愛さを詰め込みました。</p>
-              </details>
-              <a class="work-link" href="https://x.com/ria_aicreator/status/2084414571994095778" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
-            </div>
-          </article>
+        <div class="works-slider-wrap">
+          <div class="works-grid works-slider" tabindex="0">
+            <article class="work-card reveal" data-work="w-trick-or-rewind">
+              <div class="work-thumb">
+                <img src="assets/works/trick-or-rewind.jpg" alt="Trick or Rewind サムネイル" loading="lazy">
+                <span class="work-badge default" data-i18n="w-trick-or-rewind-badge">TapNow 企画参加</span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta" data-i18n="w-trick-or-rewind-meta">2026 — MUSIC VIDEO (90秒)</p>
+                <h4 class="work-title">Trick or Rewind</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w-trick-or-rewind-desc">TapNow × 松丸彗吾さんのコラボ企画「PATCHWORK DEAD」参加作品。腕や目玉が簡単に外れてしまう住人たちを、逆再生にすればばらばらの部品がひとりでに組み上がって踊り出すように見えるのではないか、と考えて作ったハロウィンのダンスMVです。崩れ落ちる動きを先に生成して巻き戻し、曲も逆さ言葉や回文で巻き戻しを遊ぶように作りました。</p>
+                </details>
+                <a class="work-link" href="https://x.com/ria_aicreator/status/2103673152194875558" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+                <a class="work-link" href="https://app.tapnow.ai/tapflow/view/18817869" target="_blank" rel="noopener">TapNow のキャンバスを見る →</a>
+                <a class="work-link" href="https://patchwork-dead.k-matsumaru.workers.dev/" target="_blank" rel="noopener">企画ページを見る →</a>
+              </div>
+            </article>
 
-          <article class="work-card reveal" data-work="w4">
-            <div class="work-thumb">
-              <img src="assets/works/lost-celestia.jpg" alt="The Lost Celestia サムネイル" loading="lazy">
-              <span class="work-badge default" data-i18n="w4-badge">Seedance 2.0 × Lovart 出品</span>
-            </div>
-            <div class="work-body">
-              <p class="work-meta">2026 — SHORT ANIME</p>
-              <h4 class="work-title">The Lost Celestia</h4>
-              <details class="work-details">
-                <summary class="work-toggle">
-                  <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
-                  <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
-                </summary>
-                <p class="work-desc" data-i18n="w4-desc">自分の人生の一部を作品に反映させ、ファンタジーに置き換えて描いたショートアニメ。星の杖を携えた三人が、失われた星空の行方をたどる。Seedance 2.0 × Lovart コンテスト応募作品。</p>
-              </details>
-              <a class="work-link" href="https://youtu.be/dHnEpRE1Eus" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
-              <a class="work-link" href="https://x.com/ria_aicreator/status/2043622723377873109" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
-            </div>
-          </article>
+            <article class="work-card reveal" data-work="w-lumia">
+              <div class="work-thumb">
+                <img src="assets/works/lumia.jpg" alt="ルミア サムネイル" loading="lazy">
+                <span class="work-badge default" data-i18n="w-lumia-badge">TapNow 企画参加</span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta">2026 — SHORT MV (30秒)</p>
+                <h4 class="work-title">ルミア</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w-lumia-desc">TapNow公式企画「ルミアと始まりの海」参加作品。提供キャラクター・ルミアと仲間たちの世界を、楽曲『ルミア』にのせて描いた30秒のショートMV。きっかり30秒の中に、キャラクターたちの可愛さを詰め込みました。</p>
+                </details>
+                <a class="work-link" href="https://x.com/ria_aicreator/status/2084414571994095778" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+              </div>
+            </article>
 
-          <article class="work-card reveal" data-work="w6">
-            <div class="work-thumb">
-              <img src="assets/works/still-shining.jpg" alt="Still shining サムネイル" loading="lazy">
-              <span class="work-badge default" data-i18n="w6-badge">自主制作</span>
-            </div>
-            <div class="work-body">
-              <p class="work-meta">2025 — MUSIC VIDEO</p>
-              <h4 class="work-title">Still shining</h4>
-              <details class="work-details">
-                <summary class="work-toggle">
-                  <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
-                  <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
-                </summary>
-                <p class="work-desc" data-i18n="w6-desc">AIで制作した自主制作のミュージックビデオ。ネオンのハートを挟んですれ違う二人と、「君がくれた言葉」がまだ消えずに光り続ける夜を描いた一曲。</p>
-              </details>
-              <a class="work-link" href="https://youtu.be/KB4xCDb-OjI" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
-            </div>
-          </article>
+            <article class="work-card reveal" data-work="w4">
+              <div class="work-thumb">
+                <img src="assets/works/lost-celestia.jpg" alt="The Lost Celestia サムネイル" loading="lazy">
+                <span class="work-badge default" data-i18n="w4-badge">Seedance 2.0 × Lovart 出品</span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta">2026 — SHORT ANIME</p>
+                <h4 class="work-title">The Lost Celestia</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w4-desc">自分の人生の一部を作品に反映させ、ファンタジーに置き換えて描いたショートアニメ。星の杖を携えた三人が、失われた星空の行方をたどる。Seedance 2.0 × Lovart コンテスト応募作品。</p>
+                </details>
+                <a class="work-link" href="https://youtu.be/dHnEpRE1Eus" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
+                <a class="work-link" href="https://x.com/ria_aicreator/status/2043622723377873109" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+              </div>
+            </article>
 
-          <article class="work-card reveal" data-work="w7">
-            <div class="work-thumb">
-              <img src="assets/works/koe-no-rashinban-thumb.jpg" alt="声の羅針盤 サムネイル" loading="lazy">
-              <span class="work-badge default">ENTRY</span>
-            </div>
-            <div class="work-body">
-              <p class="work-meta">2025 — ANIME TEASER</p>
-              <h4 class="work-title">声の羅針盤</h4>
-              <details class="work-details">
-                <summary class="work-toggle">
-                  <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
-                  <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
-                </summary>
-                <p class="work-desc" data-i18n="w7-desc">動画生成AIに初めて本格的に取り組んだアニメティザー作品。PocketANIME World Competition に出品。ここからAIクリエイターとしての活動が本格的に始まりました。</p>
-              </details>
-              <a class="work-link" href="https://www.youtube.com/shorts/hX6jMc-WhIE" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
-            </div>
-          </article>
+            <article class="work-card reveal" data-work="w6">
+              <div class="work-thumb">
+                <img src="assets/works/still-shining.jpg" alt="Still shining サムネイル" loading="lazy">
+                <span class="work-badge default" data-i18n="w6-badge">自主制作</span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta">2025 — MUSIC VIDEO</p>
+                <h4 class="work-title">Still shining</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w6-desc">AIで制作した自主制作のミュージックビデオ。ネオンのハートを挟んですれ違う二人と、「君がくれた言葉」がまだ消えずに光り続ける夜を描いた一曲。</p>
+                </details>
+                <a class="work-link" href="https://youtu.be/KB4xCDb-OjI" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
+              </div>
+            </article>
+
+            <article class="work-card reveal" data-work="w7">
+              <div class="work-thumb">
+                <img src="assets/works/koe-no-rashinban-thumb.jpg" alt="声の羅針盤 サムネイル" loading="lazy">
+                <span class="work-badge default">ENTRY</span>
+              </div>
+              <div class="work-body">
+                <p class="work-meta">2025 — ANIME TEASER</p>
+                <h4 class="work-title">声の羅針盤</h4>
+                <details class="work-details">
+                  <summary class="work-toggle">
+                    <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                    <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                  </summary>
+                  <p class="work-desc" data-i18n="w7-desc">動画生成AIに初めて本格的に取り組んだアニメティザー作品。PocketANIME World Competition に出品。ここからAIクリエイターとしての活動が本格的に始まりました。</p>
+                </details>
+                <a class="work-link" href="https://www.youtube.com/shorts/hX6jMc-WhIE" target="_blank" rel="noopener" data-i18n="lnk-yt">YouTubeで観る →</a>
+              </div>
+            </article>
+          </div>
+          <div class="works-slider-nav">
+            <button class="works-slider-btn" type="button" data-slider-dir="-1" aria-label="前の作品"><span aria-hidden="true">‹</span></button>
+            <button class="works-slider-btn" type="button" data-slider-dir="1" aria-label="次の作品"><span aria-hidden="true">›</span></button>
+          </div>
         </div>
       </div>
+
+      <p class="works-all-link reveal">
+        <a class="works-more-link" href="works/" data-i18n="t-works-all">すべての作品を見る<span aria-hidden="true"> →</span></a>
+      </p>
       <!--content:works:end-->
     </div>
   </section>
@@ -544,7 +726,7 @@
         <h3 class="profile-name">りあ <span>/ Leer</span></h3>
         <p class="profile-role">AI CREATOR</p>
         <p data-i18n="prof-bio">「人の心を動かす」をテーマに、AIを創作パートナーとして物語・映像・キャラクターを制作しています。漫画やアニメが好きで、生成AIとの出会いをきっかけに創作活動を再開しました。見たあとに少し心に残る、何かのきっかけになる作品を目指しています。</p>
-        <p class="profile-affil" data-i18n="prof-affil"><span class="affil-label">AFFILIATION</span>AiHUB株式会社 提携クリエイター — 「<a href="https://pinyo.jp/" target="_blank" rel="noopener">Pinyokio</a>」掲載</p>
+        <p class="profile-affil" data-i18n="prof-affil"><span class="affil-label">AFFILIATION</span>AiHUB株式会社 提携クリエイター — 「<a href="https://pinyo.jp/" target="_blank" rel="noopener">Pinyokio</a>」掲載 ／ 「<a href="https://ai-creators.tech/creators/leer/" target="_blank" rel="noopener">AI Creators</a>」登録クリエイター</p>
       </div>
       <!--content:profile:end-->
     </div>
