@@ -1,7 +1,17 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-26",
+  "updatedAt": "2026-10-20",
   "news": [
+    {
+      "id": "news-arena-peak",
+      "date": "2026-10-19",
+      "dateLabel": "2026.10",
+      "category": "AWARD",
+      "award": true,
+      "hidden": false,
+      "bodyJa": "『TALK BACK』（TEAM ARS）が、AI 映像ハッカソン ARENA PEAK ASIA で「日本地域賞」と「入選賞」を受賞しました。<a href=\"https://x.com/ria_aicreator/status/2111806895304671305\" target=\"_blank\" rel=\"noopener\">受賞のお知らせ</a>",
+      "bodyEn": "\"TALK BACK\" (TEAM ARS) won the Arena Peak Japan Award and a Finalist Award at the AI film hackathon ARENA PEAK ASIA. <a href=\"https://x.com/ria_aicreator/status/2111806895304671305\" target=\"_blank\" rel=\"noopener\">Announcement</a>"
+    },
     {
       "id": "news-ai-creators",
       "date": "2026-09-17",
@@ -121,9 +131,10 @@
       "kicker": "FEATURED",
       "titleJa": "代表作",
       "titleEn": "Featured Works",
-      "descJa": "世界観・物語・キャラクターから映像まで一貫して作った、オリジナルのアニメ作品。いちばん長い時間をかけた2作です。",
-      "descEn": "Original anime works built from the ground up — worldbuilding, story, characters and film. The two projects I have spent the most time on.",
-      "links": []
+      "descJa": "受賞したハッカソンの作品と、世界観・物語・キャラクターから映像まで一貫して作ったオリジナルのアニメ作品。",
+      "descEn": "An award-winning hackathon film, and original anime works built from the ground up — worldbuilding, story, characters and film.",
+      "links": [],
+      "lead": true
     },
     {
       "id": "pennys-house",
@@ -194,6 +205,29 @@
     }
   ],
   "works": [
+    {
+      "id": "w-talkback",
+      "hidden": false,
+      "series": "featured",
+      "image": "assets/works/talk-back.jpg",
+      "imageAlt": "TALK BACK 私の人形は口が悪い",
+      "badgeType": "award",
+      "badgeJa": "日本地域賞・入選賞",
+      "badgeEn": "Arena Peak Japan Award / Finalist",
+      "metaJa": "2026 — AI FILM HACKATHON / TEAM ARS",
+      "metaEn": "2026 — AI FILM HACKATHON / TEAM ARS",
+      "title": "TALK BACK",
+      "descJa": "テーマは「わだかまり」。TapNow × CreatorLabo × KlingAI の AI 映像ハッカソン「ARENA PEAK ASIA」（上海・東京・ソウルの3都市同時開催・32時間）で、「日本地域賞」と「入選賞」を受賞。TEAM ARS ── Aoki¹⁰⁴（CHIEF DIRECTOR / TEAM LEADER）、Ria（CONCEPT &amp; SCREENPLAY）、Sentaku（SOUND DIRECTOR）。人生で初めてのハッカソンで、主に脚本と動画生成を担当しました。",
+      "descEn": "Theme: \"Wadakamari\" (lingering resentment). Won the Arena Peak Japan Award and a Finalist Award at ARENA PEAK ASIA, a 32-hour AI film hackathon by TapNow × CreatorLabo × KlingAI held simultaneously in Shanghai, Tokyo and Seoul. TEAM ARS — Aoki¹⁰⁴ (Chief Director / Team Leader), Ria (Concept &amp; Screenplay), Sentaku (Sound Director). My first hackathon; I mainly handled the screenplay and video generation.",
+      "links": [
+        {
+          "labelKey": "lnk-post",
+          "href": "https://x.com/ria_aicreator/status/2112173901082157068",
+          "labelJa": "作品ポストを見る →",
+          "labelEn": "View post →"
+        }
+      ]
+    },
     {
       "id": "w2",
       "hidden": false,
@@ -752,6 +786,15 @@
         "hidden": false,
         "bodyJa": "Super 30s Creation Cup 2026（SousakuAI × Wan 3.0）ホラー部門「優秀賞」受賞。Penny's House の特別編として、3DCGのファウンドフッテージ・ホラーに初挑戦。",
         "bodyEn": "Won the Horror Category Excellence Award at Super 30s Creation Cup 2026 (SousakuAI × Wan 3.0) — a first attempt at 3DCG found-footage horror, made as a Penny's House special."
+      },
+      {
+        "id": "tl-talkback",
+        "date": "2026.10",
+        "title": "TALK BACK 🏆",
+        "award": true,
+        "hidden": false,
+        "bodyJa": "AI 映像ハッカソン ARENA PEAK ASIA（TapNow × CreatorLabo × KlingAI）で、TEAM ARS の『TALK BACK』が「日本地域賞」「入選賞」を受賞。人生で初めてのハッカソンで、脚本と動画生成を担当。",
+        "bodyEn": "\"TALK BACK\" by TEAM ARS won the Arena Peak Japan Award and a Finalist Award at the AI film hackathon ARENA PEAK ASIA (TapNow × CreatorLabo × KlingAI). My first hackathon — I handled the screenplay and video generation."
       }
     ]
   },

@@ -100,6 +100,11 @@
     <ul class="news-list" data-content="news">
       <!--content:news:start-->
       <li class="news-item reveal">
+        <time datetime="2026-10-19">2026.10</time>
+        <span class="news-cat award">AWARD</span>
+        <p data-i18n="news-arena-peak">『TALK BACK』（TEAM ARS）が、AI 映像ハッカソン ARENA PEAK ASIA で「日本地域賞」と「入選賞」を受賞しました。<a href="https://x.com/ria_aicreator/status/2111806895304671305" target="_blank" rel="noopener">受賞のお知らせ</a></p>
+      </li>
+      <li class="news-item reveal">
         <time datetime="2026-09-17">2026.09</time>
         <span class="news-cat">MEDIA</span>
         <p data-i18n="news-ai-creators">企業とAIクリエイターをつなぐプラットフォーム「AIクリエイターズ（AI Creators）」に、登録クリエイターとして掲載されました。<a href="https://ai-creators.tech/creators/leer/" target="_blank" rel="noopener">プロフィールページ</a></p>
@@ -119,40 +124,46 @@
         <span class="news-cat">ENTRY</span>
         <p data-i18n="news-lumia">TapNow公式企画「ルミアと始まりの海」に、30秒のショートMV『ルミア』を投稿しました。<a href="https://x.com/ria_aicreator/status/2084414571994095778" target="_blank" rel="noopener">作品ポスト</a></p>
       </li>
-      <li class="news-item reveal">
+      <li class="news-item is-extra reveal">
         <time datetime="2026-08">2026.08</time>
         <span class="news-cat">INFO</span>
         <p data-i18n="news-1">公式サイトを開設しました。</p>
       </li>
-      <li class="news-item reveal">
+      <li class="news-item is-extra reveal">
         <time datetime="2026-07-31">2026.07</time>
         <span class="news-cat award">AWARD</span>
         <p data-i18n="news-2">「真夜中の自分会議」が SousakuAI Agent Creation Cup 2026 Vol.2 で<strong>最優秀MV賞</strong>を受賞しました。<a href="https://x.com/ria_aicreator/status/2083169721801932825" target="_blank" rel="noopener">受賞報告ポスト</a></p>
       </li>
-      <li class="news-item reveal">
+      <li class="news-item is-extra reveal">
         <time datetime="2026-07-09">2026.07</time>
         <span class="news-cat">MEDIA</span>
         <p data-i18n="news-pinyo">AiHUB株式会社の提携クリエイターとして、「Pinyokio」に掲載されました。<a href="https://pinyo.jp/" target="_blank" rel="noopener">pinyo.jp</a></p>
       </li>
-      <li class="news-item reveal">
+      <li class="news-item is-extra reveal">
         <time datetime="2026-06">2026.06</time>
         <span class="news-cat">RELEASE</span>
         <p data-i18n="news-3">オリジナルアニメ企画「ポスト・アニマ」の公式紹介サイトを公開しました。<a href="https://post-anima.official-leer.workers.dev/" target="_blank" rel="noopener">公式サイトはこちら</a></p>
       </li>
-      <li class="news-item reveal">
+      <li class="news-item is-extra reveal">
         <time datetime="2026-05-14">2026.05</time>
         <span class="news-cat award">AWARD</span>
         <p data-i18n="news-4">「ナイモノネダリ」が SousakuAI Agent クリエイションカップ 2026 Vol.1 ビジュアル部門で<strong>最優秀ビジュアル賞</strong>を受賞しました。<a href="https://x.com/ria_aicreator/status/2055273706545696859" target="_blank" rel="noopener">受賞報告ポスト</a></p>
       </li>
-      <li class="news-item reveal">
+      <li class="news-item is-extra reveal">
         <time datetime="2026-01">2026.01</time>
         <span class="news-cat">SELECTED</span>
         <p data-i18n="news-5">短編アニメ「人間（仮）、はじめます。」が WAIFF の一次選考を通過しました。</p>
       </li>
-      <li class="news-item reveal">
+      <li class="news-item is-extra reveal">
         <time datetime="2025-03">2025.03</time>
         <span class="news-cat">ENTRY</span>
         <p data-i18n="news-6">アニメティザー「声の羅針盤」を PocketANIME World Competition に出品しました。</p>
+      </li>
+      <li class="news-more-row">
+        <button class="news-more-btn" type="button" aria-expanded="false">
+          <span class="news-more-open"><span data-i18n="t-news-more">もっと見る</span>（7）</span>
+          <span class="news-more-close" data-i18n="t-news-less">閉じる</span>
+        </button>
       </li>
       <!--content:news:end-->
     </ul>
@@ -171,10 +182,29 @@
           <div class="series-heading">
             <p class="series-kicker">FEATURED</p>
             <h3 class="series-title" data-i18n="series-featured-title">代表作</h3>
-            <p class="series-desc" data-i18n="series-featured-desc">世界観・物語・キャラクターから映像まで一貫して作った、オリジナルのアニメ作品。いちばん長い時間をかけた2作です。</p>
+            <p class="series-desc" data-i18n="series-featured-desc">受賞したハッカソンの作品と、世界観・物語・キャラクターから映像まで一貫して作ったオリジナルのアニメ作品。</p>
           </div>
         </div>
-        <div class="works-grid cols-2">
+        <div class="works-grid cols-2 lead-first">
+          <article class="work-card reveal" data-work="w-talkback">
+            <div class="work-thumb">
+              <img src="assets/works/talk-back.jpg" alt="TALK BACK 私の人形は口が悪い" loading="lazy">
+              <span class="work-badge award"><svg class="work-badge-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 2h10v2h4v4a5 5 0 0 1-4.2 4.94A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a6 6 0 0 1-3.8-4.06A5 5 0 0 1 3 8V4h4V2zm0 4H5v2a3 3 0 0 0 2 2.83V6zm10 0v4.83A3 3 0 0 0 19 8V6h-2z"></path></svg><span data-i18n="w-talkback-badge">日本地域賞・入選賞</span></span>
+            </div>
+            <div class="work-body">
+              <p class="work-meta" data-i18n="w-talkback-meta">2026 — AI FILM HACKATHON / TEAM ARS</p>
+              <h4 class="work-title">TALK BACK</h4>
+              <details class="work-details">
+                <summary class="work-toggle">
+                  <span class="work-toggle-open" data-i18n="t-more">詳細を見る</span>
+                  <span class="work-toggle-close" data-i18n="t-less">閉じる</span>
+                </summary>
+                <p class="work-desc" data-i18n="w-talkback-desc">テーマは「わだかまり」。TapNow × CreatorLabo × KlingAI の AI 映像ハッカソン「ARENA PEAK ASIA」（上海・東京・ソウルの3都市同時開催・32時間）で、「日本地域賞」と「入選賞」を受賞。TEAM ARS ── Aoki¹⁰⁴（CHIEF DIRECTOR / TEAM LEADER）、Ria（CONCEPT &amp; SCREENPLAY）、Sentaku（SOUND DIRECTOR）。人生で初めてのハッカソンで、主に脚本と動画生成を担当しました。</p>
+              </details>
+              <a class="work-link" href="https://x.com/ria_aicreator/status/2112173901082157068" target="_blank" rel="noopener" data-i18n="lnk-post">作品ポストを見る →</a>
+            </div>
+          </article>
+
           <article class="work-card reveal" data-work="w2">
             <div class="work-thumb">
               <img src="assets/works/post-anima.jpg" alt="ポスト・アニマ キービジュアル" loading="lazy">
@@ -773,6 +803,13 @@
         <div>
           <h4>MIDNIGHT MART 🏆</h4>
           <p data-i18n="tl6-p">Super 30s Creation Cup 2026（SousakuAI × Wan 3.0）ホラー部門「優秀賞」受賞。Penny's House の特別編として、3DCGのファウンドフッテージ・ホラーに初挑戦。</p>
+        </div>
+      </div>
+      <div class="timeline-item award">
+        <time>2026.10</time>
+        <div>
+          <h4>TALK BACK 🏆</h4>
+          <p data-i18n="tl-talkback-p">AI 映像ハッカソン ARENA PEAK ASIA（TapNow × CreatorLabo × KlingAI）で、TEAM ARS の『TALK BACK』が「日本地域賞」「入選賞」を受賞。人生で初めてのハッカソンで、脚本と動画生成を担当。</p>
         </div>
       </div>
       <!--content:timeline:end-->

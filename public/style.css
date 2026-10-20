@@ -413,6 +413,25 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
   transition: color .3s, border-color .3s;
 }
 .news-item p a:hover{ color:#d9c2ff; border-color:#d9c2ff; }
+/* 6件目からは「もっと見る」で開く */
+.news-list:not(.is-open) .news-item.is-extra{ display: none; }
+.news-more-row{ text-align: center; padding: 22px 0 4px; }
+.news-more-btn{
+  font: inherit;
+  font-size: .82rem;
+  letter-spacing: .14em;
+  color: #cfcbe0;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 26px;
+  cursor: pointer;
+  transition: color .3s, border-color .3s;
+}
+.news-more-btn:hover{ color: var(--gold); border-color: var(--gold-dim); }
+.news-more-close{ display: none; }
+.news-list.is-open .news-more-open{ display: none; }
+.news-list.is-open .news-more-close{ display: inline; }
 
 /* =====================================================
    Works
@@ -826,6 +845,12 @@ a.series-links-note:hover{ color: #dcd8e6; }
 .works-series-narrow{ max-width: 100%; margin-inline: auto; }
 /* 2本だけのシリーズ (代表作) は2列にして、1枚を大きく見せる */
 .works-grid.cols-2{ grid-template-columns: repeat(2, 1fr); }
+/* lead: 1枚目を上の段の真ん中に、ほかのカードと同じ幅で1枚だけ置く (代表作の TALK BACK。2026-10-20) */
+.works-grid.cols-2.lead-first > .work-card:first-child{
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc((100% - var(--works-gap, 0px)) / 2);
+}
 .works-grid.vertical .work-thumb{ aspect-ratio: 9 / 16; }
 .works-grid.vertical .work-thumb::after{
   background: linear-gradient(180deg, transparent 70%, rgba(10,10,17,.55));
@@ -1175,6 +1200,7 @@ a.series-links-note:hover{ color: #dcd8e6; }
 @media (max-width: 640px){
   .works-grid,
   .works-grid.cols-2{ grid-template-columns: 1fr; }
+  .works-grid.cols-2.lead-first > .work-card:first-child{ width: 100%; }
   /* スマホの横スライドは次のカードの端を少し見せて、横に続くことを伝える */
   .works-slider-wrap .works-grid.works-slider{ grid-auto-columns: 84%; }
   /* 縦型は「左にサムネイル・右に本文」の横並びにして、縦に伸びすぎないようにする */

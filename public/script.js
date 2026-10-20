@@ -136,6 +136,15 @@
   const updateAll = () => document.querySelectorAll('.works-slider').forEach(update);
   window.leerUpdateSliders = updateAll;
 
+  /* NEWS の「もっと見る」(再描画されても効くよう document で委譲) */
+  document.addEventListener('click', e => {
+    const more = e.target.closest('.news-more-btn');
+    if (!more) return;
+    const list = more.closest('.news-list');
+    const open = list.classList.toggle('is-open');
+    more.setAttribute('aria-expanded', String(open));
+    if (!open) list.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  });
   document.addEventListener('click', e => {
     const btn = e.target.closest('[data-slider-dir]');
     if (!btn) return;
@@ -195,6 +204,9 @@
     /* 作品カードの説明文アコーディオン (content.json 由来ではないので手書き) */
     't-more': 'Read more',
     't-less': 'Close',
+    /* NEWS の「もっと見る」(同上) */
+    't-news-more': 'Show more',
+    't-news-less': 'Show less',
     /* 作品一覧ページへの導線 (同上) */
     't-works-more': 'See the rest<span aria-hidden="true"> \u2192</span>',
     't-works-all': 'View all works<span aria-hidden="true"> \u2192</span>',
@@ -202,6 +214,7 @@
     't-works-all-lead': 'Every work, grouped by series.',
     't-works-back': '\u2190 Back to home',
     /* content:en:start */
+    "news-arena-peak": "\"TALK BACK\" (TEAM ARS) won the Arena Peak Japan Award and a Finalist Award at the AI film hackathon ARENA PEAK ASIA. <a href=\"https://x.com/ria_aicreator/status/2111806895304671305\" target=\"_blank\" rel=\"noopener\">Announcement</a>",
     "news-ai-creators": "Listed as a registered creator on \"AI Creators\", a platform connecting companies with AI creators. <a href=\"https://en.ai-creators.tech/creators/leer/\" target=\"_blank\" rel=\"noopener\">Profile page</a>",
     "news-midnight-mart": "\"MIDNIGHT MART\", a Penny's House special, won the <strong>Horror Category Excellence Award</strong> at Super 30s Creation Cup 2026 (SousakuAI × Wan 3.0). <a href=\"https://x.com/sousakuai/status/2098399365194990061\" target=\"_blank\" rel=\"noopener\">Results post</a>",
     "news-archives-2026": "Featured in \"AI CREATORS FILE 2026\", the creator directory in \"AI Video Production Archives 2026\" (edited by VIDEO SALON, released August 27, 2026). <a href=\"https://x.com/videosalon/status/2092756024331760118\" target=\"_blank\" rel=\"noopener\">Announcement post</a>",
@@ -213,6 +226,10 @@
     "news-4": "\"Naimononedari\" won the <strong>Best Visual Award</strong> at SousakuAI Agent Creation Cup 2026 Vol.1. <a href=\"https://x.com/ria_aicreator/status/2055273706545696859\" target=\"_blank\" rel=\"noopener\">Announcement post</a>",
     "news-5": "The short anime \"Ningen (Kari), Hajimemasu.\" passed the first-round selection at WAIFF.",
     "news-6": "Submitted the anime teaser \"Koe no Rashinban\" to PocketANIME World Competition.",
+    "w-talkback-badge": "Arena Peak Japan Award / Finalist",
+    "w-talkback-meta": "2026 — AI FILM HACKATHON / TEAM ARS",
+    "w-talkback-desc": "Theme: \"Wadakamari\" (lingering resentment). Won the Arena Peak Japan Award and a Finalist Award at ARENA PEAK ASIA, a 32-hour AI film hackathon by TapNow × CreatorLabo × KlingAI held simultaneously in Shanghai, Tokyo and Seoul. TEAM ARS — Aoki¹⁰⁴ (Chief Director / Team Leader), Ria (Concept &amp; Screenplay), Sentaku (Sound Director). My first hackathon; I mainly handled the screenplay and video generation.",
+    "lnk-post": "View post →",
     "w2-badge": "Top 50 Nominees",
     "w2-desc": "A world where feelings spilled from human hearts turn into monsters. Wounded couriers keep searching for the souls' addresses — not to erase the feelings, but to return them. A postal-fantasy anime project covering worldbuilding, story, characters, and a full first episode. Selected among the Top 50 nominees at COLOTEK.",
     "lnk-site": "Official site →",
@@ -220,7 +237,6 @@
     "w5-meta": "2026 — SHORT ANIME (approx. 10 min)",
     "w5-desc": "Rin, a humanoid girl, can derive the \"optimal answer\" more calmly than anyone. But does that answer truly reach anyone's heart? A human drama / sci-fi short about a girl who keeps growing as one existence. Produced over about a month.",
     "lnk-yt": "Watch on YouTube →",
-    "lnk-post": "View post →",
     "w-midnight-mart-badge": "Horror Category Excellence Award",
     "w-midnight-mart-meta": "2026 — HORROR SHORT (2 min)",
     "w-midnight-mart-desc": "A late-night supermarket: shelves fully stocked, machines humming, and not a single customer. At the register stand two clerks with exactly the same face. Found-footage horror told through the recording left on Gav's phone. A non-canon special of Penny's House — two minutes, no dialogue, no music. Winner of the Horror Category Excellence Award at Super 30s Creation Cup 2026 (SousakuAI × Wan 3.0).",
@@ -270,7 +286,7 @@
     "w6-desc": "An independent AI-produced music video. Two people pass each other across a neon heart, while \"the words you gave me\" keep glowing through the night.",
     "w7-desc": "My first serious work with generative video AI — an anime teaser submitted to PocketANIME World Competition. This is where my journey as an AI creator truly began.",
     "series-featured-title": "Featured Works",
-    "series-featured-desc": "Original anime works built from the ground up — worldbuilding, story, characters and film. The two projects I have spent the most time on.",
+    "series-featured-desc": "An award-winning hackathon film, and original anime works built from the ground up — worldbuilding, story, characters and film.",
     "series-pennys-house-title": "Penny's House Series",
     "series-pennys-house-desc": "A 3DCG series about Penny, Stella and Gav sharing a house.<br>Vertical music videos and shorts, released under the BLANK ROOM label.",
     "series-nil-title": "NiL Series",
@@ -287,6 +303,7 @@
     "tl4-p": "Launched an original anime project — worldbuilding, characters, a first episode, and an official site. Selected among the Top 50 nominees at COLOTEK.",
     "tl5-p": "Won the Best MV Award at SousakuAI Agent Creation Cup 2026 Vol.2 — the most competitive category.",
     "tl6-p": "Won the Horror Category Excellence Award at Super 30s Creation Cup 2026 (SousakuAI × Wan 3.0) — a first attempt at 3DCG found-footage horror, made as a Penny's House special.",
+    "tl-talkback-p": "\"TALK BACK\" by TEAM ARS won the Arena Peak Japan Award and a Finalist Award at the AI film hackathon ARENA PEAK ASIA (TapNow × CreatorLabo × KlingAI). My first hackathon — I handled the screenplay and video generation.",
     "contact": "For work inquiries and collaborations, feel free to DM me on X.",
     /* content:en:end */
   };

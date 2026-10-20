@@ -91,18 +91,32 @@ const i18nAttr = key => (key ? ` data-i18n="${escapeHtml(key)}"` : '');
 const indentBlock = (lines, indent) => lines.map(line => (line ? indent + line : line)).join('\n');
 
 /* ---------- NEWS ---------- */
+/* 先頭の NEWS_SHOWN 件だけ出し、残りは「もっと見る」で開く (2026-10-20 りあ指示「最大5行だけ表示し、残りは展開する形に」)。
+   開閉は script.js が .news-list に is-open を付け外しする */
+export const NEWS_SHOWN = 5;
 export function renderNews(content, indent = '      ') {
-  const blocks = visible(content?.news).map(item => {
+  const items = visible(content?.news);
+  const blocks = items.map((item, i) => {
     const cat = item.award ? 'news-cat award' : 'news-cat';
     const key = item.bodyEn ? item.id : '';
     return [
-      '<li class="news-item reveal">',
+      `<li class="news-item${i >= NEWS_SHOWN ? ' is-extra' : ''} reveal">`,
       `  <time datetime="${escapeHtml(item.date)}">${escapeHtml(item.dateLabel || item.date)}</time>`,
       `  <span class="${cat}">${escapeHtml(item.category)}</span>`,
       `  <p${i18nAttr(key)}>${sanitizeHtml(item.bodyJa)}</p>`,
       '</li>'
     ].join('\n');
   });
+  if (items.length > NEWS_SHOWN) {
+    blocks.push([
+      '<li class="news-more-row">',
+      '  <button class="news-more-btn" type="button" aria-expanded="false">',
+      `    <span class="news-more-open"><span data-i18n="t-news-more">もっと見る</span>（${items.length - NEWS_SHOWN}）</span>`,
+      '    <span class="news-more-close" data-i18n="t-news-less">閉じる</span>',
+      '  </button>',
+      '</li>'
+    ].join('\n'));
+  }
   return indentBlock(blocks.join('\n').split('\n'), indent);
 }
 
@@ -219,11 +233,11 @@ function renderSeriesLinks(series) {
 }
 
 function renderSeriesBlock(series, works, other = false, { limit = 0, assetPrefix = '' } = {}) {
-  /* orientation: vertical → 9:16 サムネ + ブロック全体を細く / columns: 2 → 2列 */
+  /* orientation: vertical → 9:16 サムネ + ブロック全体を細く / columns: 2 → 2列 / lead: true → 1枚目を上の段の真ん中に1枚だけ置く */
   const vertical = series.orientation === 'vertical';
   /* トップページは1行 (4枚) の表示域のまま。あふれたシリーズは横にスライドして残りを見せる */
   const slider = limit > 0 && works.length > limit;
-  const gridClass = ['works-grid', vertical ? 'vertical' : '', series.columns === 2 ? 'cols-2' : '', slider ? 'works-slider' : '']
+  const gridClass = ['works-grid', vertical ? 'vertical' : '', series.columns === 2 ? 'cols-2' : '', series.lead === true && !slider ? 'lead-first' : '', slider ? 'works-slider' : '']
     .filter(Boolean)
     .join(' ');
   const titleKey = other ? 't-works-other' : series.titleEn ? `series-${series.id}-title` : '';
