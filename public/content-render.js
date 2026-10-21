@@ -188,7 +188,10 @@ function renderWorkCard(work, level = 3, { assetPrefix = '' } = {}) {
    blockquote.twitter-tweet を置き、script.js が X の widgets.js で埋め込みに変えてから、カードの高さに収まるように縮める。
    埋め込みは POST_WIDTH の幅で組む (data-width)。clipBottom は、その幅で組んだ埋め込みの下から隠す高さ (px)。
    X の埋め込みには引用した投稿を隠す設定が無い (data-conversation・data-cards では消えない) ので、
-   AoKi さんの受賞の報告に引用されている「10/18 最高の32時間だった」とその下を隠すのに使う。読み込めなくても投稿へのリンクとして残る */
+   AoKi さんの受賞の報告に引用されている「10/18 最高の32時間だった」とその下を隠すのに使う。
+   keepFooter：埋め込みでは日付・いいね・返信の欄が引用より下にあり、clipBottom で一緒に消える。keepFooter を書くと、同じ投稿をもう1つ埋め込み、
+   その下から keepFooter の高さ (日付の欄) だけを写真のすぐ下に出す (2026-10-21 りあ指示「AoKi さんの投稿だけ返信を読むがない。同じように表示して」)。
+   読み込めなくても投稿へのリンクとして残る */
 const POST_HREF = /^https:\/\/(?:x|twitter)\.com\/[A-Za-z0-9_]+\/status\/\d+$/;
 const POST_WIDTH = 280;
 function renderWorkPosts(work) {
@@ -196,11 +199,17 @@ function renderWorkPosts(work) {
   if (!posts.length) return '';
   return [
     `<div class="work-posts reveal" data-post-width="${POST_WIDTH}">`,
-    ...posts.map(post => [
-      `  <div class="work-post"${Number.isInteger(post.clipBottom) && post.clipBottom > 0 ? ` data-clip-bottom="${post.clipBottom}"` : ''}><div class="work-post-inner">`,
-      `    <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true" data-lang="ja" data-width="${POST_WIDTH}"><a href="${escapeHtml(post.href)}">${escapeHtml(post.label || post.href)}</a></blockquote>`,
-      '  </div></div>'
-    ].join('\n')),
+    ...posts.map(post => {
+      const clip = Number.isInteger(post.clipBottom) && post.clipBottom > 0 ? post.clipBottom : 0;
+      const foot = clip && Number.isInteger(post.keepFooter) && post.keepFooter > 0 && post.keepFooter < clip ? post.keepFooter : 0;
+      const quote = `<blockquote class="twitter-tweet" data-theme="dark" data-dnt="true" data-lang="ja" data-width="${POST_WIDTH}"><a href="${escapeHtml(post.href)}">${escapeHtml(post.label || post.href)}</a></blockquote>`;
+      return [
+        `  <div class="work-post"${clip ? ` data-clip-bottom="${clip}"` : ''}${foot ? ` data-keep-footer="${foot}"` : ''}>`,
+        `    <div class="work-post-part"><div class="work-post-inner">${quote}</div></div>`,
+        ...(foot ? [`    <div class="work-post-part work-post-foot"><div class="work-post-inner">${quote}</div></div>`] : []),
+        '  </div>'
+      ].join('\n');
+    }),
     '</div>'
   ].join('\n');
 }

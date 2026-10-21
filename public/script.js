@@ -138,27 +138,37 @@
 
   /* X の投稿の大きさ合わせ。埋め込みは data-post-width の幅で組まれる。3つを同じ倍率で、列の幅と、
      カードの右に並べるとき (--fit-height: 1) はカードの高さに収まるまで縮める (2026-10-21 りあ指示「カードの位置・縦幅に合わせて横並びに」)。
-     data-clip-bottom の投稿は、組んだ幅での下からその高さを隠す (AoKi さんの受賞の報告の引用) */
+     data-clip-bottom の投稿は、組んだ幅での下からその高さを隠す (AoKi さんの受賞の報告の引用)。
+     data-keep-footer があれば、2つ目の埋め込みの下からその高さ (日付・いいね・返信の欄) だけを、すぐ下に出す */
   const fitWorkPosts = box => {
     if (!box) return;
     const posts = [...box.querySelectorAll('.work-post')];
-    const heights = posts.map(p => {
-      const frame = p.querySelector('iframe');
-      return frame && frame.offsetHeight > 0 ? Math.max(1, frame.offsetHeight - (Number(p.dataset.clipBottom) || 0)) : 0;
+    const sizes = posts.map(p => {
+      const [frame, footFrame] = p.querySelectorAll('iframe');
+      if (!frame || !(frame.offsetHeight > 0)) return null;
+      const keep = Number(p.dataset.keepFooter) || 0;
+      const foot = keep && footFrame && footFrame.offsetHeight > keep ? keep : 0;
+      return { top: Math.max(1, frame.offsetHeight - (Number(p.dataset.clipBottom) || 0)), foot, shift: foot ? footFrame.offsetHeight - keep : 0 };
     });
-    if (!heights.some(Boolean)) return;
+    if (!sizes.some(Boolean)) return;
     const width = Number(box.dataset.postWidth) || 280;
     const cs = getComputedStyle(box);
     const col = parseFloat(cs.gridTemplateColumns) || box.clientWidth;
     const fitH = cs.getPropertyValue('--fit-height').trim() === '1' ? box.clientHeight : Infinity;
     if (!(col > 0) || !(fitH > 0)) return;
-    const scale = Math.min(1, col / width, fitH / Math.max(...heights));
+    const scale = Math.min(1, col / width, fitH / Math.max(...sizes.filter(Boolean).map(z => z.top + z.foot)));
     posts.forEach((p, i) => {
-      if (!heights[i]) return;
+      const z = sizes[i];
+      if (!z) return;
+      const [part, footPart] = p.querySelectorAll('.work-post-part');
       p.style.setProperty('--post-w', `${width}px`);
       p.style.setProperty('--post-s', scale.toFixed(4));
+      p.style.setProperty('--foot-shift', String(z.shift));
       p.style.width = `${width * scale}px`;
-      p.style.height = `${heights[i] * scale + (p.dataset.clipBottom ? 1 : 0)}px`;
+      part.style.height = `${z.top * scale}px`;
+      if (footPart) footPart.style.height = `${z.foot * scale}px`;
+      p.style.height = `${(z.top + z.foot) * scale + (p.dataset.clipBottom && !z.foot ? 1 : 0)}px`;
+      p.classList.toggle('has-foot', z.foot > 0);
       p.classList.add('is-fit');
     });
   };

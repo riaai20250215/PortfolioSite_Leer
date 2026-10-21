@@ -867,12 +867,16 @@ a.series-links-note:hover{ color: #dcd8e6; }
   min-width: 0;
 }
 .works-grid.cols-2.lead-posts > .work-posts{ --fit-height: 1; align-self: stretch; contain: size; overflow: hidden; }
-.work-post{ min-width: 0; justify-self: center; overflow: hidden; }
+.work-post{ min-width: 0; justify-self: center; overflow: hidden; display: flex; flex-direction: column; }
+.work-post-part{ flex: none; overflow: hidden; }
+/* 日付の欄だけを出す2つ目の埋め込み (keepFooter)。縮める前は高さ0で隠す (埋め込み自体は組まれる) */
+.work-post-foot{ height: 0; }
 /* 縮めたあと (is-fit)：外の箱は縮めた大きさ、中は組んだ幅のまま scale で縮める。角は埋め込みの角 (12px) に合わせる */
 .work-post.is-fit{ border-radius: calc(12px * var(--post-s, 1)); }
 .work-post.is-fit .work-post-inner{ width: var(--post-w, 280px); transform: scale(var(--post-s, 1)); transform-origin: 0 0; }
-/* 下を隠した投稿 (clipBottom) は、埋め込みの枠と同じ色で下の縁を引いて、投稿の終わりに見せる */
-.work-post.is-fit[data-clip-bottom]{ border-bottom: 1px solid #38444d; }
+.work-post.is-fit .work-post-foot .work-post-inner{ transform: scale(var(--post-s, 1)) translateY(calc(var(--foot-shift, 0) * -1px)); }
+/* 下を隠して日付の欄がまだ出ていない投稿は、埋め込みの枠と同じ色で下の縁を引いて、投稿の終わりに見せる */
+.work-post.is-fit[data-clip-bottom]:not(.has-foot){ border-bottom: 1px solid #38444d; }
 .work-post .twitter-tweet{ margin: 0 !important; }
 .work-post blockquote.twitter-tweet{
   border: 1px solid var(--line);
