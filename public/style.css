@@ -322,6 +322,8 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
   margin: 0 auto;
   padding: clamp(84px, 12vh, 140px) clamp(20px, 5vw, 48px) 0;
 }
+/* 作品の節だけ幅を広げる (2026-10-21 りあ指示「領域は全然広げてもいい」) */
+#works.section, #works-all.section{ max-width: 1440px; }
 .section:last-of-type{ padding-bottom: clamp(84px, 12vh, 140px); }
 .section-head{ text-align:center; margin-bottom: clamp(40px, 6vw, 64px); }
 .section-kicker{
@@ -438,10 +440,10 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
    ===================================================== */
 .works-grid{
   display: grid;
-  /* 1シリーズ = 1行に4枚。5枚目からは同じ表示域のまま横スライド (.works-slider) */
-  --works-per-view: 4;
+  /* 1シリーズ = 1行に5枚。6枚目からは同じ表示域のまま横スライド (.works-slider)。2026-10-21 に 4→5 */
+  --works-per-view: 5;
   --works-gap: clamp(16px, 2vw, 24px);
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: var(--works-gap);
 }
 .work-card{
@@ -665,6 +667,8 @@ main, .site-header, .site-footer{ position: relative; z-index: 1; }
 }
 .works-series--stacked-links .series-heading{ max-width: none; }
 .works-series--stacked-links .series-desc{ max-width: none; }
+/* 代表作の説明文は1行で（2026-10-21 りあ指示）。狭い画面では折り返す */
+#series-featured .series-desc{ max-width: none; }
 .works-series--stacked-links .series-links{
   justify-content: flex-start;
   flex: none;
@@ -851,6 +855,32 @@ a.series-links-note:hover{ color: #dcd8e6; }
   justify-self: center;
   width: calc((100% - var(--works-gap, 0px)) / 2);
 }
+/* 1枚目に X の投稿がある (lead-posts) ときは、カードを左に寄せ、右の列に投稿を3つ横に並べる。
+   投稿の列はカードの高さだけを使い (中身で段を伸ばさない)、script.js の fitWorkPosts が、data-post-width の幅で組んだ埋め込みを
+   その高さと列の幅に収まるまで縮める (2026-10-21 りあ指示「カードの位置・縦幅に合わせて横並びに。少し小さく表示してもいい」) */
+.works-grid.cols-2.lead-posts > .work-card:first-child{ grid-column: auto; justify-self: stretch; width: auto; align-self: start; }
+.work-posts{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+  min-width: 0;
+}
+.works-grid.cols-2.lead-posts > .work-posts{ --fit-height: 1; align-self: stretch; contain: size; overflow: hidden; }
+.work-post{ min-width: 0; justify-self: center; overflow: hidden; }
+/* 縮めたあと (is-fit)：外の箱は縮めた大きさ、中は組んだ幅のまま scale で縮める。角は埋め込みの角 (12px) に合わせる */
+.work-post.is-fit{ border-radius: calc(12px * var(--post-s, 1)); }
+.work-post.is-fit .work-post-inner{ width: var(--post-w, 280px); transform: scale(var(--post-s, 1)); transform-origin: 0 0; }
+/* 下を隠した投稿 (clipBottom) は、埋め込みの枠と同じ色で下の縁を引いて、投稿の終わりに見せる */
+.work-post.is-fit[data-clip-bottom]{ border-bottom: 1px solid #38444d; }
+.work-post .twitter-tweet{ margin: 0 !important; }
+.work-post blockquote.twitter-tweet{
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  font-size: .8rem;
+}
+.work-post blockquote.twitter-tweet a{ color: #b9aef5; word-break: break-all; }
 .works-grid.vertical .work-thumb{ aspect-ratio: 9 / 16; }
 .works-grid.vertical .work-thumb::after{
   background: linear-gradient(180deg, transparent 70%, rgba(10,10,17,.55));
@@ -1184,6 +1214,15 @@ a.series-links-note:hover{ color: #dcd8e6; }
    ===================================================== */
 .pc-only{ display: inline; }
 
+/* 少し狭い PC 幅: 作品は4列 */
+@media (max-width: 1280px){
+  .works-grid{ grid-template-columns: repeat(4, 1fr); --works-per-view: 4; }
+}
+/* カードの右に3つ並べると投稿が小さくなりすぎる幅: カードは上の段の真ん中に戻し、投稿はその下に横に3つ (高さの制限なし) */
+@media (max-width: 1100px){
+  .works-grid.cols-2.lead-posts > .work-card:first-child{ grid-column: 1 / -1; justify-self: center; width: calc((100% - var(--works-gap, 0px)) / 2); }
+  .works-grid.cols-2.lead-posts > .work-posts{ grid-column: 1 / -1; --fit-height: 0; contain: none; overflow: visible; }
+}
 /* タブレット幅: 作品は3列 (縦型は細いカードなので4列のまま) */
 @media (max-width: 1024px){
   .works-grid{ grid-template-columns: repeat(3, 1fr); --works-per-view: 3; }
@@ -1201,6 +1240,9 @@ a.series-links-note:hover{ color: #dcd8e6; }
   .works-grid,
   .works-grid.cols-2{ grid-template-columns: 1fr; }
   .works-grid.cols-2.lead-first > .work-card:first-child{ width: 100%; }
+  /* スマホは投稿を横にスライド (次の投稿の端を少し見せて、横に続くことを伝える) */
+  .works-grid.cols-2.lead-posts > .work-posts{ grid-template-columns: repeat(3, 84%); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+  .work-post{ justify-self: start; scroll-snap-align: start; }
   /* スマホの横スライドは次のカードの端を少し見せて、横に続くことを伝える */
   .works-slider-wrap .works-grid.works-slider{ grid-auto-columns: 84%; }
   /* 縦型は「左にサムネイル・右に本文」の横並びにして、縦に伸びすぎないようにする */

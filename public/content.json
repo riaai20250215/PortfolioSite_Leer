@@ -222,9 +222,24 @@
       "links": [
         {
           "labelKey": "lnk-post",
-          "href": "https://x.com/ria_aicreator/status/2112173901082157068",
+          "href": "https://x.com/aoki_tosh/status/2112156532750336354",
           "labelJa": "作品ポストを見る →",
           "labelEn": "View post →"
+        }
+      ],
+      "posts": [
+        {
+          "href": "https://x.com/aoki_tosh/status/2111781250663080066",
+          "label": "AoKi¹⁰⁴ の投稿（10/18 受賞の報告）",
+          "clipBottom": 593
+        },
+        {
+          "href": "https://x.com/sentakusound/status/2111780769538641939",
+          "label": "Sentaku の投稿（10/18 受賞の報告）"
+        },
+        {
+          "href": "https://x.com/ria_aicreator/status/2111806895304671305",
+          "label": "りあの投稿（10/18 受賞の報告）"
         }
       ]
     },

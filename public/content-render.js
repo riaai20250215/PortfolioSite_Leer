@@ -183,6 +183,28 @@ function renderWorkCard(work, level = 3, { assetPrefix = '' } = {}) {
   return lines.join('\n');
 }
 
+/* 作品に添える X の投稿 (work.posts = [{ href, label, clipBottom }])。代表作の1段目で、カードの右に3つを横に並べる
+   (2026-10-21 りあ指示「右側に私たち3人の X の投稿が見える状態で」、同日「カードの位置・縦幅に合わせて横並びに。少し小さく表示してもいい」)。
+   blockquote.twitter-tweet を置き、script.js が X の widgets.js で埋め込みに変えてから、カードの高さに収まるように縮める。
+   埋め込みは POST_WIDTH の幅で組む (data-width)。clipBottom は、その幅で組んだ埋め込みの下から隠す高さ (px)。
+   X の埋め込みには引用した投稿を隠す設定が無い (data-conversation・data-cards では消えない) ので、
+   AoKi さんの受賞の報告に引用されている「10/18 最高の32時間だった」とその下を隠すのに使う。読み込めなくても投稿へのリンクとして残る */
+const POST_HREF = /^https:\/\/(?:x|twitter)\.com\/[A-Za-z0-9_]+\/status\/\d+$/;
+const POST_WIDTH = 280;
+function renderWorkPosts(work) {
+  const posts = visible(work?.posts).filter(post => POST_HREF.test(String(post.href ?? '')));
+  if (!posts.length) return '';
+  return [
+    `<div class="work-posts reveal" data-post-width="${POST_WIDTH}">`,
+    ...posts.map(post => [
+      `  <div class="work-post"${Number.isInteger(post.clipBottom) && post.clipBottom > 0 ? ` data-clip-bottom="${post.clipBottom}"` : ''}><div class="work-post-inner">`,
+      `    <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true" data-lang="ja" data-width="${POST_WIDTH}"><a href="${escapeHtml(post.href)}">${escapeHtml(post.label || post.href)}</a></blockquote>`,
+      '  </div></div>'
+    ].join('\n')),
+    '</div>'
+  ].join('\n');
+}
+
 /* ---------- WORKS: シリーズ ----------
    content.series = [{ id, kicker, titleJa, titleEn, descJa, descEn, orientation, links:[{icon,name,handle,href}] }]
    各作品の work.series にシリーズの id を入れると、そのシリーズの見出しの下にまとまる。
@@ -237,7 +259,8 @@ function renderSeriesBlock(series, works, other = false, { limit = 0, assetPrefi
   const vertical = series.orientation === 'vertical';
   /* トップページは1行 (4枚) の表示域のまま。あふれたシリーズは横にスライドして残りを見せる */
   const slider = limit > 0 && works.length > limit;
-  const gridClass = ['works-grid', vertical ? 'vertical' : '', series.columns === 2 ? 'cols-2' : '', series.lead === true && !slider ? 'lead-first' : '', slider ? 'works-slider' : '']
+  const gridClass = ['works-grid', vertical ? 'vertical' : '', series.columns === 2 ? 'cols-2' : '', series.lead === true && !slider ? 'lead-first' : '',
+    series.lead === true && !slider && renderWorkPosts(works[0]) ? 'lead-posts' : '', slider ? 'works-slider' : '']
     .filter(Boolean)
     .join(' ');
   const titleKey = other ? 't-works-other' : series.titleEn ? `series-${series.id}-title` : '';
@@ -251,7 +274,9 @@ function renderSeriesBlock(series, works, other = false, { limit = 0, assetPrefi
   lines.push(`      <h3 class="series-title"${i18nAttr(titleKey)}>${escapeHtml(series.titleJa)}</h3>`);
   if (series.descJa) lines.push(`      <p class="series-desc"${i18nAttr(descKey)}>${sanitizeHtml(series.descJa)}</p>`);
   lines.push('    </div>', ...renderSeriesLinks(series), '  </div>');
-  const cards = indentBlock(works.map(work => renderWorkCard(work, 4, { assetPrefix })).join('\n\n').split('\n'), slider ? '      ' : '    ');
+  /* lead のシリーズで1枚目に posts があれば、1枚目のカードの右 (同じ段) に投稿を置く */
+  const leadPosts = series.lead === true && !slider ? renderWorkPosts(works[0]) : '';
+  const cards = indentBlock(works.map((work, i) => renderWorkCard(work, 4, { assetPrefix }) + (i === 0 && leadPosts ? '\n\n' + leadPosts : '')).join('\n\n').split('\n'), slider ? '      ' : '    ');
   if (slider) {
     /* 送りボタンは script.js がクリックを拾う (再描画されても効くよう document で委譲) */
     lines.push(
@@ -274,7 +299,7 @@ function renderSeriesBlock(series, works, other = false, { limit = 0, assetPrefi
 
 /* トップページの WORKS。1シリーズの表示域は SERIES_LIMIT 枚 (1行) で、
    それを超えたシリーズは横スライドで残りを見せる。全作品の一覧は /works/。 */
-export const SERIES_LIMIT = 4;
+export const SERIES_LIMIT = 5;  /* 2026-10-21 に 4→5（作品の節の幅を広げたので。りあ指示「最初に表示される動画が5個くらいに」） */
 const WORKS_PAGE_HREF = 'works/';
 
 export function renderWorks(content, indent = '      ') {

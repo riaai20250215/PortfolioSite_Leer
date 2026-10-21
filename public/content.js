@@ -55,6 +55,7 @@ export function applyContent(content) {
   }
 
   if (changed) {
+    if (typeof window.leerLoadPosts === 'function') window.leerLoadPosts();
     if (typeof window.leerObserveReveals === 'function') window.leerObserveReveals();
     if (typeof window.leerUpdateSliders === 'function') window.leerUpdateSliders();
     if (typeof window.leerSetEnDict === 'function') window.leerSetEnDict(buildEnDict(content));
@@ -82,6 +83,10 @@ async function load() {
       console.debug(`[leer] ${url} を利用できませんでした:`, error?.message ?? error);
     }
   }
+}
+/* X の投稿の埋め込みは、中身を決めたあとで読み込む (先に埋め込むと、静的HTMLとの比較が合わずに描き直して消えるため) */
+async function loadThenPosts() {
+  try { await load(); } finally { if (typeof window.leerLoadPosts === 'function') window.leerLoadPosts(); }
 }
 
 /* ---------- 管理画面からのライブプレビュー ---------- */
@@ -126,4 +131,4 @@ document.addEventListener('click',pick,true);document.addEventListener('keydown'
 
 window.leerApplyContent = applyContent;
 
-load();
+loadThenPosts();

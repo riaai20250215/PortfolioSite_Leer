@@ -136,6 +136,57 @@
   const updateAll = () => document.querySelectorAll('.works-slider').forEach(update);
   window.leerUpdateSliders = updateAll;
 
+  /* X の投稿の大きさ合わせ。埋め込みは data-post-width の幅で組まれる。3つを同じ倍率で、列の幅と、
+     カードの右に並べるとき (--fit-height: 1) はカードの高さに収まるまで縮める (2026-10-21 りあ指示「カードの位置・縦幅に合わせて横並びに」)。
+     data-clip-bottom の投稿は、組んだ幅での下からその高さを隠す (AoKi さんの受賞の報告の引用) */
+  const fitWorkPosts = box => {
+    if (!box) return;
+    const posts = [...box.querySelectorAll('.work-post')];
+    const heights = posts.map(p => {
+      const frame = p.querySelector('iframe');
+      return frame && frame.offsetHeight > 0 ? Math.max(1, frame.offsetHeight - (Number(p.dataset.clipBottom) || 0)) : 0;
+    });
+    if (!heights.some(Boolean)) return;
+    const width = Number(box.dataset.postWidth) || 280;
+    const cs = getComputedStyle(box);
+    const col = parseFloat(cs.gridTemplateColumns) || box.clientWidth;
+    const fitH = cs.getPropertyValue('--fit-height').trim() === '1' ? box.clientHeight : Infinity;
+    if (!(col > 0) || !(fitH > 0)) return;
+    const scale = Math.min(1, col / width, fitH / Math.max(...heights));
+    posts.forEach((p, i) => {
+      if (!heights[i]) return;
+      p.style.setProperty('--post-w', `${width}px`);
+      p.style.setProperty('--post-s', scale.toFixed(4));
+      p.style.width = `${width * scale}px`;
+      p.style.height = `${heights[i] * scale + (p.dataset.clipBottom ? 1 : 0)}px`;
+      p.classList.add('is-fit');
+    });
+  };
+  /* 投稿の高さ (画像が読めると伸びる) と、列・カードの大きさが変わったら合わせ直す */
+  const postSizes = 'ResizeObserver' in window
+    ? new ResizeObserver(entries => new Set(entries.map(en => en.target.closest('.work-posts'))).forEach(fitWorkPosts))
+    : null;
+
+  /* X の投稿の埋め込み (作品の .twitter-tweet)。content.js が中身を決めたあとに呼ぶ。widgets.js は1回だけ読み込む */
+  window.leerLoadPosts = () => {
+    const boxes = document.querySelectorAll('.work-posts');
+    boxes.forEach(box => postSizes?.observe(box));
+    if (!document.querySelector('blockquote.twitter-tweet')) { boxes.forEach(fitWorkPosts); return; }
+    if (window.twttr?.widgets) { window.twttr.widgets.load(); return; }
+    if (document.getElementById('x-widgets')) return;
+    /* widgets.js より先に ready の受け口を置く (X の公式の読み込み方)。描けた投稿から大きさを合わせる */
+    const tw = window.twttr = window.twttr || {};
+    tw._e = tw._e || [];
+    tw.ready = tw.ready || (f => tw._e.push(f));
+    tw.ready(t => t.events.bind('rendered', e => {
+      postSizes?.observe(e.target);
+      fitWorkPosts(e.target.closest?.('.work-posts'));
+    }));
+    const s = document.createElement('script');
+    s.id = 'x-widgets'; s.async = true; s.charset = 'utf-8';
+    s.src = 'https://platform.twitter.com/widgets.js';
+    document.head.append(s);
+  };
   /* NEWS の「もっと見る」(再描画されても効くよう document で委譲) */
   document.addEventListener('click', e => {
     const more = e.target.closest('.news-more-btn');
